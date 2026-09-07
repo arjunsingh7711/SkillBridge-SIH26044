@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Post Opportunity - SkillBridge</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 250px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main-content {
+                margin-left: 210px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar fixed top-0 left-0 h-screen bg-slate-900 text-white p-6">
+
+        <h1 class="text-2xl font-bold mb-10">
+            SkillBridge
+        </h1>
+
+        <p class="text-xs text-gray-400 uppercase mb-3">
+            Company
+        </p>
+
+        <nav class="space-y-2">
+
+            <a href="company-dashboard.html"
+               class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                Dashboard
+            </a>
+
+            <a href="company-opportunities.html"
+               class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                My Opportunities
+            </a>
+
+            <a href="company-applications.html"
+               class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                Applications
+            </a>
+
+            <a href="company-profile.html"
+               class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                Company Profile
+            </a>
+
+            <button onclick="logout()"
+                    class="w-full text-left px-4 py-3 rounded-lg hover:bg-red-900 text-red-300 mt-6">
+                Logout
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content min-h-screen">
+
+        <!-- TOP BAR -->
+        <header class="bg-white border-b px-8 py-5 flex justify-between items-center">
+
+            <div>
+                <h2 class="text-2xl font-bold">
+                    Post Opportunity
+                </h2>
+
+                <p class="text-gray-500 text-sm mt-1">
+                    Create a new opportunity for students
+                </p>
+            </div>
+
+            <a href="company-dashboard.html"
+               class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100">
+                ← Back
+            </a>
+
+        </header>
+
+
+        <!-- FORM AREA -->
+        <section class="p-8">
+
+            <div class="max-w-4xl mx-auto">
+
+                <div class="bg-white rounded-xl shadow-sm border p-8">
+
+                    <form id="opportunityForm">
+
+                        <!-- BASIC INFORMATION -->
+                        <div class="mb-8">
+
+                            <h3 class="text-lg font-semibold mb-1">
+                                Basic Information
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mb-6">
+                                Provide the main details of the opportunity.
+                            </p>
+
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                <!-- TITLE -->
+                                <div class="md:col-span-2">
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Opportunity Title *
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="title"
+                                        placeholder="e.g. Backend Developer Intern"
+                                        required
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700"
+                                    >
+
+                                </div>
+
+
+                                <!-- COMPANY -->
+                                <div>
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Company Name *
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="company"
+                                        placeholder="e.g. TechNova Solutions"
+                                        required
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700"
+                                    >
+
+                                </div>
+
+
+                                <!-- TYPE -->
+                                <div>
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Opportunity Type *
+                                    </label>
+
+                                    <select
+                                        id="type"
+                                        required
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white outline-none focus:border-slate-700">
+
+                                        <option value="">
+                                            Select Type
+                                        </option>
+
+                                        <option value="Internship">
+                                            Internship
+                                        </option>
+
+                                        <option value="Job">
+                                            Job
+                                        </option>
+
+                                        <option value="Hackathon">
+                                            Hackathon
+                                        </option>
+
+                                        <option value="Course">
+                                            Course
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+                        <div class="mb-8">
+
+                            <h3 class="text-lg font-semibold mb-1">
+                                Opportunity Details
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mb-6">
+                                Tell students what this opportunity is about.
+                            </p>
+
+
+                            <div>
+
+                                <label class="block text-sm font-medium mb-2">
+                                    Description *
+                                </label>
+
+                                <textarea
+                                    id="description"
+                                    rows="6"
+                                    placeholder="Describe the role, responsibilities, requirements and what students can expect..."
+                                    required
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700 resize-none"></textarea>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SKILLS -->
+                        <div class="mb-8">
+
+                            <h3 class="text-lg font-semibold mb-1">
+                                Required Skills
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mb-6">
+                                Add the skills required for this opportunity.
+                            </p>
+
+
+                            <label class="block text-sm font-medium mb-2">
+                                Skills *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="requiredSkills"
+                                placeholder="e.g. Python, MongoDB, Express, REST API"
+                                required
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700">
+
+                            <p class="text-xs text-gray-500 mt-2">
+                                Separate multiple skills using commas.
+                            </p>
+
+                        </div>
+
+
+                        <!-- WORK DETAILS -->
+                        <div class="mb-8">
+
+                            <h3 class="text-lg font-semibold mb-1">
+                                Work Details
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mb-6">
+                                Specify where and how the student will work.
+                            </p>
+
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                <!-- LOCATION -->
+                                <div>
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Location
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="location"
+                                        placeholder="e.g. Delhi, India"
+                                        value="India"
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700">
+
+                                </div>
+
+
+                                <!-- WORK MODE -->
+                                <div>
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Work Mode
+                                    </label>
+
+                                    <select
+                                        id="workMode"
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white outline-none focus:border-slate-700">
+
+                                        <option value="Remote">
+                                            Remote
+                                        </option>
+
+                                        <option value="On-site">
+                                            On-site
+                                        </option>
+
+                                        <option value="Hybrid">
+                                            Hybrid
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- SALARY -->
+                                <div>
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Salary / Stipend
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="salary"
+                                        placeholder="e.g. ₹20,000/month"
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700">
+
+                                </div>
+
+
+                                <!-- EXPERIENCE -->
+                                <div>
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Experience
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="experience"
+                                        placeholder="e.g. Fresher / 0-1 years"
+                                        value="Fresher"
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- APPLICATION -->
+                        <div class="mb-8">
+
+                            <h3 class="text-lg font-semibold mb-1">
+                                Application Details
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mb-6">
+                                Set the deadline and application link.
+                            </p>
+
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                <!-- DEADLINE -->
+                                <div>
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Application Deadline
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        id="deadline"
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700">
+
+                                </div>
+
+
+                                <!-- APPLICATION LINK -->
+                                <div>
+
+                                    <label class="block text-sm font-medium mb-2">
+                                        Application Link
+                                    </label>
+
+                                    <input
+                                        type="url"
+                                        id="applicationLink"
+                                        placeholder="https://example.com/apply"
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-slate-700">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- MESSAGE -->
+                        <div
+                            id="message"
+                            class="hidden mb-6 px-4 py-3 rounded-lg text-sm">
+                        </div>
+
+
+                        <!-- BUTTONS -->
+                        <div class="flex justify-end gap-3 border-t pt-6">
+
+                            <a
+                                href="company-dashboard.html"
+                                class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-100">
+
+                                Cancel
+
+                            </a>
+
+
+                            <button
+                                type="submit"
+                                id="submitBtn"
+                                class="px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800">
+
+                                Post Opportunity
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const form =
+            document.getElementById("opportunityForm");
+
+        const message =
+            document.getElementById("message");
+
+        const submitBtn =
+            document.getElementById("submitBtn");
+
+
+        form.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                const token =
+                    localStorage.getItem("token");
+
+
+                if (!token) {
+
+                    alert(
+                        "Please login first."
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+                }
+
+
+                const title =
+                    document.getElementById("title").value.trim();
+
+                const company =
+                    document.getElementById("company").value.trim();
+
+                const description =
+                    document.getElementById("description").value.trim();
+
+                const type =
+                    document.getElementById("type").value;
+
+                const requiredSkills =
+                    document
+                        .getElementById("requiredSkills")
+                        .value
+                        .split(",")
+                        .map(skill => skill.trim())
+                        .filter(skill => skill !== "");
+
+
+                const location =
+                    document.getElementById("location").value.trim();
+
+                const workMode =
+                    document.getElementById("workMode").value;
+
+                const salary =
+                    document.getElementById("salary").value.trim();
+
+                const experience =
+                    document.getElementById("experience").value.trim();
+
+                const deadline =
+                    document.getElementById("deadline").value;
+
+                const applicationLink =
+                    document
+                        .getElementById("applicationLink")
+                        .value
+                        .trim();
+
+
+                const opportunityData = {
+
+                    title,
+                    company,
+                    description,
+                    type,
+                    requiredSkills,
+                    location,
+                    workMode,
+                    salary,
+                    experience,
+                    deadline,
+                    applicationLink
+
+                };
+
+
+                submitBtn.disabled = true;
+
+                submitBtn.innerText =
+                    "Posting...";
+
+
+                message.classList.add("hidden");
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/opportunities",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Authorization":
+                                        "Bearer " + token
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        opportunityData
+                                    )
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    console.log(
+                        "CREATE OPPORTUNITY RESPONSE:",
+                        data
+                    );
+
+
+                    if (response.status === 401) {
+
+                        localStorage.removeItem(
+                            "token"
+                        );
+
+                        localStorage.removeItem(
+                            "user"
+                        );
+
+                        alert(
+                            "Session expired. Please login again."
+                        );
+
+                        window.location.href =
+                            "login.html";
+
+                        return;
+                    }
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Failed to create opportunity"
+                        );
+
+                    }
+
+
+                    message.className =
+                        "mb-6 px-4 py-3 rounded-lg text-sm bg-green-100 text-green-700";
+
+                    message.innerText =
+                        "Opportunity posted successfully!";
+
+                    message.classList.remove(
+                        "hidden"
+                    );
+
+
+                    submitBtn.innerText =
+                        "Posted ✓";
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "company-dashboard.html";
+
+                        },
+                        1000
+                    );
+
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "CREATE OPPORTUNITY ERROR:",
+                        error
+                    );
+
+
+                    message.className =
+                        "mb-6 px-4 py-3 rounded-lg text-sm bg-red-100 text-red-700";
+
+                    message.innerText =
+                        error.message ||
+                        "Something went wrong.";
+
+                    message.classList.remove(
+                        "hidden"
+                    );
+
+
+                    submitBtn.disabled = false;
+
+                    submitBtn.innerText =
+                        "Post Opportunity";
+
+                }
+
+            }
+        );
+
+
+        function logout() {
+
+            localStorage.removeItem("token");
+
+            localStorage.removeItem("user");
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
+</body>
+</html>

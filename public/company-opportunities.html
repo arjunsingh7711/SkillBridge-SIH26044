@@ -1,0 +1,3541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Opportunities | SkillBridge</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #111827;
+            border-right: 1px solid #1f2937;
+            z-index: 1000;
+            transition: transform 0.25s ease;
+        }
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+            height: 80px;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #273244;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 19px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .logo-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .logo-subtitle {
+            color: #6b7280;
+            font-size: 9px;
+            letter-spacing: 0.4px;
+        }
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .nav {
+            padding: 22px 14px;
+        }
+
+        .nav-title {
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 0 14px;
+            margin-bottom: 10px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            text-decoration: none;
+            color: #cbd5e1;
+            padding: 13px 14px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .nav a:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        .nav a.active {
+            background: linear-gradient(
+                135deg,
+                rgba(99, 102, 241, 0.95),
+                rgba(124, 58, 237, 0.95)
+            );
+            color: white;
+            box-shadow:
+                0 5px 14px rgba(79, 70, 229, 0.22);
+        }
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
+
+        .logout-section {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 14px;
+            border-top: 1px solid #273244;
+        }
+
+        .logout-btn {
+            width: 100%;
+            border: none;
+            background: #1f2937;
+            color: #cbd5e1;
+            padding: 12px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+            transition: 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #374151;
+            color: white;
+        }
+
+        /* =====================================================
+           MOBILE HEADER
+        ===================================================== */
+
+        .mobile-header {
+            display: none;
+            height: 60px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: center;
+            padding: 0 16px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .hamburger {
+            border: none;
+            background: transparent;
+            font-size: 23px;
+            cursor: pointer;
+            color: #374151;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .hamburger:hover {
+            background: #f3f4f6;
+        }
+
+        .mobile-logo {
+            margin-left: 10px;
+            font-size: 17px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        /* =====================================================
+           OVERLAY
+        ===================================================== */
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            z-index: 950;
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            font-size: 29px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .heading p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           COMPANY PROFILE PILL
+        ===================================================== */
+
+        .company-profile-mini {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 8px 13px 8px 9px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .company-profile-mini:hover {
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .company-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .company-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .company-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .company-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .company-role {
+            font-size: 10px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        /* =====================================================
+           ACTION BUTTON
+        ===================================================== */
+
+        .post-btn {
+            border: none;
+            background: #4f46e5;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .post-btn:hover {
+            background: #4338ca;
+        }
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow:
+                0 2px 8px rgba(15, 23, 42, 0.035);
+            transition: 0.2s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #d8d9ff;
+            box-shadow:
+                0 5px 16px rgba(79, 70, 229, 0.08);
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 12px;
+            margin-bottom: 9px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        /* =====================================================
+           SEARCH TOOLBAR
+        ===================================================== */
+
+        .toolbar {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 17px 19px;
+            box-shadow:
+                0 2px 8px rgba(15, 23, 42, 0.035);
+            margin-bottom: 20px;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 15px;
+            pointer-events: none;
+        }
+
+        #searchInput {
+            width: 100%;
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+            padding: 11px 14px 11px 40px;
+            outline: none;
+            font-size: 13px;
+            color: #1f2937;
+            background: white;
+            transition: 0.2s ease;
+        }
+
+        #searchInput::placeholder {
+            color: #9ca3af;
+        }
+
+        #searchInput:focus {
+            border-color: #6366f1;
+            box-shadow:
+                0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* =====================================================
+           OPPORTUNITY SECTION
+        ===================================================== */
+
+        .section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow:
+                0 2px 8px rgba(15, 23, 42, 0.035);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 19px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .section-subtitle {
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* =====================================================
+           OPPORTUNITY GRID
+        ===================================================== */
+
+        .opportunities-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .opportunity-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 17px;
+            padding: 20px;
+            transition: 0.2s ease;
+            min-width: 0;
+        }
+
+        .opportunity-card:hover {
+            border-color: #d8d9ff;
+            box-shadow:
+                0 6px 18px rgba(79, 70, 229, 0.09);
+            transform: translateY(-1px);
+        }
+
+        .opportunity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .opportunity-title {
+            color: #111827;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        .opportunity-type {
+            color: #4f46e5;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        /* =====================================================
+           STATUS BADGES
+        ===================================================== */
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 9px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+            border: 1px solid;
+        }
+
+        .status-active {
+            color: #047857;
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+
+        .status-closed {
+            color: #b91c1c;
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+
+        .status-other {
+            color: #92400e;
+            background: #fffbeb;
+            border-color: #fde68a;
+        }
+
+        /* =====================================================
+           DESCRIPTION
+        ===================================================== */
+
+        .opportunity-description {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 14px;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* =====================================================
+           META
+        ===================================================== */
+
+        .opportunity-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 9px;
+            margin-top: 16px;
+        }
+
+        .meta-box {
+            background: #f8fafc;
+            border: 1px solid #edf0f3;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .meta-label {
+            color: #9ca3af;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .meta-value {
+            color: #374151;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* =====================================================
+           SKILLS
+        ===================================================== */
+
+        .skills-section {
+            margin-top: 15px;
+        }
+
+        .skills-label {
+            color: #6b7280;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-chip {
+            background: #f5f3ff;
+            color: #5b21b6;
+            border: 1px solid #ddd6fe;
+            border-radius: 8px;
+            padding: 5px 8px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           CARD FOOTER
+        ===================================================== */
+
+        .opportunity-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid #edf0f3;
+        }
+
+        .application-count {
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .view-btn {
+            border: 1px solid #c7d2fe;
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 8px 12px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 11px;
+            transition: 0.2s ease;
+        }
+
+        .view-btn:hover {
+            background: #e0e7ff;
+            border-color: #a5b4fc;
+        }
+
+        .delete-btn {
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #b91c1c;
+            padding: 8px 12px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 11px;
+            transition: 0.2s ease;
+        }
+
+        .delete-btn:hover {
+            background: #fee2e2;
+            border-color: #fca5a5;
+        }
+
+        /* =====================================================
+           EMPTY / ERROR
+        ===================================================== */
+
+        .empty {
+            text-align: center;
+            padding: 45px 20px;
+            color: #6b7280;
+            border: 1px dashed #e5e7eb;
+            border-radius: 13px;
+            background: #fafbfc;
+        }
+
+        .empty-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .empty h3 {
+            color: #374151;
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .empty p {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .error-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #b91c1c;
+            border-radius: 11px;
+            padding: 13px 15px;
+            margin-bottom: 18px;
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .loading {
+            text-align: center;
+            padding: 45px 20px;
+            color: #6b7280;
+        }
+
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #6366f1;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 13px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 680px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 17px;
+            border: 1px solid #e5e7eb;
+            box-shadow:
+                0 20px 50px rgba(15, 23, 42, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border-bottom: 1px solid #edf0f3;
+        }
+
+        .modal-title {
+            color: #111827;
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+            border: none;
+            background: #f8fafc;
+            color: #6b7280;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: #f1f5f9;
+            color: #111827;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-description {
+            background: #f8fafc;
+            border: 1px solid #edf0f3;
+            border-radius: 11px;
+            padding: 14px;
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .modal-info {
+            background: #f8fafc;
+            border: 1px solid #edf0f3;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .modal-info-label {
+            color: #9ca3af;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 5px;
+        }
+
+        .modal-info-value {
+            color: #374151;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 11px;
+            padding: 13px 16px;
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.14);
+            font-size: 13px;
+            z-index: 3000;
+            display: none;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        .toast.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .opportunities-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .mobile-header {
+                display: flex;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 25px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .main {
+                padding: 18px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .company-profile-mini {
+                width: 100%;
+            }
+
+            .section {
+                padding: 16px;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .post-btn {
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .opportunity-card {
+                padding: 16px;
+            }
+
+            .opportunity-meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .opportunity-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .card-actions {
+                width: 100%;
+            }
+
+            .view-btn,
+            .delete-btn {
+                flex: 1;
+            }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 430px) {
+
+            .heading h1 {
+                font-size: 24px;
+            }
+
+            .heading p {
+                font-size: 13px;
+                line-height: 1.5;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+
+            .modal-content {
+                border-radius: 14px;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MOBILE HEADER
+    ===================================================== -->
+
+    <header class="mobile-header">
+
+        <button
+            class="hamburger"
+            onclick="toggleSidebar()"
+            aria-label="Open navigation">
+
+            ☰
+
+        </button>
+
+        <div class="mobile-logo">
+            SkillBridge
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SIDEBAR OVERLAY
+    ===================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()">
+    </div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar">
+
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                S
+            </div>
+
+            <div class="logo-text">
+
+                <div class="logo-title">
+                    SkillBridge
+                </div>
+
+                <div class="logo-subtitle">
+                    Academia × Industry
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav class="nav">
+
+            <div class="nav-title">
+                Company Portal
+            </div>
+
+
+            <a href="company-dashboard.html">
+
+                <span class="nav-icon">
+                    ▦
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="company-opportunities.html"
+                class="active">
+
+                <span class="nav-icon">
+                    ◈
+                </span>
+
+                <span>
+                    My Opportunities
+                </span>
+
+            </a>
+
+
+            <a href="company-applications.html">
+
+                <span class="nav-icon">
+                    ▤
+                </span>
+
+                <span>
+                    Applications
+                </span>
+
+            </a>
+
+
+            <a href="company-profile.html">
+
+                <span class="nav-icon">
+                    ◉
+                </span>
+
+                <span>
+                    Company Profile
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="logout-section">
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+
+                ⇥ &nbsp; Logout
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <div class="topbar">
+
+            <div class="heading">
+
+                <h1>
+                    My Opportunities
+                </h1>
+
+                <p>
+                    Manage opportunities posted by your company.
+                </p>
+
+            </div>
+
+
+            <div
+                class="company-profile-mini"
+                onclick="openCompanyProfile()">
+
+                <div
+                    class="company-avatar"
+                    id="companyAvatar">
+
+                    C
+
+                </div>
+
+                <div class="company-info">
+
+                    <div
+                        class="company-name"
+                        id="companyName">
+
+                        Company
+
+                    </div>
+
+                    <div class="company-role">
+                        Company Account
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Opportunities
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalOpportunities">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Active Opportunities
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="activeOpportunities">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Applications
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalApplications">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <div class="toolbar">
+
+            <div class="search-wrapper">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search opportunities by title, type, description or location...">
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             MAIN SECTION
+        ================================================== -->
+
+        <div class="section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2 class="section-title">
+                        Your Opportunities
+                    </h2>
+
+                    <p class="section-subtitle">
+                        View and manage all opportunities posted by your company.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="post-btn"
+                    onclick="postOpportunity()">
+
+                    + Post Opportunity
+
+                </button>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div
+                id="errorBox"
+                class="error-box"
+                style="display:none;">
+            </div>
+
+
+            <!-- LOADING -->
+
+            <div
+                id="loading"
+                class="loading">
+
+                <div class="spinner"></div>
+
+                <p>
+                    Loading opportunities...
+                </p>
+
+            </div>
+
+
+            <!-- EMPTY -->
+
+            <div
+                id="emptyBox"
+                style="display:none;">
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ◇
+                    </div>
+
+                    <h3>
+                        No Opportunities Found
+                    </h3>
+
+                    <p>
+                        You haven't posted any opportunities yet.
+                    </p>
+
+                    <button
+                        class="post-btn"
+                        onclick="postOpportunity()">
+
+                        Post Your First Opportunity
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPPORTUNITIES -->
+
+            <div
+                id="opportunitiesContainer"
+                class="opportunities-container">
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        id="detailsModal"
+        class="modal">
+
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h2
+                    id="modalTitle"
+                    class="modal-title">
+
+                    Opportunity Details
+
+                </h2>
+
+
+                <button
+                    onclick="closeModal()"
+                    class="modal-close"
+                    aria-label="Close">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <div
+                    id="modalDescription"
+                    class="modal-description">
+
+                </div>
+
+
+                <div class="modal-grid">
+
+
+                    <div class="modal-info">
+
+                        <div class="modal-info-label">
+                            Type
+                        </div>
+
+                        <div
+                            id="modalType"
+                            class="modal-info-value">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-info">
+
+                        <div class="modal-info-label">
+                            Location
+                        </div>
+
+                        <div
+                            id="modalLocation"
+                            class="modal-info-value">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-info">
+
+                        <div class="modal-info-label">
+                            Work Mode
+                        </div>
+
+                        <div
+                            id="modalWorkMode"
+                            class="modal-info-value">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-info">
+
+                        <div class="modal-info-label">
+                            Salary
+                        </div>
+
+                        <div
+                            id="modalSalary"
+                            class="modal-info-value">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-info">
+
+                        <div class="modal-info-label">
+                            Experience
+                        </div>
+
+                        <div
+                            id="modalExperience"
+                            class="modal-info-value">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-info">
+
+                        <div class="modal-info-label">
+                            Deadline
+                        </div>
+
+                        <div
+                            id="modalDeadline"
+                            class="modal-info-value">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-info">
+
+                        <div class="modal-info-label">
+                            Applications
+                        </div>
+
+                        <div
+                            id="modalApplications"
+                            class="modal-info-value">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-info">
+
+                        <div class="modal-info-label">
+                            Posted
+                        </div>
+
+                        <div
+                            id="modalCreatedAt"
+                            class="modal-info-value">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    class="skills-section"
+                    style="margin-top:18px;">
+
+                    <div class="skills-label">
+                        Required Skills
+                    </div>
+
+                    <div
+                        id="modalSkills"
+                        class="skills-list">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        id="toast"
+        class="toast">
+    </div>
+
+
+    <script>
+
+
+        // =====================================================
+        // API
+        // =====================================================
+
+        const API_URL =
+            "http://localhost:5000/api/opportunities";
+
+
+        // =====================================================
+        // STATE
+        // =====================================================
+
+        let opportunities = [];
+
+
+        // =====================================================
+        // PAGE LOAD
+        // =====================================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                checkCompanyAccess();
+
+            }
+        );
+
+
+        // =====================================================
+        // AUTH CHECK
+        // =====================================================
+
+        function checkCompanyAccess() {
+
+            const token =
+                localStorage.getItem("token");
+
+
+            const userString =
+                localStorage.getItem("user");
+
+
+            if (!token || !userString) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            let user;
+
+
+            try {
+
+                user =
+                    JSON.parse(userString);
+
+            }
+            catch (error) {
+
+                console.error(
+                    "USER PARSE ERROR:",
+                    error
+                );
+
+
+                localStorage.removeItem(
+                    "token"
+                );
+
+                localStorage.removeItem(
+                    "user"
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+
+                return;
+
+            }
+
+
+            if (
+                user.role !==
+                "company"
+            ) {
+
+                alert(
+                    "Access denied. Company account required."
+                );
+
+
+                window.location.href =
+                    "dashboard.html";
+
+
+                return;
+
+            }
+
+
+            updateCompanyHeader(
+                user
+            );
+
+
+            loadCompanyProfile();
+
+
+            loadOpportunities();
+
+        }
+
+
+        // =====================================================
+        // COMPANY HEADER
+        // =====================================================
+
+        function updateCompanyHeader(
+            user
+        ) {
+
+            const name =
+                user.name ||
+                "Company";
+
+
+            const companyName =
+                document.getElementById(
+                    "companyName"
+                );
+
+
+            const avatar =
+                document.getElementById(
+                    "companyAvatar"
+                );
+
+
+            companyName.textContent =
+                name;
+
+
+            setCompanyAvatar(
+                avatar,
+                user.companyLogo,
+                name
+            );
+
+        }
+
+
+        // =====================================================
+        // LOAD COMPANY PROFILE
+        // =====================================================
+
+        async function loadCompanyProfile() {
+
+            const token =
+                localStorage.getItem("token");
+
+
+            const userString =
+                localStorage.getItem("user");
+
+
+            if (!token || !userString) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const localUser =
+                    JSON.parse(
+                        userString
+                    );
+
+
+                if (!localUser._id) {
+
+                    return;
+
+                }
+
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/profile/" +
+                        encodeURIComponent(
+                            localUser._id
+                        ),
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    response.status ===
+                    401
+                ) {
+
+                    handleSessionExpired();
+
+                    return;
+
+                }
+
+
+                if (!response.ok) {
+
+                    return;
+
+                }
+
+
+                const freshUser =
+                    data.user ||
+                    data;
+
+
+                if (!freshUser) {
+
+                    return;
+
+                }
+
+
+                const mergedUser = {
+                    ...localUser,
+                    ...freshUser
+                };
+
+
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(
+                        mergedUser
+                    )
+                );
+
+
+                updateCompanyHeader(
+                    mergedUser
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "PROFILE LOAD ERROR:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // COMPANY AVATAR
+        // =====================================================
+
+        function setCompanyAvatar(
+            element,
+            logo,
+            companyName
+        ) {
+
+            if (!element) {
+
+                return;
+
+            }
+
+
+            if (
+                logo &&
+                String(logo).trim() !== ""
+            ) {
+
+                const image =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                image.src =
+                    String(
+                        logo
+                    ).trim();
+
+
+                image.alt =
+                    companyName ||
+                    "Company Logo";
+
+
+                image.onerror =
+                    function () {
+
+                        element.innerHTML =
+                            "";
+
+
+                        element.textContent =
+                            getCompanyInitial(
+                                companyName
+                            );
+
+                    };
+
+
+                element.innerHTML =
+                    "";
+
+
+                element.appendChild(
+                    image
+                );
+
+
+                return;
+
+            }
+
+
+            element.innerHTML =
+                "";
+
+
+            element.textContent =
+                getCompanyInitial(
+                    companyName
+                );
+
+        }
+
+
+        // =====================================================
+        // INITIAL
+        // =====================================================
+
+        function getCompanyInitial(
+            companyName
+        ) {
+
+            const name =
+                String(
+                    companyName ||
+                    "Company"
+                ).trim();
+
+
+            return (
+                name.charAt(0) ||
+                "C"
+            ).toUpperCase();
+
+        }
+
+
+        // =====================================================
+        // PROFILE PAGE
+        // =====================================================
+
+        function openCompanyProfile() {
+
+            window.location.href =
+                "company-profile.html";
+
+        }
+
+
+        // =====================================================
+        // LOAD OPPORTUNITIES
+        // =====================================================
+
+        async function loadOpportunities() {
+
+            const token =
+                localStorage.getItem(
+                    "token"
+                );
+
+
+            const loading =
+                document.getElementById(
+                    "loading"
+                );
+
+
+            const errorBox =
+                document.getElementById(
+                    "errorBox"
+                );
+
+
+            loading.style.display =
+                "block";
+
+
+            errorBox.style.display =
+                "none";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/my",
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token,
+
+                                "Content-Type":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                if (
+                    response.status ===
+                    401
+                ) {
+
+                    handleSessionExpired();
+
+                    return;
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    response.status ===
+                    403
+                ) {
+
+                    alert(
+                        data.message ||
+                        "Only companies can access this page."
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                    return;
+
+                }
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load opportunities."
+                    );
+
+                }
+
+
+                if (
+                    Array.isArray(data)
+                ) {
+
+                    opportunities =
+                        data;
+
+                }
+                else if (
+                    Array.isArray(
+                        data.opportunities
+                    )
+                ) {
+
+                    opportunities =
+                        data.opportunities;
+
+                }
+                else if (
+                    Array.isArray(
+                        data.data
+                    )
+                ) {
+
+                    opportunities =
+                        data.data;
+
+                }
+                else {
+
+                    opportunities =
+                        [];
+
+                }
+
+
+                updateStats();
+
+                renderOpportunities(
+                    opportunities
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "OPPORTUNITIES ERROR:",
+                    error
+                );
+
+
+                showError(
+                    error.message ||
+                    "Something went wrong while loading opportunities."
+                );
+
+            }
+            finally {
+
+                loading.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        // =====================================================
+        // UPDATE STATS
+        // =====================================================
+
+        function updateStats() {
+
+            const total =
+                opportunities.length;
+
+
+            document.getElementById(
+                "totalOpportunities"
+            ).textContent =
+                total;
+
+
+            let active =
+                0;
+
+
+            opportunities.forEach(
+                function (opportunity) {
+
+                    const status =
+                        String(
+                            opportunity.status ||
+                            "Active"
+                        ).toLowerCase();
+
+
+                    if (
+                        status === "active" ||
+                        status === "open"
+                    ) {
+
+                        active++;
+
+                    }
+
+                }
+            );
+
+
+            document.getElementById(
+                "activeOpportunities"
+            ).textContent =
+                active;
+
+
+            let applications =
+                0;
+
+
+            opportunities.forEach(
+                function (opportunity) {
+
+                    applications +=
+                        Number(
+                            opportunity.applicationCount ||
+                            opportunity.applicationsCount ||
+                            0
+                        );
+
+                }
+            );
+
+
+            document.getElementById(
+                "totalApplications"
+            ).textContent =
+                applications;
+
+        }
+
+
+        // =====================================================
+        // RENDER OPPORTUNITIES
+        // =====================================================
+
+        function renderOpportunities(
+            list
+        ) {
+
+            const container =
+                document.getElementById(
+                    "opportunitiesContainer"
+                );
+
+
+            const emptyBox =
+                document.getElementById(
+                    "emptyBox"
+                );
+
+
+            container.innerHTML =
+                "";
+
+
+            if (
+                !Array.isArray(list) ||
+                list.length === 0
+            ) {
+
+                emptyBox.style.display =
+                    "block";
+
+
+                return;
+
+            }
+
+
+            emptyBox.style.display =
+                "none";
+
+
+            list.forEach(
+                function (opportunity) {
+
+                    container.appendChild(
+                        createOpportunityCard(
+                            opportunity
+                        )
+                    );
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // CREATE CARD
+        // =====================================================
+
+        function createOpportunityCard(
+            opportunity
+        ) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "opportunity-card";
+
+
+            const title =
+                opportunity.title ||
+                opportunity.name ||
+                "Untitled Opportunity";
+
+
+            const type =
+                opportunity.type ||
+                opportunity.category ||
+                "Opportunity";
+
+
+            const description =
+                opportunity.description ||
+                "No description available.";
+
+
+            const location =
+                opportunity.location ||
+                "Not specified";
+
+
+            const workMode =
+                opportunity.workMode ||
+                "Remote";
+
+
+            const salary =
+                opportunity.salary ||
+                "Not specified";
+
+
+            const experience =
+                opportunity.experience ||
+                "Fresher";
+
+
+            const deadline =
+                formatDate(
+                    opportunity.deadline ||
+                    opportunity.applicationDeadline
+                );
+
+
+            const status =
+                opportunity.status ||
+                "Active";
+
+
+            const applicationCount =
+                Number(
+                    opportunity.applicationCount ||
+                    opportunity.applicationsCount ||
+                    0
+                );
+
+
+            const skills =
+                getSkillsArray(
+                    opportunity
+                );
+
+
+            card.innerHTML = `
+
+                <div class="opportunity-header">
+
+                    <div>
+
+                        <div class="opportunity-title">
+                            ${escapeHTML(title)}
+                        </div>
+
+                        <div class="opportunity-type">
+                            ${escapeHTML(type)}
+                        </div>
+
+                    </div>
+
+
+                    <span class="
+                        status-badge
+                        ${getStatusClass(status)}
+                    ">
+
+                        ${escapeHTML(status)}
+
+                    </span>
+
+                </div>
+
+
+                <div class="opportunity-description">
+
+                    ${escapeHTML(description)}
+
+                </div>
+
+
+                <div class="opportunity-meta-grid">
+
+
+                    <div class="meta-box">
+
+                        <div class="meta-label">
+                            Location
+                        </div>
+
+                        <div class="meta-value">
+                            ${escapeHTML(location)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="meta-box">
+
+                        <div class="meta-label">
+                            Work Mode
+                        </div>
+
+                        <div class="meta-value">
+                            ${escapeHTML(workMode)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="meta-box">
+
+                        <div class="meta-label">
+                            Salary
+                        </div>
+
+                        <div class="meta-value">
+                            ${escapeHTML(salary)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="meta-box">
+
+                        <div class="meta-label">
+                            Deadline
+                        </div>
+
+                        <div class="meta-value">
+                            ${escapeHTML(deadline)}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="skills-section">
+
+                    <div class="skills-label">
+                        Required Skills
+                    </div>
+
+                    <div class="skills-list">
+
+                        ${
+                            skills.length
+                                ? skills
+                                    .slice(0, 8)
+                                    .map(
+                                        skill => `
+
+                                            <span class="skill-chip">
+                                                ${escapeHTML(skill)}
+                                            </span>
+
+                                        `
+                                    )
+                                    .join("")
+                                : `
+                                    <span
+                                        style="
+                                            color:#9ca3af;
+                                            font-size:10px;
+                                        ">
+
+                                        No skills specified
+
+                                    </span>
+                                `
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="opportunity-footer">
+
+
+                    <div class="application-count">
+
+                        👥
+                        ${applicationCount}
+                        Applications
+
+                    </div>
+
+
+                    <div class="card-actions">
+
+
+                        <button
+                            class="view-btn"
+                            onclick="viewOpportunity('${escapeHTML(
+                                opportunity._id
+                            )}')">
+
+                            View
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteOpportunity('${escapeHTML(
+                                opportunity._id
+                            )}')">
+
+                            Delete
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+            return card;
+
+        }
+
+
+        // =====================================================
+        // SEARCH
+        // =====================================================
+
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .addEventListener(
+                "input",
+                function () {
+
+                    const search =
+                        this.value
+                            .toLowerCase()
+                            .trim();
+
+
+                    if (!search) {
+
+                        renderOpportunities(
+                            opportunities
+                        );
+
+                        return;
+
+                    }
+
+
+                    const filtered =
+                        opportunities.filter(
+                            function (
+                                opportunity
+                            ) {
+
+                                const title =
+                                    String(
+                                        opportunity.title ||
+                                        opportunity.name ||
+                                        ""
+                                    ).toLowerCase();
+
+
+                                const description =
+                                    String(
+                                        opportunity.description ||
+                                        ""
+                                    ).toLowerCase();
+
+
+                                const type =
+                                    String(
+                                        opportunity.type ||
+                                        opportunity.category ||
+                                        ""
+                                    ).toLowerCase();
+
+
+                                const location =
+                                    String(
+                                        opportunity.location ||
+                                        ""
+                                    ).toLowerCase();
+
+
+                                const workMode =
+                                    String(
+                                        opportunity.workMode ||
+                                        ""
+                                    ).toLowerCase();
+
+
+                                return (
+                                    title.includes(search) ||
+                                    description.includes(search) ||
+                                    type.includes(search) ||
+                                    location.includes(search) ||
+                                    workMode.includes(search)
+                                );
+
+                            }
+                        );
+
+
+                    renderOpportunities(
+                        filtered
+                    );
+
+                }
+            );
+
+
+        // =====================================================
+        // VIEW OPPORTUNITY
+        // =====================================================
+
+        function viewOpportunity(
+            id
+        ) {
+
+            const opportunity =
+                opportunities.find(
+                    function (item) {
+
+                        return String(
+                            item._id
+                        ) === String(
+                            id
+                        );
+
+                    }
+                );
+
+
+            if (!opportunity) {
+
+                showToast(
+                    "Opportunity not found.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "modalTitle"
+            ).textContent =
+                opportunity.title ||
+                opportunity.name ||
+                "Opportunity Details";
+
+
+            document.getElementById(
+                "modalDescription"
+            ).textContent =
+                opportunity.description ||
+                "No description available.";
+
+
+            document.getElementById(
+                "modalType"
+            ).textContent =
+                opportunity.type ||
+                opportunity.category ||
+                "Not specified";
+
+
+            document.getElementById(
+                "modalLocation"
+            ).textContent =
+                opportunity.location ||
+                "Not specified";
+
+
+            document.getElementById(
+                "modalWorkMode"
+            ).textContent =
+                opportunity.workMode ||
+                "Remote";
+
+
+            document.getElementById(
+                "modalSalary"
+            ).textContent =
+                opportunity.salary ||
+                "Not specified";
+
+
+            document.getElementById(
+                "modalExperience"
+            ).textContent =
+                opportunity.experience ||
+                "Fresher";
+
+
+            document.getElementById(
+                "modalDeadline"
+            ).textContent =
+                formatDate(
+                    opportunity.deadline ||
+                    opportunity.applicationDeadline
+                );
+
+
+            document.getElementById(
+                "modalApplications"
+            ).textContent =
+                Number(
+                    opportunity.applicationCount ||
+                    opportunity.applicationsCount ||
+                    0
+                );
+
+
+            document.getElementById(
+                "modalCreatedAt"
+            ).textContent =
+                formatDate(
+                    opportunity.createdAt
+                );
+
+
+            const modalSkills =
+                document.getElementById(
+                    "modalSkills"
+                );
+
+
+            const skills =
+                getSkillsArray(
+                    opportunity
+                );
+
+
+            if (skills.length) {
+
+                modalSkills.innerHTML =
+                    skills
+                        .map(
+                            function (skill) {
+
+                                return `
+
+                                    <span class="skill-chip">
+                                        ${escapeHTML(skill)}
+                                    </span>
+
+                                `;
+
+                            }
+                        )
+                        .join("");
+
+            }
+            else {
+
+                modalSkills.innerHTML = `
+
+                    <span
+                        style="
+                            color:#9ca3af;
+                            font-size:11px;
+                        ">
+
+                        No skills specified
+
+                    </span>
+
+                `;
+
+            }
+
+
+            document
+                .getElementById(
+                    "detailsModal"
+                )
+                .classList.add(
+                    "show"
+                );
+
+        }
+
+
+        // =====================================================
+        // CLOSE MODAL
+        // =====================================================
+
+        function closeModal() {
+
+            document
+                .getElementById(
+                    "detailsModal"
+                )
+                .classList.remove(
+                    "show"
+                );
+
+        }
+
+
+        // =====================================================
+        // DELETE
+        // =====================================================
+
+        async function deleteOpportunity(
+            id
+        ) {
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to delete this opportunity?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            const token =
+                localStorage.getItem(
+                    "token"
+                );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL +
+                        "/" +
+                        encodeURIComponent(id),
+                        {
+                            method: "DELETE",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token,
+
+                                "Content-Type":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                if (
+                    response.status ===
+                    401
+                ) {
+
+                    handleSessionExpired();
+
+                    return;
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to delete opportunity."
+                    );
+
+                }
+
+
+                opportunities =
+                    opportunities.filter(
+                        function (opportunity) {
+
+                            return String(
+                                opportunity._id
+                            ) !== String(
+                                id
+                            );
+
+                        }
+                    );
+
+
+                updateStats();
+
+
+                const searchInput =
+                    document.getElementById(
+                        "searchInput"
+                    );
+
+
+                searchInput.value =
+                    "";
+
+
+                renderOpportunities(
+                    opportunities
+                );
+
+
+                showToast(
+                    "Opportunity deleted successfully.",
+                    "success"
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "DELETE ERROR:",
+                    error
+                );
+
+
+                showToast(
+                    error.message ||
+                    "Something went wrong.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // GET SKILLS ARRAY
+        // =====================================================
+
+        function getSkillsArray(
+            opportunity
+        ) {
+
+            let skills =
+                opportunity.requiredSkills;
+
+
+            if (
+                skills == null
+            ) {
+
+                skills =
+                    opportunity.skills;
+
+            }
+
+
+            if (
+                skills == null
+            ) {
+
+                return [];
+
+            }
+
+
+            if (
+                Array.isArray(skills)
+            ) {
+
+                return skills
+                    .map(
+                        function (skill) {
+
+                            if (
+                                typeof skill ===
+                                "object"
+                            ) {
+
+                                return (
+                                    skill.name ||
+                                    skill.title ||
+                                    skill.skill ||
+                                    ""
+                                );
+
+                            }
+
+
+                            return String(
+                                skill
+                            );
+
+                        }
+                    )
+                    .map(
+                        function (skill) {
+
+                            return String(
+                                skill
+                            ).trim();
+
+                        }
+                    )
+                    .filter(Boolean);
+
+            }
+
+
+            if (
+                typeof skills ===
+                "object"
+            ) {
+
+                return Object.values(
+                    skills
+                )
+                    .map(
+                        function (skill) {
+
+                            if (
+                                typeof skill ===
+                                "object"
+                            ) {
+
+                                return (
+                                    skill.name ||
+                                    skill.title ||
+                                    skill.skill ||
+                                    ""
+                                );
+
+                            }
+
+
+                            return String(
+                                skill
+                            );
+
+                        }
+                    )
+                    .map(
+                        function (skill) {
+
+                            return String(
+                                skill
+                            ).trim();
+
+                        }
+                    )
+                    .filter(Boolean);
+
+            }
+
+
+            return String(
+                skills
+            )
+                .split(",")
+                .map(
+                    function (skill) {
+
+                        return skill.trim();
+
+                    }
+                )
+                .filter(Boolean);
+
+        }
+
+
+        // =====================================================
+        // STATUS CLASS
+        // =====================================================
+
+        function getStatusClass(
+            status
+        ) {
+
+            const value =
+                String(
+                    status ||
+                    "Active"
+                ).toLowerCase();
+
+
+            if (
+                value === "active" ||
+                value === "open"
+            ) {
+
+                return "status-active";
+
+            }
+
+
+            if (
+                value === "closed" ||
+                value === "inactive"
+            ) {
+
+                return "status-closed";
+
+            }
+
+
+            return "status-other";
+
+        }
+
+
+        // =====================================================
+        // DATE
+        // =====================================================
+
+        function formatDate(
+            date
+        ) {
+
+            if (!date) {
+
+                return "Not specified";
+
+            }
+
+
+            const parsed =
+                new Date(date);
+
+
+            if (
+                Number.isNaN(
+                    parsed.getTime()
+                )
+            ) {
+
+                return String(
+                    date
+                );
+
+            }
+
+
+            return parsed.toLocaleDateString(
+                "en-IN",
+                {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // POST OPPORTUNITY
+        // =====================================================
+
+        function postOpportunity() {
+
+            window.location.href =
+                "post-opportunity.html";
+
+        }
+
+
+        // =====================================================
+        // SESSION EXPIRED
+        // =====================================================
+
+        function handleSessionExpired() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+
+            localStorage.removeItem(
+                "user"
+            );
+
+
+            alert(
+                "Session expired. Please login again."
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        // =====================================================
+        // ERROR
+        // =====================================================
+
+        function showError(
+            message
+        ) {
+
+            const errorBox =
+                document.getElementById(
+                    "errorBox"
+                );
+
+
+            errorBox.textContent =
+                message;
+
+
+            errorBox.style.display =
+                "block";
+
+        }
+
+
+        // =====================================================
+        // TOAST
+        // =====================================================
+
+        function showToast(
+            message,
+            type
+        ) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+
+            toast.textContent =
+                message;
+
+
+            toast.className =
+                "toast show " +
+                (
+                    type ||
+                    "success"
+                );
+
+
+            setTimeout(
+                function () {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                3000
+            );
+
+        }
+
+
+        // =====================================================
+        // MOBILE SIDEBAR
+        // =====================================================
+
+        function toggleSidebar() {
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+
+            const overlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+
+            overlay.classList.toggle(
+                "show"
+            );
+
+        }
+
+
+        // =====================================================
+        // CLOSE SIDEBAR
+        // =====================================================
+
+        function closeSidebar() {
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+
+            const overlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+
+            overlay.classList.remove(
+                "show"
+            );
+
+        }
+
+
+        // =====================================================
+        // NAV MOBILE CLOSE
+        // =====================================================
+
+        document
+            .querySelectorAll(
+                ".nav a"
+            )
+            .forEach(
+                function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        function () {
+
+                            if (
+                                window.innerWidth <=
+                                900
+                            ) {
+
+                                closeSidebar();
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+        // =====================================================
+        // MODAL BACKGROUND CLICK
+        // =====================================================
+
+        document
+            .getElementById(
+                "detailsModal"
+            )
+            .addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target ===
+                        this
+                    ) {
+
+                        closeModal();
+
+                    }
+
+                }
+            );
+
+
+        // =====================================================
+        // ESCAPE KEY
+        // =====================================================
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeModal();
+
+                    closeSidebar();
+
+                }
+
+            }
+        );
+
+
+        // =====================================================
+        // RESIZE
+        // =====================================================
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                if (
+                    window.innerWidth >
+                    900
+                ) {
+
+                    closeSidebar();
+
+                }
+
+            }
+        );
+
+
+        // =====================================================
+        // HTML ESCAPE
+        // =====================================================
+
+        function escapeHTML(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        // =====================================================
+        // LOGOUT
+        // =====================================================
+
+        function logout() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+
+            localStorage.removeItem(
+                "user"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

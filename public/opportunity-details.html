@@ -1,0 +1,2087 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Opportunity Details | SkillBridge</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Inter, Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f6f8fc;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            background: #101828;
+
+            color: white;
+
+            padding: 25px 16px;
+
+            overflow-y: auto;
+
+            z-index: 1000;
+
+            border-right:
+                1px solid rgba(255,255,255,.05);
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            padding: 7px 12px;
+
+            margin-bottom: 35px;
+
+            letter-spacing: -.5px;
+        }
+
+
+        .logo-mark {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3b82f6,
+                    #6366f1
+                );
+
+            font-size: 17px;
+
+            box-shadow:
+                0 6px 18px
+                rgba(59,130,246,.25);
+        }
+
+
+        .logo span {
+            color: #60a5fa;
+        }
+
+
+        .menu-label {
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.4px;
+
+            color: #667085;
+
+            font-weight: 700;
+
+            padding: 0 13px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .nav {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .nav a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-decoration: none;
+
+            color: #98a2b3;
+
+            padding: 12px 13px;
+
+            border-radius: 11px;
+
+            margin-bottom: 5px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: .2s ease;
+        }
+
+
+        .nav a:hover {
+
+            background:
+                rgba(255,255,255,.055);
+
+            color: white;
+
+            transform:
+                translateX(2px);
+        }
+
+
+        .nav a.active {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(59,130,246,.22),
+                    rgba(99,102,241,.16)
+                );
+
+            color: white;
+
+            border:
+                1px solid
+                rgba(96,165,250,.15);
+        }
+
+
+        .menu-icon {
+
+            width: 30px;
+            height: 30px;
+
+            border-radius: 8px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(255,255,255,.045);
+
+            font-size: 14px;
+
+            flex-shrink: 0;
+        }
+
+
+        .nav a.active .menu-icon {
+
+            background: #2563eb;
+
+            box-shadow:
+                0 4px 12px
+                rgba(37,99,235,.3);
+        }
+
+
+        .account-label {
+            margin-top: 27px;
+        }
+
+
+        .logout-link {
+            margin-top: 5px;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+
+            margin-left: 250px;
+
+            min-height: 100vh;
+
+            padding:
+                32px 42px 55px;
+
+            max-width: 1250px;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            border: none;
+
+            background: white;
+
+            color: #475467;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            border:
+                1px solid #eaecf0;
+
+            margin-bottom: 18px;
+
+            transition: .2s;
+
+            box-shadow:
+                0 3px 10px
+                rgba(16,24,40,.035);
+        }
+
+
+        .back-btn:hover {
+
+            color: #2563eb;
+
+            border-color:
+                #c7d7fe;
+
+            transform:
+                translateX(-2px);
+        }
+
+
+        /* =====================================================
+           DETAILS CARD
+        ===================================================== */
+
+        .details-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            border:
+                1px solid #eaecf0;
+
+            box-shadow:
+                0 6px 25px
+                rgba(16,24,40,.055);
+        }
+
+
+        /* =====================================================
+           TITLE SECTION
+        ===================================================== */
+
+        .title-section {
+
+            position: relative;
+
+            padding-bottom: 25px;
+
+            margin-bottom: 25px;
+
+            border-bottom:
+                1px solid #eef0f3;
+        }
+
+
+        .opportunity-label {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+            font-weight: 800;
+
+            color: #2563eb;
+
+            background: #eff6ff;
+
+            padding: 6px 9px;
+
+            border-radius: 7px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .opportunity-label::before {
+
+            content: "";
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+        }
+
+
+        .title-section h1 {
+
+            font-size: 30px;
+
+            line-height: 1.2;
+
+            letter-spacing: -.7px;
+
+            color: #101828;
+
+            margin-bottom: 8px;
+        }
+
+
+        .company {
+
+            font-size: 14px;
+
+            color: #2563eb;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           TAGS
+        ===================================================== */
+
+        .tags {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-top: 17px;
+        }
+
+
+        .tag {
+
+            background: #f5f8ff;
+
+            color: #3157a8;
+
+            border:
+                1px solid #e0e9ff;
+
+            padding: 7px 10px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .type-tag {
+
+            background: #2563eb;
+
+            color: white;
+
+            border-color: #2563eb;
+        }
+
+
+        /* =====================================================
+           INFO GRID
+        ===================================================== */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .info-box {
+
+            background: #f8fafc;
+
+            border:
+                1px solid #edf0f4;
+
+            border-radius: 12px;
+
+            padding: 15px;
+
+            transition: .2s;
+        }
+
+
+        .info-box:hover {
+
+            border-color:
+                #d9e2f5;
+
+            background: #f9fbff;
+        }
+
+
+        .info-icon {
+
+            width: 29px;
+            height: 29px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background: #eef4ff;
+
+            margin-bottom: 10px;
+
+            font-size: 13px;
+        }
+
+
+        .info-label {
+
+            color: #98a2b3;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-value {
+
+            color: #344054;
+
+            font-weight: 750;
+
+            font-size: 12px;
+
+            line-height: 1.45;
+        }
+
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .section {
+
+            margin-bottom: 28px;
+        }
+
+
+        .section-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .section-heading-mark {
+
+            width: 5px;
+            height: 19px;
+
+            border-radius: 5px;
+
+            background: #2563eb;
+        }
+
+
+        .section h2 {
+
+            font-size: 17px;
+
+            color: #101828;
+
+            letter-spacing: -.2px;
+        }
+
+
+        .description {
+
+            color: #475467;
+
+            line-height: 1.8;
+
+            font-size: 13px;
+
+            white-space: pre-line;
+
+            background: #fafbfc;
+
+            border:
+                1px solid #edf0f4;
+
+            border-radius: 11px;
+
+            padding: 17px;
+        }
+
+
+        /* =====================================================
+           SKILLS
+        ===================================================== */
+
+        .skills-box {
+
+            background: #fafbff;
+
+            border:
+                1px solid #edf0f4;
+
+            border-radius: 12px;
+
+            padding: 16px;
+        }
+
+
+        .skills-intro {
+
+            font-size: 11px;
+
+            color: #667085;
+
+            margin-bottom: 2px;
+
+            line-height: 1.5;
+        }
+
+
+        .skills-box .tags {
+
+            margin-top: 12px;
+        }
+
+
+        /* =====================================================
+           ACTION AREA
+        ===================================================== */
+
+        .action-area {
+
+            border-top:
+                1px solid #eaecf0;
+
+            padding-top: 22px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .action-note {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #667085;
+
+            font-size: 11px;
+
+            line-height: 1.4;
+        }
+
+
+        .action-note-icon {
+
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background: #f2f4f7;
+        }
+
+
+        .action-buttons {
+
+            display: flex;
+
+            gap: 9px;
+        }
+
+
+        .btn {
+
+            border: none;
+
+            padding: 11px 19px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-weight: 750;
+
+            font-size: 11px;
+
+            transition: .2s;
+        }
+
+
+        .back-action {
+
+            background: #f2f4f7;
+
+            color: #344054;
+
+            border:
+                1px solid #e4e7ec;
+        }
+
+
+        .back-action:hover {
+
+            background: #e4e7ec;
+        }
+
+
+        .apply-btn {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #315bea
+                );
+
+            color: white;
+
+            box-shadow:
+                0 7px 17px
+                rgba(37,99,235,.18);
+        }
+
+
+        .apply-btn:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 10px 22px
+                rgba(37,99,235,.24);
+        }
+
+
+        .apply-btn:disabled {
+
+            cursor: not-allowed;
+
+            opacity: .72;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .message {
+
+            background: white;
+
+            padding: 65px 30px;
+
+            border-radius: 17px;
+
+            text-align: center;
+
+            color: #667085;
+
+            border:
+                1px solid #eaecf0;
+
+            box-shadow:
+                0 5px 20px
+                rgba(16,24,40,.045);
+        }
+
+
+        .message-icon {
+
+            width: 55px;
+            height: 55px;
+
+            margin:
+                0 auto 15px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: #eef4ff;
+
+            color: #2563eb;
+
+            font-size: 23px;
+        }
+
+
+        .message h2 {
+
+            color: #101828;
+
+            font-size: 19px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .message p {
+
+            font-size: 12px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .error {
+
+            color: #dc2626;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .loading-spinner {
+
+            width: 31px;
+            height: 31px;
+
+            border:
+                3px solid #e5e7eb;
+
+            border-top:
+                3px solid #2563eb;
+
+            border-radius: 50%;
+
+            margin:
+                0 auto 15px;
+
+            animation:
+                spin .8s linear infinite;
+        }
+
+
+        @keyframes spin {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .info-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                width: 205px;
+            }
+
+            .main {
+                margin-left: 205px;
+                padding: 27px;
+            }
+
+            .title-section h1 {
+                font-size: 25px;
+            }
+
+            .info-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .action-area {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .action-buttons {
+                width: 100%;
+            }
+
+            .action-buttons .btn {
+                flex: 1;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .sidebar {
+
+                width: 66px;
+
+                padding:
+                    18px 8px;
+            }
+
+
+            .logo {
+
+                justify-content: center;
+
+                padding: 0;
+
+                margin-bottom: 25px;
+            }
+
+
+            .logo-text,
+            .menu-label,
+            .nav a span:not(.menu-icon) {
+
+                display: none;
+            }
+
+
+            .nav a {
+
+                justify-content: center;
+
+                padding: 9px;
+            }
+
+
+            .menu-icon {
+
+                width: 38px;
+                height: 38px;
+            }
+
+
+            .account-label {
+
+                margin-top: 20px;
+            }
+
+
+            .main {
+
+                margin-left: 66px;
+
+                padding:
+                    20px 15px 35px;
+            }
+
+
+            .details-card {
+
+                padding: 19px;
+
+                border-radius: 15px;
+            }
+
+
+            .title-section h1 {
+
+                font-size: 22px;
+
+                letter-spacing: -.4px;
+            }
+
+
+            .company {
+
+                font-size: 12px;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 9px;
+            }
+
+
+            .info-box {
+
+                padding: 13px;
+            }
+
+
+            .description {
+
+                font-size: 12px;
+
+                padding: 14px;
+            }
+
+
+            .section h2 {
+
+                font-size: 15px;
+            }
+
+
+            .action-buttons {
+
+                flex-direction: column;
+            }
+
+
+            .action-buttons .btn {
+
+                width: 100%;
+            }
+
+
+            .back-btn {
+
+                margin-bottom: 13px;
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .main {
+
+                padding:
+                    17px 12px 30px;
+            }
+
+
+            .details-card {
+
+                padding: 16px;
+            }
+
+
+            .tags {
+
+                gap: 6px;
+            }
+
+
+            .tag {
+
+                font-size: 10px;
+
+                padding:
+                    6px 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <div class="logo-mark">
+                S
+            </div>
+
+            <div class="logo-text">
+                Skill<span>Bridge</span>
+            </div>
+
+        </div>
+
+
+        <div class="menu-label">
+            Main Menu
+        </div>
+
+
+        <nav class="nav">
+
+
+            <a href="dashboard.html">
+
+                <span class="menu-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="my-skills.html">
+
+                <span class="menu-icon">
+                    ◈
+                </span>
+
+                <span>
+                    My Skills
+                </span>
+
+            </a>
+
+
+            <a href="learning.html">
+
+                <span class="menu-icon">
+                    ▣
+                </span>
+
+                <span>
+                    Learning
+                </span>
+
+            </a>
+
+
+            <a href="opportunities.html"
+               class="active">
+
+                <span class="menu-icon">
+                    ◆
+                </span>
+
+                <span>
+                    Opportunities
+                </span>
+
+            </a>
+
+
+            <a href="applications.html">
+
+                <span class="menu-icon">
+                    ◷
+                </span>
+
+                <span>
+                    Applications
+                </span>
+
+            </a>
+
+
+            <div class="menu-label account-label">
+                Account
+            </div>
+
+
+            <a href="profile.html">
+
+                <span class="menu-icon">
+                    ●
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="logout-link"
+               onclick="logout(); return false;">
+
+                <span class="menu-icon">
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <button
+            class="back-btn"
+            onclick="goBack()"
+        >
+            ← Back to Opportunities
+        </button>
+
+
+        <div id="content">
+
+            <div class="message">
+
+                <div class="loading-spinner"></div>
+
+                Loading opportunity...
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <script>
+
+        const API_URL =
+            "http://localhost:5000/api/opportunities";
+
+
+        /* =====================================================
+           GET OPPORTUNITY ID
+        ===================================================== */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const opportunityId =
+            params.get("id");
+
+
+        /* =====================================================
+           PAGE LOAD
+        ===================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                if (!opportunityId) {
+
+                    showError(
+                        "Opportunity ID is missing."
+                    );
+
+                    return;
+                }
+
+                loadOpportunity();
+
+            }
+        );
+
+
+        /* =====================================================
+           LOAD OPPORTUNITY
+        ===================================================== */
+
+        async function loadOpportunity() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/${opportunityId}`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Opportunity not found"
+                    );
+
+                }
+
+
+                const opportunity =
+                    await response.json();
+
+
+                renderOpportunity(
+                    opportunity
+                );
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "OPPORTUNITY DETAILS ERROR:",
+                    error
+                );
+
+                showError(
+                    "Unable to load opportunity details."
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           RENDER
+        ===================================================== */
+
+        function renderOpportunity(
+            opportunity
+        ) {
+
+            const skills =
+                Array.isArray(
+                    opportunity.requiredSkills
+                )
+                    ? opportunity.requiredSkills
+                    : [];
+
+
+            const skillTags =
+                skills
+                    .map(
+                        skill => `
+
+                            <span class="tag">
+                                ${escapeHTML(skill)}
+                            </span>
+
+                        `
+                    )
+                    .join("");
+
+
+            const deadline =
+                opportunity.deadline
+                    ? new Date(
+                        opportunity.deadline
+                    ).toLocaleDateString(
+                        "en-IN",
+                        {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric"
+                        }
+                    )
+                    : "Not specified";
+
+
+            document.getElementById(
+                "content"
+            ).innerHTML = `
+
+                <div class="details-card">
+
+
+                    <!-- ================= TITLE ================= -->
+
+                    <div class="title-section">
+
+
+                        <div class="opportunity-label">
+                            Career Opportunity
+                        </div>
+
+
+                        <h1>
+                            ${escapeHTML(
+                                opportunity.title
+                            )}
+                        </h1>
+
+
+                        <div class="company">
+                            ${escapeHTML(
+                                opportunity.company
+                            )}
+                        </div>
+
+
+                        <div class="tags">
+
+
+                            <span class="tag type-tag">
+                                ${escapeHTML(
+                                    opportunity.type ||
+                                    "Opportunity"
+                                )}
+                            </span>
+
+
+                            ${skillTags}
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ================= INFORMATION ================= -->
+
+                    <div class="info-grid">
+
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+                                📍
+                            </div>
+
+                            <div class="info-label">
+                                Location
+                            </div>
+
+                            <div class="info-value">
+
+                                ${
+                                    escapeHTML(
+                                        opportunity.location ||
+                                        "India"
+                                    )
+                                }
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+                                💼
+                            </div>
+
+                            <div class="info-label">
+                                Work Mode
+                            </div>
+
+                            <div class="info-value">
+
+                                ${
+                                    escapeHTML(
+                                        opportunity.workMode ||
+                                        "Remote"
+                                    )
+                                }
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+                                💰
+                            </div>
+
+                            <div class="info-label">
+                                Salary
+                            </div>
+
+                            <div class="info-value">
+
+                                ${
+                                    escapeHTML(
+                                        opportunity.salary ||
+                                        "Not specified"
+                                    )
+                                }
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+                                🎓
+                            </div>
+
+                            <div class="info-label">
+                                Experience
+                            </div>
+
+                            <div class="info-value">
+
+                                ${
+                                    escapeHTML(
+                                        opportunity.experience ||
+                                        "Fresher"
+                                    )
+                                }
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+                                📅
+                            </div>
+
+                            <div class="info-label">
+                                Application Deadline
+                            </div>
+
+                            <div class="info-value">
+
+                                ${deadline}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ================= DESCRIPTION ================= -->
+
+                    <div class="section">
+
+
+                        <div class="section-heading">
+
+                            <div class="section-heading-mark"></div>
+
+                            <h2>
+                                About this Opportunity
+                            </h2>
+
+                        </div>
+
+
+                        <div class="description">
+
+                            ${escapeHTML(
+                                opportunity.description ||
+                                "No description provided."
+                            )}
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ================= SKILLS ================= -->
+
+                    <div class="section">
+
+
+                        <div class="section-heading">
+
+                            <div class="section-heading-mark"></div>
+
+                            <h2>
+                                Required Skills
+                            </h2>
+
+                        </div>
+
+
+                        <div class="skills-box">
+
+
+                            <div class="skills-intro">
+                                Skills that can help you perform well
+                                in this opportunity.
+                            </div>
+
+
+                            <div class="tags">
+
+                                ${
+                                    skills.length
+                                        ? skillTags
+                                        : `
+                                            <span class="tag">
+                                                No specific skills mentioned
+                                            </span>
+                                          `
+                                }
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ================= ACTION ================= -->
+
+                    <div class="action-area">
+
+
+                        <div class="action-note">
+
+                            <div class="action-note-icon">
+                                💡
+                            </div>
+
+                            <span>
+                                Review the opportunity details
+                                before applying.
+                            </span>
+
+                        </div>
+
+
+                        <div class="action-buttons">
+
+
+                            <button
+                                class="btn back-action"
+                                onclick="goBack()"
+                            >
+                                Back
+                            </button>
+
+
+                            <button
+                                class="btn apply-btn"
+                                onclick="applyOpportunity()"
+                            >
+                                Apply Now →
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+            window.currentOpportunity =
+                opportunity;
+
+        }
+
+
+        /* =====================================================
+           APPLY FOR OPPORTUNITY
+        ===================================================== */
+
+        async function applyOpportunity() {
+
+            const opportunity =
+                window.currentOpportunity;
+
+
+            if (!opportunity) {
+
+                alert(
+                    "Opportunity details not loaded."
+                );
+
+                return;
+            }
+
+
+            /* =====================================
+               CHECK LOGIN
+            ===================================== */
+
+            const token =
+                localStorage.getItem("token");
+
+
+            if (!token) {
+
+                alert(
+                    "Please login before applying."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            /* =====================================
+               GET APPLY BUTTON
+            ===================================== */
+
+            const applyButton =
+                document.querySelector(
+                    ".apply-btn"
+                );
+
+
+            if (applyButton) {
+
+                applyButton.disabled = true;
+
+                applyButton.innerText =
+                    "Applying...";
+
+            }
+
+
+            try {
+
+
+                /* =================================
+                   CREATE APPLICATION
+                ================================= */
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/applications",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    "Bearer " + token
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    opportunityId:
+                                        opportunity._id
+
+                                })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "APPLICATION RESPONSE:",
+                    data
+                );
+
+
+                /* =================================
+                   TOKEN INVALID
+                ================================= */
+
+                if (
+                    response.status === 401
+                ) {
+
+                    localStorage.removeItem(
+                        "token"
+                    );
+
+                    localStorage.removeItem(
+                        "user"
+                    );
+
+                    alert(
+                        "Session expired. Please login again."
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   ALREADY APPLIED
+                ================================= */
+
+                if (
+                    response.status === 409
+                ) {
+
+                    alert(
+                        data.message ||
+                        "You have already applied for this opportunity."
+                    );
+
+
+                    if (applyButton) {
+
+                        applyButton.disabled =
+                            false;
+
+                        applyButton.innerText =
+                            "Already Applied";
+
+                    }
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   OTHER ERROR
+                ================================= */
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to submit application"
+                    );
+
+                }
+
+
+                /* =================================
+                   SUCCESS
+                ================================= */
+
+                alert(
+                    "Application submitted successfully! 🎉"
+                );
+
+
+                if (applyButton) {
+
+                    applyButton.innerText =
+                        "✓ Applied";
+
+                    applyButton.disabled =
+                        true;
+
+                }
+
+
+                /* =================================
+                   OPEN EXTERNAL APPLICATION
+                ================================= */
+
+                if (
+                    opportunity.applicationLink
+                ) {
+
+                    window.open(
+                        opportunity.applicationLink,
+                        "_blank"
+                    );
+
+                }
+                else {
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "applications.html";
+
+                        },
+                        800
+                    );
+
+                }
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "APPLY ERROR:",
+                    error
+                );
+
+
+                alert(
+                    error.message ||
+                    "Unable to submit application."
+                );
+
+
+                if (applyButton) {
+
+                    applyButton.disabled =
+                        false;
+
+                    applyButton.innerText =
+                        "Apply Now →";
+
+                }
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BACK
+        ===================================================== */
+
+        function goBack() {
+
+            window.location.href =
+                "opportunities.html";
+
+        }
+
+
+        /* =====================================================
+           ERROR
+        ===================================================== */
+
+        function showError(message) {
+
+            document.getElementById(
+                "content"
+            ).innerHTML = `
+
+                <div class="message error">
+
+                    <div class="message-icon">
+                        !
+                    </div>
+
+                    <h2>
+                        Unable to Load Opportunity
+                    </h2>
+
+                    <p>
+                        ${escapeHTML(message)}
+                    </p>
+
+
+                    <button
+                        class="btn back-action"
+                        onclick="goBack()"
+                    >
+                        ← Back to Opportunities
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHTML(value) {
+
+            return String(value ?? "")
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
+
+        function logout() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            localStorage.removeItem(
+                "user"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+

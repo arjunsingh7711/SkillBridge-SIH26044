@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Learning | SkillBridge</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+}
+
+body{
+    background:#f6f8fc;
+    color:#172033;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#0b1220;
+    padding:24px 16px;
+    z-index:1000;
+    overflow-y:auto;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:0 9px;
+    margin-bottom:42px;
+}
+
+.brand-icon{
+    width:39px;
+    height:39px;
+    border-radius:11px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:18px;
+    font-weight:800;
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+}
+
+.brand-text{
+    color:white;
+    font-size:20px;
+    font-weight:750;
+    letter-spacing:-.4px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#98a2b3;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:12px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:500;
+    transition:.2s;
+}
+
+.menu a:hover{
+    background:#151f32;
+    color:white;
+}
+
+.menu a.active{
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #4f46e5
+    );
+    color:white;
+    box-shadow:0 7px 18px rgba(37,99,235,.18);
+}
+
+.menu-icon{
+    width:22px;
+    text-align:center;
+    font-size:16px;
+}
+
+.sidebar-bottom{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid #1d2939;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+    height:74px;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #eaecf0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.search-box{
+    width:350px;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    height:41px;
+    border:1px solid #dfe3eb;
+    border-radius:10px;
+    padding:0 14px 0 40px;
+    outline:none;
+    font-size:12px;
+    background:white;
+}
+
+.search-box input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.search-icon{
+    position:absolute;
+    left:14px;
+    top:11px;
+    color:#667085;
+    font-size:15px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    box-shadow:0 4px 12px rgba(37,99,235,.18);
+}
+
+.profile-info{
+    line-height:1.3;
+}
+
+.profile-name{
+    font-size:13px;
+    font-weight:750;
+}
+
+.profile-role{
+    font-size:11px;
+    color:#667085;
+    margin-top:3px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+    padding:32px 35px 50px;
+    max-width:1500px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header{
+    margin-bottom:23px;
+}
+
+.page-header h1{
+    font-size:29px;
+    font-weight:800;
+    letter-spacing:-.8px;
+}
+
+.page-header p{
+    margin-top:6px;
+    color:#667085;
+    font-size:13px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.learning-hero{
+    background:
+        linear-gradient(
+            135deg,
+            #173ea5,
+            #4338ca
+        );
+
+    border-radius:19px;
+
+    padding:27px 30px;
+
+    color:white;
+
+    margin-bottom:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:30px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    min-height:205px;
+}
+
+.learning-hero::before{
+    content:"";
+    position:absolute;
+    width:270px;
+    height:270px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.08);
+    right:90px;
+    top:-130px;
+}
+
+.learning-hero::after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.055);
+    right:-60px;
+    bottom:-100px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:650px;
+}
+
+.hero-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#bfdbfe;
+    margin-bottom:10px;
+}
+
+.hero-content h2{
+    font-size:23px;
+    font-weight:800;
+    letter-spacing:-.4px;
+}
+
+.hero-content p{
+    margin-top:9px;
+    color:#dbeafe;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.hero-actions{
+    display:flex;
+    gap:9px;
+    margin-top:17px;
+}
+
+.hero-action{
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.1);
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    font-size:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   CIRCULAR READINESS
+========================================================= */
+
+.hero-stat{
+    position:relative;
+    z-index:3;
+    min-width:185px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.readiness-ring{
+    width:145px;
+    height:145px;
+    border-radius:50%;
+    background:
+        conic-gradient(
+            #ffffff var(--readiness-angle,0deg),
+            rgba(255,255,255,.17) var(--readiness-angle,0deg)
+        );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.readiness-ring::before{
+    content:"";
+    position:absolute;
+    width:111px;
+    height:111px;
+    border-radius:50%;
+    background:#2745b6;
+}
+
+.readiness-inner{
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+.readiness-number{
+    font-size:28px;
+    font-weight:850;
+}
+
+.readiness-label{
+    font-size:9px;
+    color:#dbeafe;
+    margin-top:2px;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:26px;
+}
+
+.stat-card{
+    background:white;
+    border:1px solid #eaecf0;
+    border-radius:15px;
+    padding:18px;
+    position:relative;
+    overflow:hidden;
+}
+
+.stat-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:#667085;
+    font-size:11px;
+    font-weight:650;
+}
+
+.stat-icon{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:#eff6ff;
+    color:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+}
+
+.stat-card h3{
+    margin:13px 0 4px;
+    font-size:24px;
+    letter-spacing:-.5px;
+}
+
+.stat-card p{
+    color:#98a2b3;
+    font-size:10px;
+}
+
+
+/* =========================================================
+   LEARNING PROGRESS
+========================================================= */
+
+.progress-panel{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:16px;
+    margin-bottom:27px;
+}
+
+.panel{
+    background:white;
+    border:1px solid #eaecf0;
+    border-radius:16px;
+    padding:21px;
+}
+
+.panel-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:17px;
+}
+
+.panel-title{
+    font-size:15px;
+    font-weight:750;
+}
+
+.panel-subtitle{
+    color:#667085;
+    font-size:10px;
+    margin-top:4px;
+}
+
+.view-link{
+    color:#2563eb;
+    font-size:10px;
+    font-weight:700;
+}
+
+.big-progress{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.progress-circle{
+    width:72px;
+    height:72px;
+    min-width:72px;
+    border-radius:50%;
+    background:
+        conic-gradient(
+            #2563eb var(--progress-angle,0deg),
+            #edf1f7 var(--progress-angle,0deg)
+        );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.progress-circle::before{
+    content:"";
+    position:absolute;
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    background:white;
+}
+
+.progress-circle span{
+    position:relative;
+    z-index:2;
+    font-size:13px;
+    font-weight:800;
+}
+
+.progress-copy{
+    flex:1;
+}
+
+.progress-copy strong{
+    display:block;
+    font-size:13px;
+}
+
+.progress-copy span{
+    display:block;
+    margin-top:5px;
+    color:#667085;
+    font-size:10px;
+    line-height:1.5;
+}
+
+.streak{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.streak-number{
+    font-size:31px;
+    font-weight:850;
+}
+
+.streak-label{
+    font-size:10px;
+    color:#667085;
+    margin-top:2px;
+}
+
+.streak-fire{
+    width:54px;
+    height:54px;
+    border-radius:14px;
+    background:#fff7ed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+    margin-bottom:29px;
+}
+
+.section-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+    gap:15px;
+}
+
+.section-title{
+    font-size:18px;
+    font-weight:800;
+}
+
+.section-subtitle{
+    margin-top:4px;
+    font-size:11px;
+    color:#667085;
+}
+
+
+/* =========================================================
+   SKILL GAPS
+========================================================= */
+
+.skill-gap-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.skill-card{
+    background:white;
+    border:1px solid #eaecf0;
+    border-radius:15px;
+    padding:20px;
+    transition:.2s;
+}
+
+.skill-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 9px 25px rgba(16,24,40,.07);
+}
+
+.skill-card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.skill-name{
+    font-size:15px;
+    font-weight:750;
+}
+
+.skill-meta{
+    color:#667085;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.status-badge{
+    font-size:9px;
+    font-weight:800;
+    padding:6px 9px;
+    border-radius:20px;
+}
+
+.must-learn{
+    background:#fef2f2;
+    color:#dc2626;
+}
+
+.improve{
+    background:#fffaeb;
+    color:#b54708;
+}
+
+.met{
+    background:#ecfdf3;
+    color:#027a48;
+}
+
+.progress-area{
+    margin-top:17px;
+}
+
+.progress-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    color:#667085;
+    margin-bottom:7px;
+}
+
+.progress-bar{
+    height:7px;
+    background:#eaecf0;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #6366f1
+    );
+    transition:width .4s ease;
+}
+
+.skill-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:16px;
+    gap:10px;
+}
+
+.required-text{
+    font-size:10px;
+    color:#667085;
+}
+
+.learn-btn{
+    border:none;
+    background:#1d4ed8;
+    color:white;
+    padding:8px 13px;
+    border-radius:8px;
+    font-size:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.learn-btn:hover{
+    background:#1e40af;
+}
+
+.learn-btn.done{
+    background:#ecfdf3;
+    color:#027a48;
+    cursor:default;
+}
+
+
+/* =========================================================
+   COURSE CONTROLS
+========================================================= */
+
+.course-controls{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.course-search{
+    width:210px;
+    height:37px;
+    border:1px solid #d0d5dd;
+    border-radius:9px;
+    padding:0 11px;
+    outline:none;
+    font-size:11px;
+}
+
+.course-search:focus{
+    border-color:#2563eb;
+}
+
+.filter-select{
+    height:37px;
+    border:1px solid #d0d5dd;
+    border-radius:9px;
+    padding:0 9px;
+    background:white;
+    color:#344054;
+    outline:none;
+    font-size:11px;
+}
+
+
+/* =========================================================
+   COURSES
+========================================================= */
+
+.course-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.course-card{
+    background:white;
+    border:1px solid #eaecf0;
+    border-radius:16px;
+    padding:19px;
+    transition:.2s;
+    position:relative;
+}
+
+.course-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 11px 28px rgba(16,24,40,.07);
+}
+
+.course-icon{
+    width:43px;
+    height:43px;
+    border-radius:11px;
+    background:#eff6ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+    margin-bottom:13px;
+}
+
+.course-category{
+    font-size:9px;
+    color:#2563eb;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+.course-title{
+    margin:7px 0 5px;
+    font-size:14px;
+    font-weight:800;
+}
+
+.course-description{
+    color:#667085;
+    font-size:10px;
+    line-height:1.55;
+    min-height:35px;
+}
+
+.course-info{
+    display:flex;
+    gap:12px;
+    margin-top:12px;
+    font-size:10px;
+    color:#667085;
+}
+
+.course-progress{
+    margin-top:15px;
+}
+
+.course-progress-text{
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    color:#667085;
+    margin-bottom:6px;
+}
+
+.course-actions{
+    margin-top:15px;
+}
+
+.course-btn{
+    width:100%;
+    height:36px;
+    border:none;
+    border-radius:8px;
+    background:#1d4ed8;
+    color:white;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.course-btn.completed{
+    background:#ecfdf3;
+    color:#027a48;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty-state{
+    background:white;
+    border:1px dashed #d0d5dd;
+    border-radius:15px;
+    padding:35px 20px;
+    text-align:center;
+    color:#667085;
+    font-size:11px;
+}
+
+.empty-state strong{
+    display:block;
+    color:#344054;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    background:#101828;
+    color:white;
+    padding:12px 17px;
+    border-radius:9px;
+    font-size:11px;
+    box-shadow:0 10px 30px rgba(0,0,0,.16);
+    transform:translateY(80px);
+    opacity:0;
+    transition:.3s;
+    z-index:3000;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1150px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .course-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .progress-panel{
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media(max-width:900px){
+
+    .skill-gap-list{
+        grid-template-columns:1fr;
+    }
+
+    .learning-hero{
+        align-items:flex-start;
+    }
+}
+
+
+@media(max-width:750px){
+
+    .sidebar{
+        width:70px;
+        padding:22px 9px;
+    }
+
+    .brand{
+        justify-content:center;
+        padding:0;
+    }
+
+    .brand-text,
+    .menu a span:not(.menu-icon){
+        display:none;
+    }
+
+    .menu a{
+        justify-content:center;
+        padding:12px;
+    }
+
+    .sidebar-bottom{
+        display:none;
+    }
+
+    .main{
+        margin-left:70px;
+    }
+
+    .topbar{
+        padding:0 20px;
+    }
+
+    .search-box{
+        width:45%;
+    }
+
+    .profile-info{
+        display:none;
+    }
+
+    .content{
+        padding:25px 20px 35px;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .learning-hero{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .hero-stat{
+        width:100%;
+    }
+
+    .course-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .course-controls{
+        width:100%;
+    }
+
+    .course-search{
+        flex:1;
+        width:auto;
+    }
+}
+
+
+@media(max-width:500px){
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .search-box{
+        display:none;
+    }
+
+    .page-header h1{
+        font-size:25px;
+    }
+
+    .content{
+        padding:22px 15px 30px;
+    }
+
+    .hero-content h2{
+        font-size:20px;
+    }
+
+    .big-progress{
+        align-items:flex-start;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+
+<div class="brand">
+
+    <div class="brand-icon">
+        S
+    </div>
+
+    <div class="brand-text">
+        SkillBridge
+    </div>
+
+</div>
+
+
+<nav class="menu">
+
+    <a href="dashboard.html">
+        <span class="menu-icon">⌂</span>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="opportunities.html">
+        <span class="menu-icon">◈</span>
+        <span>Opportunities</span>
+    </a>
+
+    <a href="applications.html">
+        <span class="menu-icon">▤</span>
+        <span>Applications</span>
+    </a>
+
+    <a href="my-skills.html">
+        <span class="menu-icon">◆</span>
+        <span>My Skills</span>
+    </a>
+
+    <a href="learning.html" class="active">
+        <span class="menu-icon">▣</span>
+        <span>Learning</span>
+    </a>
+
+    <a href="profile.html">
+        <span class="menu-icon">◉</span>
+        <span>Profile</span>
+    </a>
+
+</nav>
+
+
+<div class="sidebar-bottom">
+
+    <nav class="menu">
+
+        <a href="#" id="logoutBtn">
+
+            <span class="menu-icon">
+                ↪
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+    </nav>
+
+</div>
+
+
+</aside>
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+
+<div class="search-box">
+
+    <span class="search-icon">
+        ⌕
+    </span>
+
+    <input
+        type="text"
+        id="globalSearch"
+        placeholder="Search opportunities..."
+    >
+
+</div>
+
+
+<div class="profile">
+
+    <div
+        class="avatar"
+        id="userAvatar">
+        S
+    </div>
+
+    <div class="profile-info">
+
+        <div
+            class="profile-name"
+            id="userName">
+            Student
+        </div>
+
+        <div class="profile-role">
+            Student
+        </div>
+
+    </div>
+
+</div>
+
+
+</header>
+
+<section class="content">
+
+<!-- =========================================================
+     PAGE HEADER
+========================================================= -->
+
+<div class="page-header">
+
+
+<h1>
+    Learning
+</h1>
+
+<p>
+    Turn your skill gaps into career opportunities.
+</p>
+
+
+</div>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<div class="learning-hero">
+
+
+<div class="hero-content">
+
+    <div class="hero-eyebrow">
+        ✦ Personalized Learning
+    </div>
+
+    <h2>
+        Learn what the industry needs.
+    </h2>
+
+    <p>
+        SkillBridge compares your skills with real opportunity
+        requirements and helps you focus on the capabilities
+        that can make the biggest difference to your career.
+    </p>
+
+
+    <div class="hero-actions">
+
+        <button
+            class="hero-action"
+            onclick="document.getElementById('courseSearch').focus()">
+
+            Explore Courses
+
+        </button>
+
+        <button
+            class="hero-action"
+            onclick="location.href='my-skills.html'">
+
+            Improve My Skills
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- READINESS -->
+
+<div class="hero-stat">
+
+    <div
+        class="readiness-ring"
+        id="readinessRing"
+        style="--readiness-angle:0deg;">
+
+        <div class="readiness-inner">
+
+            <div
+                class="readiness-number"
+                id="jobReadiness">
+                0%
+            </div>
+
+            <div class="readiness-label">
+                JOB READINESS
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+    <div class="stat-top">
+
+        <span>
+            Courses
+        </span>
+
+        <div class="stat-icon">
+            ▣
+        </div>
+
+    </div>
+
+    <h3 id="courseCount">
+        0
+    </h3>
+
+    <p>
+        Courses completed
+    </p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+    <div class="stat-top">
+
+        <span>
+            Learning
+        </span>
+
+        <div class="stat-icon">
+            
+        </div>
+
+    </div>
+
+    <h3 id="learningCount">
+        0
+    </h3>
+
+    <p>
+        Courses in progress
+    </p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+    <div class="stat-top">
+
+        <span>
+            Skill Gaps
+        </span>
+
+        <div class="stat-icon">
+            !
+        </div>
+
+    </div>
+
+    <h3 id="skillGapCount">
+        0
+    </h3>
+
+    <p>
+        Skills to improve
+    </p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+    <div class="stat-top">
+
+        <span>
+            Skills
+        </span>
+
+        <div class="stat-icon">
+            ◆
+        </div>
+
+    </div>
+
+    <h3 id="skillCount">
+        0
+    </h3>
+
+    <p>
+        Skills in your profile
+    </p>
+
+</div>
+
+
+</div>
+
+<!-- =========================================================
+     LEARNING PROGRESS
+========================================================= -->
+
+<div class="progress-panel">
+
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <div class="panel-title">
+                Learning Progress
+            </div>
+
+            <div class="panel-subtitle">
+                Your journey toward becoming job-ready
+            </div>
+
+        </div>
+
+        <span class="view-link">
+            SkillBridge
+        </span>
+
+    </div>
+
+
+    <div class="big-progress">
+
+        <div
+            class="progress-circle"
+            id="learningProgressCircle"
+            style="--progress-angle:0deg;">
+
+            <span id="learningProgress">
+                0%
+            </span>
+
+        </div>
+
+
+        <div class="progress-copy">
+
+            <strong>
+                Keep building your career profile
+            </strong>
+
+            <span>
+                Complete recommended courses and improve
+                the skills most relevant to your target opportunities.
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <div class="panel-title">
+                Learning Streak
+            </div>
+
+            <div class="panel-subtitle">
+                Consistency builds expertise
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="streak">
+
+        <div>
+
+            <div
+                class="streak-number"
+                id="learningStreak">
+                0
+            </div>
+
+            <div class="streak-label">
+                days learning
+            </div>
+
+        </div>
+
+
+        <div class="streak-fire">
+            🔥
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- =========================================================
+     SKILL GAPS
+========================================================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+
+<div>
+
+    <h2 class="section-title">
+        🎯 Skills Required for Your Opportunities
+    </h2>
+
+    <p class="section-subtitle">
+        Prioritized skills based on what companies are looking for.
+    </p>
+
+</div>
+
+
+</div>
+
+<div
+    class="skill-gap-list"
+    id="skillGapList">
+
+
+<div class="empty-state">
+
+    <strong>
+        Analyzing your opportunities...
+    </strong>
+
+    Loading skill requirements.
+
+</div>
+
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     COURSES
+========================================================= -->
+
+<section class="section">
+
+<div class="section-header">
+
+
+<div>
+
+    <h2 class="section-title">
+        📚 Recommended Courses
+    </h2>
+
+    <p class="section-subtitle">
+        Learn skills that can strengthen your career profile.
+    </p>
+
+</div>
+
+
+<div class="course-controls">
+
+
+    <input
+        type="text"
+        id="courseSearch"
+        class="course-search"
+        placeholder="Search courses..."
+    >
+
+
+    <select
+        id="categoryFilter"
+        class="filter-select">
+
+        <option value="all">
+            All Categories
+        </option>
+
+        <option value="Programming">
+            Programming
+        </option>
+
+        <option value="Backend">
+            Backend
+        </option>
+
+        <option value="Database">
+            Database
+        </option>
+
+        <option value="AI/ML">
+            AI / ML
+        </option>
+
+        <option value="Data Science">
+            Data Science
+        </option>
+
+        <option value="Tools">
+            Tools
+        </option>
+
+    </select>
+
+</div>
+
+
+</div>
+
+<div
+    class="course-grid"
+    id="courseGrid">
+
+</div>
+
+</section>
+
+</section>
+
+</main>
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+<!-- =========================================================
+     EXISTING JS — UNCHANGED
+========================================================= -->
+
+<script src="learning.js"></script>
+
+<script>
+
+/*
+=========================================================
+VISUAL HELPERS
+
+These only enhance the new UI.
+They don't replace your existing learning.js logic.
+=========================================================
+*/
+
+
+function updateLearningVisuals(){
+
+    const readiness =
+        parseInt(
+            document.getElementById(
+                "jobReadiness"
+            )?.innerText
+            || "0"
+        ) || 0;
+
+
+    const readinessRing =
+        document.getElementById(
+            "readinessRing"
+        );
+
+
+    if(readinessRing){
+
+        readinessRing.style.setProperty(
+            "--readiness-angle",
+            (readiness * 3.6) + "deg"
+        );
+
+    }
+
+
+    const learningProgress =
+        parseInt(
+            document.getElementById(
+                "learningProgress"
+            )?.innerText
+            || "0"
+        ) || 0;
+
+
+    const progressCircle =
+        document.getElementById(
+            "learningProgressCircle"
+        );
+
+
+    if(progressCircle){
+
+        progressCircle.style.setProperty(
+            "--progress-angle",
+            (learningProgress * 3.6) + "deg"
+        );
+
+    }
+
+}
+
+
+/*
+Observe changes made by learning.js
+to existing IDs.
+*/
+
+const observer =
+    new MutationObserver(
+        function(){
+
+            updateLearningVisuals();
+
+        }
+    );
+
+
+[
+    "jobReadiness",
+    "learningProgress"
+].forEach(
+    function(id){
+
+        const element =
+            document.getElementById(id);
+
+        if(element){
+
+            observer.observe(
+                element,
+                {
+                    childList:true,
+                    characterData:true,
+                    subtree:true
+                }
+            );
+
+        }
+
+    }
+);
+
+
+/*
+Initial visual state
+*/
+
+updateLearningVisuals();
+
+
+/*
+Small learning streak fallback.
+
+If learning.js already provides
+learning streak functionality, this
+doesn't interfere with it.
+*/
+
+const streak =
+    document.getElementById(
+        "learningStreak"
+    );
+
+if(streak && streak.innerText === "0"){
+
+    streak.innerText = "0";
+
+}
+
+</script>
+
+</body>
+
+</html>

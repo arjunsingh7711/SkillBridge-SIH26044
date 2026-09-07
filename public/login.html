@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SkillBridge - Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --purple: #7c3aed;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --background: #f5f7fb;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(99, 102, 241, 0.12),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(124, 58, 237, 0.10),
+                    transparent 32%
+                ),
+                var(--background);
+
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .auth-wrapper {
+            width: 100%;
+            max-width: 1080px;
+            min-height: 650px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+            border-radius: 24px;
+
+            box-shadow:
+                0 25px 60px rgba(15, 23, 42, 0.10);
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+
+        /* =========================
+           LEFT BRAND PANEL
+        ========================= */
+
+        .brand-panel {
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 42%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111827,
+                    #1e1b4b
+                );
+
+            padding: 45px;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 22px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px rgba(99, 102, 241, 0.30);
+        }
+
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+
+        .logo-subtitle {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+
+
+        .brand-content h1 {
+            font-size: 43px;
+            line-height: 1.12;
+
+            margin-bottom: 20px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .brand-content h1 span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #818cf8,
+                    #c084fc
+                );
+
+           
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .brand-content p {
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 360px;
+        }
+
+
+        .brand-footer {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           RIGHT CONTENT
+        ========================= */
+
+        .content-panel {
+            margin-left: 42%;
+
+            width: 58%;
+
+            min-height: 650px;
+
+            padding: 55px 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .screen {
+            width: 100%;
+            max-width: 570px;
+
+            display: none;
+
+            animation: fadeIn 0.35s ease;
+        }
+
+
+        .screen.active {
+            display: block;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
+
+        .welcome-screen {
+            text-align: center;
+        }
+
+
+        .welcome-icon {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 25px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 34px;
+            font-weight: 800;
+
+            box-shadow:
+                0 15px 30px rgba(99, 102, 241, 0.25);
+        }
+
+
+        .welcome-screen h2 {
+            font-size: 34px;
+            margin-bottom: 12px;
+
+            letter-spacing: -0.6px;
+        }
+
+
+        .welcome-screen h2 span {
+            color: var(--primary);
+        }
+
+
+        .welcome-screen p {
+            color: var(--muted);
+
+            font-size: 15px;
+            line-height: 1.7;
+
+            max-width: 440px;
+
+            margin: 0 auto 30px;
+        }
+
+
+        .get-started {
+            width: auto;
+            min-width: 190px;
+
+            padding: 14px 25px;
+
+            border: none;
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--purple)
+                );
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 22px rgba(99, 102, 241, 0.22);
+
+            transition: 0.2s;
+        }
+
+
+        .get-started:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 28px rgba(99, 102, 241, 0.30);
+        }
+
+
+        /* =========================
+           ROLE SCREEN
+        ========================= */
+
+        .screen-header {
+            margin-bottom: 27px;
+        }
+
+
+        .screen-header h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+
+        .screen-header p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+
+        .back-button {
+            border: none;
+            background: transparent;
+
+            color: #6b7280;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            margin-bottom: 18px;
+
+            padding: 0;
+        }
+
+
+        .back-button:hover {
+            color: var(--primary);
+        }
+
+
+        .role-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .role-card {
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            padding: 23px 17px;
+
+            background: #fff;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                border-color 0.2s,
+                box-shadow 0.2s;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .role-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            transform: scaleX(0);
+
+            transition: 0.2s;
+        }
+
+
+        .role-card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: #a5b4fc;
+
+            box-shadow:
+                0 14px 30px rgba(15, 23, 42, 0.08);
+        }
+
+
+        .role-card:hover::before {
+            transform: scaleX(1);
+        }
+
+
+        .role-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 13px;
+
+            background: #eef2ff;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 23px;
+
+            margin-bottom: 16px;
+        }
+
+
+        .role-card h3 {
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+
+        .role-card p {
+            font-size: 12px;
+            line-height: 1.55;
+
+            color: var(--muted);
+
+            min-height: 56px;
+        }
+
+
+        .role-action {
+            margin-top: 17px;
+
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           LOGIN SCREEN
+        ========================= */
+
+        .login-header {
+            margin-bottom: 23px;
+        }
+
+
+        .login-header h2 {
+            font-size: 29px;
+            margin-bottom: 7px;
+        }
+
+
+        .login-header p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+
+        .selected-role {
+            display: inline-flex;
+
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 11px;
+
+            background: #eef2ff;
+
+            color: #4f46e5;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            margin-bottom: 14px;
+        }
+
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            color: #374151;
+
+            margin-bottom: 7px;
+        }
+
+
+        .input-wrapper {
+            position: relative;
+        }
+
+
+        .input-wrapper input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            color: #1f2937;
+
+            background: white;
+
+            transition: 0.2s;
+        }
+
+
+        .input-wrapper input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(99, 102, 241, 0.10);
+        }
+
+
+        .password-input {
+            padding-right: 45px !important;
+        }
+
+
+        .toggle-password {
+            position: absolute;
+
+            right: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #6b7280;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            padding: 0;
+        }
+
+
+        .login-options {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin: 3px 0 20px;
+        }
+
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+
+        .remember input {
+            accent-color: var(--primary);
+        }
+
+
+        .forgot-link {
+            color: var(--primary);
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+
+        #loginButton {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            box-shadow:
+                0 8px 18px rgba(99, 102, 241, 0.20);
+        }
+
+
+        #loginButton:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 11px 22px rgba(99, 102, 241, 0.28);
+        }
+
+
+        #loginButton:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+
+        #message {
+            min-height: 20px;
+
+            text-align: center;
+
+            margin-top: 13px;
+
+            font-size: 12px;
+        }
+
+
+        .signup-link {
+            text-align: center;
+
+            margin-top: 23px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #eef0f3;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        .signup-link a {
+            color: var(--primary);
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            margin-left: 4px;
+        }
+
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            body {
+                padding: 18px;
+            }
+
+            .auth-wrapper {
+                max-width: 650px;
+                min-height: auto;
+            }
+
+            .brand-panel {
+                position: relative;
+
+                width: 100%;
+
+                min-height: 240px;
+
+                padding: 30px;
+
+                justify-content: center;
+            }
+
+            .brand-content {
+                margin-top: 28px;
+            }
+
+            .brand-content h1 {
+                font-size: 31px;
+            }
+
+            .brand-content p {
+                font-size: 13px;
+            }
+
+            .brand-footer {
+                display: none;
+            }
+
+            .content-panel {
+                margin-left: 0;
+
+                width: 100%;
+
+                min-height: auto;
+
+                padding: 40px 35px;
+            }
+
+        }
+
+
+        @media (max-width: 620px) {
+
+            body {
+                padding: 0;
+            }
+
+            .auth-wrapper {
+                min-height: 100vh;
+
+                border-radius: 0;
+
+                border: none;
+
+                box-shadow: none;
+            }
+
+            .brand-panel {
+                min-height: 210px;
+
+                padding: 25px;
+            }
+
+            .brand-content {
+                margin-top: 25px;
+            }
+
+            .brand-content h1 {
+                font-size: 28px;
+            }
+
+            .content-panel {
+                padding: 35px 22px;
+            }
+
+            .role-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .role-card {
+                display: grid;
+
+                grid-template-columns: 55px 1fr;
+
+                column-gap: 13px;
+
+                padding: 17px;
+            }
+
+            .role-icon {
+                grid-row: span 2;
+
+                margin-bottom: 0;
+            }
+
+            .role-card p {
+                min-height: auto;
+            }
+
+            .role-action {
+                grid-column: 2;
+
+                margin-top: 8px;
+            }
+
+            .welcome-screen h2 {
+                font-size: 29px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="auth-wrapper">
+
+
+    <!-- =====================================
+         LEFT BRANDING
+    ====================================== -->
+
+    <div class="brand-panel">
+
+        <div class="brand-logo">
+
+            <div class="logo-icon">
+                S
+            </div>
+
+            <div>
+
+                <div class="logo-text">
+                    SkillBridge
+                </div>
+
+                <div class="logo-subtitle">
+                    Academia × Industry
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="brand-content">
+
+            <h1>
+                Connect.
+                <br>
+                <span>Grow.</span>
+                <br>
+                Succeed.
+            </h1>
+
+            <p>
+                A single platform connecting students,
+                colleges and companies to create meaningful
+                opportunities and build stronger careers.
+            </p>
+
+        </div>
+
+
+        <div class="brand-footer">
+
+            © 2026 SkillBridge · Academia × Industry
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         RIGHT CONTENT
+    ====================================== -->
+
+    <div class="content-panel">
+
+
+        <!-- =====================================
+             SCREEN 1 — WELCOME
+        ====================================== -->
+
+        <div
+            id="welcomeScreen"
+            class="screen active welcome-screen"
+        >
+
+            <div class="welcome-icon">
+                S
+            </div>
+
+
+            <h2>
+                Welcome to <span>SkillBridge</span>
+            </h2>
+
+
+            <p>
+                Your bridge between talent, academia and
+                industry. Discover opportunities, connect
+                with the right people and build your future.
+            </p>
+
+
+            <button
+                type="button"
+                class="get-started"
+                onclick="showRoleScreen()"
+            >
+                Get Started →
+            </button>
+
+        </div>
+
+
+
+        <!-- =====================================
+             SCREEN 2 — ROLE SELECTION
+        ====================================== -->
+
+        <div
+            id="roleScreen"
+            class="screen"
+        >
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="showWelcomeScreen()"
+            >
+                ← Back
+            </button>
+
+
+            <div class="screen-header">
+
+                <h2>
+                    Choose Your Role
+                </h2>
+
+                <p>
+                    Select how you want to continue with SkillBridge.
+                </p>
+
+            </div>
+
+
+            <div class="role-grid">
+
+
+                <!-- STUDENT -->
+
+                <div
+                    class="role-card"
+                    onclick="selectRole('student')"
+                >
+
+                    <div class="role-icon">
+                        🎓
+                    </div>
+
+                    <h3>
+                        Student
+                    </h3>
+
+                    <p>
+                        Build your future by discovering
+                        opportunities and showcasing your skills.
+                    </p>
+
+                    <div class="role-action">
+                        Continue →
+                    </div>
+
+                </div>
+
+
+
+                <!-- COMPANY -->
+
+                <div
+                    class="role-card"
+                    onclick="selectRole('company')"
+                >
+
+                    <div class="role-icon">
+                        🏢
+                    </div>
+
+                    <h3>
+                        Company
+                    </h3>
+
+                    <p>
+                        Find the right talent, create opportunities
+                        and connect with skilled students.
+                    </p>
+
+                    <div class="role-action">
+                        Continue →
+                    </div>
+
+                </div>
+
+
+
+                <!-- COLLEGE -->
+
+                <div
+                    class="role-card"
+                    onclick="selectRole('college')"
+                >
+
+                    <div class="role-icon">
+                        🏫
+                    </div>
+
+                    <h3>
+                        College
+                    </h3>
+
+                    <p>
+                        Empower your students through industry
+                        connections and career opportunities.
+                    </p>
+
+                    <div class="role-action">
+                        Continue →
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             SCREEN 3 — LOGIN
+        ====================================== -->
+
+        <div
+            id="loginScreen"
+            class="screen"
+        >
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="showRoleScreen()"
+            >
+                ← Change Role
+            </button>
+
+
+            <div class="login-header">
+
+                <div
+                    id="selectedRole"
+                    class="selected-role"
+                >
+                    🎓 Student
+                </div>
+
+
+                <h2>
+                    Welcome Back 👋
+                </h2>
+
+
+                <p id="loginSubtitle">
+                    Continue your journey with SkillBridge.
+                </p>
+
+            </div>
+
+
+
+            <form id="loginForm">
+
+
+                <!-- Hidden Role -->
+
+                <input
+                    type="hidden"
+                    id="role"
+                    name="role"
+                >
+
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            class="password-input"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            onclick="togglePassword()"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- OPTIONS -->
+
+                <div class="login-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        Remember me
+
+                    </label>
+
+
+                    <a
+                        href="forgot-password.html"
+                        class="forgot-link"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="button"
+                    id="loginButton"
+                >
+                    Login →
+                </button>
+
+
+            </form>
+
+
+
+            <div id="message"></div>
+
+
+
+            <div class="signup-link">
+
+                Don't have an account?
+
+                <a href="signup.html">
+                    Create Account
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    /* =========================================
+       SCREEN ELEMENTS
+    ========================================= */
+
+    const welcomeScreen =
+        document.getElementById("welcomeScreen");
+
+    const roleScreen =
+        document.getElementById("roleScreen");
+
+    const loginScreen =
+        document.getElementById("loginScreen");
+
+
+    /* =========================================
+       ROLE DATA
+    ========================================= */
+
+    const roleData = {
+
+        student: {
+
+            icon: "🎓",
+
+            name: "Student",
+
+            subtitle:
+                "Continue your journey with SkillBridge."
+
+        },
+
+        company: {
+
+            icon: "🏢",
+
+            name: "Company",
+
+            subtitle:
+                "Find exceptional talent and build your team."
+
+        },
+
+        college: {
+
+            icon: "🏫",
+
+            name: "College",
+
+            subtitle:
+                "Connect your students with industry opportunities."
+
+        }
+
+    };
+
+
+    /* =========================================
+       SHOW WELCOME
+    ========================================= */
+
+    function showWelcomeScreen() {
+
+        welcomeScreen.classList.add("active");
+
+        roleScreen.classList.remove("active");
+
+        loginScreen.classList.remove("active");
+
+    }
+
+
+    /* =========================================
+       SHOW ROLE SCREEN
+    ========================================= */
+
+    function showRoleScreen() {
+
+        welcomeScreen.classList.remove("active");
+
+        roleScreen.classList.add("active");
+
+        loginScreen.classList.remove("active");
+
+    }
+
+
+    /* =========================================
+       SELECT ROLE
+    ========================================= */
+
+    function selectRole(role) {
+
+        const data = roleData[role];
+
+        if (!data) return;
+
+
+        document.getElementById("role").value = role;
+
+
+        document.getElementById("selectedRole").innerHTML =
+            `${data.icon} ${data.name}`;
+
+
+        document.getElementById("loginSubtitle").textContent =
+            data.subtitle;
+
+
+        welcomeScreen.classList.remove("active");
+
+        roleScreen.classList.remove("active");
+
+        loginScreen.classList.add("active");
+
+
+        setTimeout(() => {
+
+            document.getElementById("email").focus();
+
+        }, 300);
+
+    }
+
+
+    /* =========================================
+       SHOW / HIDE PASSWORD
+    ========================================= */
+
+    function togglePassword() {
+
+        const password =
+            document.getElementById("password");
+
+        const button =
+            document.querySelector(".toggle-password");
+
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            button.textContent = "🙈";
+
+            button.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        } else {
+
+            password.type = "password";
+
+            button.textContent = "👁";
+
+            button.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       LOGIN FORM ENTER KEY
+    ========================================= */
+
+    document
+        .getElementById("loginForm")
+        .addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                document
+                    .getElementById("loginButton")
+                    .click();
+
+            }
+
+        });
+
+</script>
+
+
+
+<!--
+    IMPORTANT:
+    Existing login.js is kept.
+    Your backend/login functionality remains connected.
+-->
+
+<script src="./login.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2377 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Opportunities | SkillBridge</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-soft: #eff6ff;
+            --bg: #f6f8fc;
+            --card: #ffffff;
+            --text: #172033;
+            --muted: #718096;
+            --border: #e7ebf3;
+            --sidebar: #101828;
+            --green: #16a34a;
+            --orange: #d97706;
+            --red: #dc2626;
+        }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: var(--sidebar);
+            color: white;
+            padding: 25px 16px;
+            z-index: 100;
+            border-right: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 4px 12px 34px;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+        }
+
+        .logo-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            display: grid;
+            place-items: center;
+            font-size: 17px;
+            box-shadow: 0 8px 22px rgba(37,99,235,.3);
+        }
+
+        .nav-section {
+            margin: 0 10px 10px;
+            color: #667085;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            text-decoration: none;
+            color: #98a2b3;
+            padding: 12px 13px;
+            border-radius: 11px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: .2s ease;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+            opacity: .85;
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,.06);
+            color: white;
+        }
+
+        .nav a.active {
+            background: linear-gradient(
+                135deg,
+                rgba(37,99,235,.95),
+                rgba(79,70,229,.95)
+            );
+            color: white;
+            box-shadow: 0 8px 22px rgba(37,99,235,.2);
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: rgba(255,255,255,.07);
+            margin: 20px 8px 18px;
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+            padding: 30px 38px 50px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 27px;
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .topbar h1 {
+            font-size: 29px;
+            line-height: 1.15;
+            letter-spacing: -.8px;
+        }
+
+        .topbar p {
+            color: var(--muted);
+            margin-top: 7px;
+            font-size: 14px;
+        }
+
+        .user-box {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 8px 12px 8px 8px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            box-shadow: 0 5px 18px rgba(16,24,40,.04);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .user-role {
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        /* =====================================================
+           SEARCH PANEL
+        ===================================================== */
+
+        .search-area {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            padding: 18px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 28px rgba(16,24,40,.045);
+        }
+
+        .search-label {
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #344054;
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: minmax(260px, 1fr) 160px 170px 110px;
+            gap: 10px;
+        }
+
+        .search-input-wrap {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #98a2b3;
+            font-size: 15px;
+        }
+
+        .search-row input,
+        .search-row select {
+            width: 100%;
+            height: 45px;
+            padding: 0 13px;
+            border: 1px solid #dfe3eb;
+            border-radius: 10px;
+            background: #fbfcfe;
+            color: #344054;
+            font-size: 13px;
+            outline: none;
+            transition: .2s;
+        }
+
+        .search-row input {
+            padding-left: 40px;
+        }
+
+        .search-row input:focus,
+        .search-row select:focus {
+            border-color: #8bb4ff;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37,99,235,.08);
+        }
+
+        .search-btn {
+            height: 45px;
+            border: none;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 800;
+            transition: .2s;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* =====================================================
+           RESULTS HEADER
+        ===================================================== */
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .results-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .results-header h2 {
+            font-size: 18px;
+            letter-spacing: -.3px;
+        }
+
+        .result-pill {
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #eef4ff;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        #resultCount {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           OPPORTUNITY GRID
+        ===================================================== */
+
+        .opportunities {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(320px, 1fr)
+            );
+            gap: 17px;
+        }
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .card {
+            position: relative;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            padding: 20px;
+            box-shadow: 0 7px 24px rgba(16,24,40,.045);
+            transition: .25s ease;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                #2563eb,
+                #6366f1
+            );
+            opacity: .75;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #d5def0;
+            box-shadow: 0 15px 35px rgba(16,24,40,.09);
+        }
+
+        .card-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .company-logo {
+            width: 43px;
+            height: 43px;
+            border-radius: 12px;
+            background: #eef4ff;
+            color: var(--primary);
+            display: grid;
+            place-items: center;
+            font-size: 18px;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .card-title-area {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            line-height: 1.35;
+            margin-bottom: 5px;
+            color: #182230;
+        }
+
+        .company {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           MATCH
+        ===================================================== */
+
+        .match-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            padding: 6px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: .2px;
+        }
+
+        .match-high {
+            background: #ecfdf3;
+            color: #15803d;
+        }
+
+        .match-medium {
+            background: #fff7e6;
+            color: #b45309;
+        }
+
+        .match-low {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        /* =====================================================
+           TAGS
+        ===================================================== */
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background: #f4f7fb;
+            border: 1px solid #e7ebf2;
+            color: #475467;
+            padding: 5px 8px;
+            border-radius: 7px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .tags .tag:first-child {
+            background: #eef4ff;
+            border-color: #dbe7ff;
+            color: var(--primary);
+        }
+
+        /* =====================================================
+           MATCH DETAILS
+        ===================================================== */
+
+        .match-details {
+            background: #f8fafc;
+            border: 1px solid #edf0f5;
+            border-radius: 11px;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .match-title {
+            font-size: 11px;
+            font-weight: 900;
+            color: #344054;
+            margin-bottom: 5px;
+        }
+
+        .matched-text {
+            color: #15803d;
+        }
+
+        .missing-text {
+            color: #dc2626;
+        }
+
+        /* =====================================================
+           INFO
+        ===================================================== */
+
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            color: #667085;
+            font-size: 11px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .info br {
+            display: none;
+        }
+
+        .description {
+            color: #667085;
+            font-size: 12px;
+            line-height: 1.65;
+            margin-bottom: 18px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .btn {
+            height: 39px;
+            border-radius: 9px;
+            border: none;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 800;
+            transition: .2s;
+        }
+
+        .view-btn {
+            background: #f5f7fa;
+            color: #344054;
+            border: 1px solid #e5e7eb;
+        }
+
+        .view-btn:hover {
+            background: #edf1f6;
+        }
+
+        .apply-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .apply-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .apply-btn.applied {
+            background: #16a34a;
+            cursor: default;
+        }
+
+        .apply-btn.applied:hover {
+            background: #16a34a;
+        }
+
+        .apply-btn.loading {
+            background: #667085;
+            cursor: wait;
+        }
+
+        /* =====================================================
+           STATES
+        ===================================================== */
+
+        .message {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 55px 30px;
+            border-radius: 17px;
+            text-align: center;
+            color: #667085;
+            grid-column: 1 / -1;
+            box-shadow: 0 7px 24px rgba(16,24,40,.04);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .sidebar {
+                width: 215px;
+            }
+
+            .main {
+                margin-left: 215px;
+                padding: 25px;
+            }
+
+            .search-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .search-input-wrap {
+                grid-column: 1 / -1;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+
+            .opportunities {
+                grid-template-columns: repeat(
+                    auto-fill,
+                    minmax(290px, 1fr)
+                );
+            }
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 720px) {
+
+            .sidebar {
+                width: 68px;
+                padding: 18px 8px;
+            }
+
+            .logo {
+                justify-content: center;
+                padding: 0 0 25px;
+            }
+
+            .logo-text,
+            .nav-section,
+            .nav a span:not(.nav-icon) {
+                display: none;
+            }
+
+            .nav a {
+                justify-content: center;
+                padding: 12px 8px;
+            }
+
+            .nav-icon {
+                width: auto;
+                font-size: 18px;
+            }
+
+            .nav-divider {
+                margin: 15px 5px;
+            }
+
+            .main {
+                margin-left: 68px;
+                padding: 20px 15px 35px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .topbar h1 {
+                font-size: 23px;
+            }
+
+            .topbar p {
+                font-size: 12px;
+            }
+
+            .user-box {
+                padding: 6px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            .user-avatar {
+                width: 34px;
+                height: 34px;
+            }
+
+            .search-area {
+                padding: 14px;
+            }
+
+            .search-row {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .search-row input,
+            .search-row select,
+            .search-btn {
+                width: 100%;
+            }
+
+            .results-header {
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .results-left {
+                flex-wrap: wrap;
+            }
+
+            .opportunities {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 17px;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 420px) {
+
+            .main {
+                padding: 16px 11px 30px;
+            }
+
+            .topbar h1 {
+                font-size: 21px;
+            }
+
+            .topbar p {
+                max-width: 220px;
+            }
+
+            .match-badge {
+                top: 15px;
+                right: 15px;
+            }
+
+            .card h3 {
+                font-size: 16px;
+                padding-right: 70px;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-mark">S</div>
+            <span class="logo-text">SkillBridge</span>
+        </div>
+
+        <div class="nav-section">
+            Main Menu
+        </div>
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="my-skills.html">
+                <span class="nav-icon">◈</span>
+                <span>My Skills</span>
+            </a>
+
+            <a href="learning.html">
+                <span class="nav-icon">▣</span>
+                <span>Learning</span>
+            </a>
+
+            <a href="opportunities.html" class="active">
+                <span class="nav-icon">◆</span>
+                <span>Opportunities</span>
+            </a>
+
+            <a href="applications.html">
+                <span class="nav-icon">◷</span>
+                <span>Applications</span>
+            </a>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-section">
+                Account
+            </div>
+
+            <a href="profile.html">
+                <span class="nav-icon">○</span>
+                <span>Profile</span>
+            </a>
+
+            <a href="#" onclick="logout()">
+                <span class="nav-icon">↪</span>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+
+                <div class="eyebrow">
+                    Career discovery
+                </div>
+
+                <h1>
+                    Opportunities
+                </h1>
+
+                <p>
+                    Discover roles, internships and programs that fit your skills.
+                </p>
+
+            </div>
+
+            <div class="user-box">
+
+                <div class="user-avatar">
+                    <span id="userInitial">U</span>
+                </div>
+
+                <div class="user-info">
+
+                    <div
+                        class="user-name"
+                        id="userName"
+                    >
+                        User
+                    </div>
+
+                    <div class="user-role">
+                        Student
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <section class="search-area">
+
+            <div class="search-label">
+                Find your next opportunity
+            </div>
+
+            <div class="search-row">
+
+                <div class="search-input-wrap">
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search role, company or skill..."
+                    >
+
+                </div>
+
+                <select id="typeFilter">
+
+                    <option value="">
+                        All Types
+                    </option>
+
+                    <option value="Internship">
+                        Internship
+                    </option>
+
+                    <option value="Job">
+                        Job
+                    </option>
+
+                    <option value="Hackathon">
+                        Hackathon
+                    </option>
+
+                    <option value="Course">
+                        Course
+                    </option>
+
+                </select>
+
+                <select id="modeFilter">
+
+                    <option value="">
+                        All Work Modes
+                    </option>
+
+                    <option value="Remote">
+                        Remote
+                    </option>
+
+                    <option value="Hybrid">
+                        Hybrid
+                    </option>
+
+                    <option value="On-site">
+                        On-site
+                    </option>
+
+                </select>
+
+                <button
+                    class="search-btn"
+                    onclick="filterOpportunities()"
+                >
+                    Search
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RESULTS
+        ================================================== -->
+
+        <div class="results-header">
+
+            <div class="results-left">
+
+                <h2 id="pageTitle">
+                    All Opportunities
+                </h2>
+
+                <span
+                    class="result-pill"
+                    id="resultCount"
+                >
+                    Loading...
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <section
+            class="opportunities"
+            id="opportunitiesContainer"
+        >
+
+            <div class="message">
+                Loading opportunities...
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        // =====================================================
+        // API
+        // =====================================================
+
+        const API_URL =
+            "http://localhost:5000/api/opportunities";
+
+        const MATCH_API_URL =
+            "http://localhost:5000/api/opportunities/matches";
+
+        const APPLICATION_API_URL =
+            "http://localhost:5000/api/applications";
+
+
+        // =====================================================
+        // GLOBAL DATA
+        // =====================================================
+
+        let allOpportunities = [];
+
+        let appliedOpportunityIds = new Set();
+
+        let isMatchingMode = false;
+
+        let isLoadingApplications = false;
+
+
+        // =====================================================
+        // PAGE LOAD
+        // =====================================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+                loadUser();
+
+                setupSearchFromURL();
+
+                await loadApplications();
+
+                await loadOpportunities();
+
+            }
+        );
+
+
+        // =====================================================
+        // LOAD USER
+        // =====================================================
+
+        function loadUser() {
+
+            const userData =
+                localStorage.getItem("user");
+
+            if (!userData) {
+                return;
+            }
+
+            try {
+
+                const user =
+                    JSON.parse(userData);
+
+                const name =
+                    user.name || "User";
+
+                document.getElementById(
+                    "userName"
+                ).textContent = name;
+
+                document.getElementById(
+                    "userInitial"
+                ).textContent =
+                    name.charAt(0).toUpperCase();
+
+            } catch (error) {
+
+                console.error(
+                    "USER ERROR:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // LOAD MY APPLICATIONS
+        // =====================================================
+
+        async function loadApplications() {
+
+            const token =
+                localStorage.getItem("token");
+
+            if (!token) {
+                return;
+            }
+
+            if (isLoadingApplications) {
+                return;
+            }
+
+            isLoadingApplications = true;
+
+            try {
+
+                const response =
+                    await fetch(
+                        APPLICATION_API_URL,
+                        {
+                            method: "GET",
+
+                            headers: {
+                                Authorization:
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+                }
+
+                if (response.status === 403) {
+
+                    appliedOpportunityIds =
+                        new Set();
+
+                    return;
+                }
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load applications"
+                    );
+
+                }
+
+                const applications =
+                    await response.json();
+
+                appliedOpportunityIds =
+                    new Set(
+                        Array.isArray(applications)
+                            ? applications
+                                .map(
+                                    application => {
+
+                                        if (
+                                            application &&
+                                            application.opportunity
+                                        ) {
+
+                                            return (
+                                                typeof application.opportunity === "object"
+                                                    ? application.opportunity._id
+                                                    : application.opportunity
+                                            );
+
+                                        }
+
+                                        return null;
+
+                                    }
+                                )
+                                .filter(Boolean)
+                            : []
+                    );
+
+                console.log(
+                    "APPLIED OPPORTUNITY IDS:",
+                    [...appliedOpportunityIds]
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "APPLICATION LOAD ERROR:",
+                    error
+                );
+
+            } finally {
+
+                isLoadingApplications = false;
+
+            }
+
+        }
+
+
+        // =====================================================
+        // LOAD OPPORTUNITIES
+        // =====================================================
+
+        async function loadOpportunities() {
+
+            const container =
+                document.getElementById(
+                    "opportunitiesContainer"
+                );
+
+            try {
+
+                const token =
+                    localStorage.getItem("token");
+
+                let response;
+
+                if (token) {
+
+                    response =
+                        await fetch(
+                            MATCH_API_URL,
+                            {
+                                method: "GET",
+
+                                headers: {
+                                    Authorization:
+                                        `Bearer ${token}`
+                                }
+                            }
+                        );
+
+                    if (
+                        response.status === 401 ||
+                        response.status === 403
+                    ) {
+
+                        response =
+                            await fetch(
+                                API_URL
+                            );
+
+                    }
+
+                } else {
+
+                    response =
+                        await fetch(
+                            API_URL
+                        );
+
+                }
+
+                if (
+                    response.status === 401 &&
+                    token
+                ) {
+
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+                }
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to fetch opportunities"
+                    );
+
+                }
+
+                const data =
+                    await response.json();
+
+                allOpportunities =
+                    Array.isArray(data)
+                        ? data
+                        : [];
+
+                filterOpportunities();
+
+            } catch (error) {
+
+                console.error(
+                    "OPPORTUNITIES ERROR:",
+                    error
+                );
+
+                container.innerHTML = `
+
+                    <div class="message error">
+
+                        Unable to load opportunities.
+
+                        <br><br>
+
+                        Please make sure the server is running.
+
+                    </div>
+
+                `;
+
+                document.getElementById(
+                    "resultCount"
+                ).textContent =
+                    "0 results";
+
+            }
+
+        }
+
+
+        // =====================================================
+        // FILTER OPPORTUNITIES
+        // =====================================================
+
+        function filterOpportunities() {
+
+            const search =
+                document
+                    .getElementById(
+                        "searchInput"
+                    )
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+            const type =
+                document
+                    .getElementById(
+                        "typeFilter"
+                    )
+                    .value;
+
+            const mode =
+                document
+                    .getElementById(
+                        "modeFilter"
+                    )
+                    .value;
+
+            const filtered =
+                allOpportunities.filter(
+                    opportunity => {
+
+                        const title =
+                            (
+                                opportunity.title ||
+                                ""
+                            )
+                                .toLowerCase();
+
+                        const company =
+                            (
+                                opportunity.company ||
+                                ""
+                            )
+                                .toLowerCase();
+
+                        const description =
+                            (
+                                opportunity.description ||
+                                ""
+                            )
+                                .toLowerCase();
+
+                        const skills =
+                            Array.isArray(
+                                opportunity.requiredSkills
+                            )
+                                ? opportunity.requiredSkills
+                                    .map(
+                                        skill => {
+
+                                            if (
+                                                typeof skill === "string"
+                                            ) {
+
+                                                return skill;
+
+                                            }
+
+                                            if (
+                                                skill &&
+                                                typeof skill === "object"
+                                            ) {
+
+                                                return (
+                                                    skill.name ||
+                                                    ""
+                                                );
+
+                                            }
+
+                                            return "";
+
+                                        }
+                                    )
+                                    .join(" ")
+                                    .toLowerCase()
+                                : "";
+
+                        const matchesSearch =
+                            !search ||
+                            title.includes(search) ||
+                            company.includes(search) ||
+                            description.includes(search) ||
+                            skills.includes(search);
+
+                        const matchesType =
+                            !type ||
+                            opportunity.type === type;
+
+                        const matchesMode =
+                            !mode ||
+                            opportunity.workMode === mode;
+
+                        return (
+                            matchesSearch &&
+                            matchesType &&
+                            matchesMode
+                        );
+
+                    }
+                );
+
+            filtered.sort(
+                (a, b) =>
+                    (b.matchPercentage || 0) -
+                    (a.matchPercentage || 0)
+            );
+
+            renderOpportunities(
+                filtered
+            );
+
+        }
+
+
+        // =====================================================
+        // RENDER OPPORTUNITIES
+        // =====================================================
+
+        function renderOpportunities(
+            opportunities
+        ) {
+
+            const container =
+                document.getElementById(
+                    "opportunitiesContainer"
+                );
+
+            document.getElementById(
+                "resultCount"
+            ).textContent =
+                `${opportunities.length} result${
+                    opportunities.length !== 1
+                        ? "s"
+                        : ""
+                }`;
+
+            if (
+                opportunities.length === 0
+            ) {
+
+                container.innerHTML = `
+
+                    <div class="message">
+
+                        No opportunities found.
+
+                        <br>
+
+                        Try another search or filter.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+            container.innerHTML =
+                opportunities
+                    .map(
+                        opportunity =>
+                            createOpportunityCard(
+                                opportunity
+                            )
+                    )
+                    .join("");
+
+        }
+
+
+        // =====================================================
+        // CREATE OPPORTUNITY CARD
+        // =====================================================
+
+        function createOpportunityCard(
+            opportunity
+        ) {
+
+            const skills =
+                Array.isArray(
+                    opportunity.requiredSkills
+                )
+                    ? opportunity.requiredSkills
+                    : [];
+
+            const skillTags =
+                skills
+                    .slice(0, 5)
+                    .map(
+                        skill => {
+
+                            let skillName = "";
+                            let skillLevel = "";
+
+                            if (
+                                typeof skill === "string"
+                            ) {
+
+                                skillName =
+                                    skill;
+
+                            } else if (
+                                skill &&
+                                typeof skill === "object"
+                            ) {
+
+                                skillName =
+                                    skill.name || "";
+
+                                skillLevel =
+                                    skill.level || "";
+
+                            }
+
+                            return `
+
+                                <span class="tag">
+
+                                    ${escapeHTML(
+                                        skillName
+                                    )}
+
+                                    ${
+                                        skillLevel
+                                            ? `(${escapeHTML(
+                                                skillLevel
+                                            )})`
+                                            : ""
+                                    }
+
+                                </span>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+            const deadline =
+                opportunity.deadline
+                    ? new Date(
+                        opportunity.deadline
+                    ).toLocaleDateString(
+                        "en-IN"
+                    )
+                    : "Not specified";
+
+            const hasMatchData =
+                opportunity.matchPercentage !==
+                undefined;
+
+            const matchPercentage =
+                hasMatchData
+                    ? Number(
+                        opportunity.matchPercentage || 0
+                    )
+                    : 0;
+
+            let matchClass =
+                "match-low";
+
+            if (
+                matchPercentage >= 70
+            ) {
+
+                matchClass =
+                    "match-high";
+
+            } else if (
+                matchPercentage >= 40
+            ) {
+
+                matchClass =
+                    "match-medium";
+
+            }
+
+            const matchedSkills =
+                Array.isArray(
+                    opportunity.matchedSkills
+                )
+                    ? opportunity.matchedSkills
+                    : [];
+
+            const missingSkills =
+                Array.isArray(
+                    opportunity.missingSkills
+                )
+                    ? opportunity.missingSkills
+                    : [];
+
+            const matchedSkillNames =
+                matchedSkills
+                    .map(
+                        skill => {
+
+                            if (
+                                typeof skill === "string"
+                            ) {
+
+                                return skill;
+
+                            }
+
+                            if (
+                                skill &&
+                                typeof skill === "object"
+                            ) {
+
+                                const name =
+                                    skill.name ||
+                                    "";
+
+                                const studentLevel =
+                                    skill.studentLevel ||
+                                    "";
+
+                                const requiredLevel =
+                                    skill.requiredLevel ||
+                                    "";
+
+                                if (
+                                    studentLevel &&
+                                    requiredLevel &&
+                                    studentLevel !==
+                                    requiredLevel
+                                ) {
+
+                                    return `${name} (${studentLevel} → ${requiredLevel})`;
+
+                                }
+
+                                return requiredLevel
+                                    ? `${name} (${requiredLevel})`
+                                    : name;
+
+                            }
+
+                            return "";
+
+                        }
+                    )
+                    .filter(Boolean);
+
+            const missingSkillNames =
+                missingSkills
+                    .map(
+                        skill => {
+
+                            if (
+                                typeof skill === "string"
+                            ) {
+
+                                return skill;
+
+                            }
+
+                            if (
+                                skill &&
+                                typeof skill === "object"
+                            ) {
+
+                                const name =
+                                    skill.name ||
+                                    "";
+
+                                const requiredLevel =
+                                    skill.requiredLevel ||
+                                    "";
+
+                                return requiredLevel
+                                    ? `${name} (${requiredLevel})`
+                                    : name;
+
+                            }
+
+                            return "";
+
+                        }
+                    )
+                    .filter(Boolean);
+
+            let matchDetailsHTML = "";
+
+            if (hasMatchData) {
+
+                matchDetailsHTML = `
+
+                    <div class="match-details">
+
+                        <div class="match-title">
+                            🎯 Skill Match
+                        </div>
+
+                        ${
+                            matchedSkillNames.length > 0
+                                ? `
+                                    <div class="matched-text">
+
+                                        ✓ Matched:
+                                        ${escapeHTML(
+                                            matchedSkillNames.join(
+                                                ", "
+                                            )
+                                        )}
+
+                                    </div>
+                                `
+                                : `
+                                    <div class="matched-text">
+
+                                        ✓ Matched: None
+
+                                    </div>
+                                `
+                        }
+
+                        ${
+                            missingSkillNames.length > 0
+                                ? `
+                                    <div class="missing-text">
+
+                                        ✗ Missing:
+                                        ${escapeHTML(
+                                            missingSkillNames.join(
+                                                ", "
+                                            )
+                                        )}
+
+                                    </div>
+                                `
+                                : `
+                                    <div class="matched-text">
+
+                                        ✓ You have all required skills
+
+                                    </div>
+                                `
+                        }
+
+                    </div>
+
+                `;
+
+            }
+
+            const opportunityId =
+                opportunity._id;
+
+            const alreadyApplied =
+                appliedOpportunityIds.has(
+                    opportunityId
+                );
+
+            const companyName =
+                opportunity.company ||
+                "Company";
+
+            const companyInitial =
+                companyName
+                    .charAt(0)
+                    .toUpperCase();
+
+            return `
+
+                <div class="card">
+
+                    ${
+                        hasMatchData
+                            ? `
+
+                                <div
+                                    class="match-badge ${matchClass}"
+                                >
+
+                                    ${matchPercentage}% Match
+
+                                </div>
+
+                            `
+                            : ""
+                    }
+
+                    <div class="card-head">
+
+                        <div class="company-logo">
+                            ${escapeHTML(companyInitial)}
+                        </div>
+
+                        <div class="card-title-area">
+
+                            <h3>
+                                ${escapeHTML(
+                                    opportunity.title
+                                )}
+                            </h3>
+
+                            <div class="company">
+                                ${escapeHTML(
+                                    companyName
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="tags">
+
+                        <span class="tag">
+
+                            ${escapeHTML(
+                                opportunity.type
+                            )}
+
+                        </span>
+
+                        ${skillTags}
+
+                    </div>
+
+                    ${matchDetailsHTML}
+
+                    <div class="info">
+
+                        <span>
+                            📍
+                            ${escapeHTML(
+                                opportunity.location ||
+                                "India"
+                            )}
+                        </span>
+
+                        <span>
+                            💼
+                            ${escapeHTML(
+                                opportunity.workMode ||
+                                "Remote"
+                            )}
+                        </span>
+
+                        <span>
+                            💰
+                            ${escapeHTML(
+                                opportunity.salary ||
+                                "Not specified"
+                            )}
+                        </span>
+
+                        <span>
+                            📅
+                            ${escapeHTML(deadline)}
+                        </span>
+
+                    </div>
+
+                    <div class="description">
+
+                        ${escapeHTML(
+                            opportunity.description
+                        )}
+
+                    </div>
+
+                    <div class="actions">
+
+                        <button
+                            class="btn view-btn"
+                            onclick="
+                                viewOpportunity(
+                                    '${escapeHTML(opportunityId)}'
+                                )
+                            "
+                        >
+                            View Details
+                        </button>
+
+                        ${
+                            alreadyApplied
+                                ? `
+
+                                    <button
+                                        class="btn apply-btn applied"
+                                        disabled
+                                    >
+                                        ✓ Applied
+                                    </button>
+
+                                `
+                                : `
+
+                                    <button
+                                        class="btn apply-btn"
+                                        id="apply-${escapeHTML(opportunityId)}"
+                                        onclick="
+                                            applyOpportunity(
+                                                '${escapeHTML(opportunityId)}'
+                                            )
+                                        "
+                                    >
+                                        Apply Now
+                                    </button>
+
+                                `
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        // =====================================================
+        // VIEW OPPORTUNITY
+        // =====================================================
+
+        function viewOpportunity(id) {
+
+            if (!id) {
+                return;
+            }
+
+            window.location.href =
+                "opportunity-details.html?id=" +
+                encodeURIComponent(id);
+
+        }
+
+
+        // =====================================================
+        // APPLY TO OPPORTUNITY
+        // =====================================================
+
+        async function applyOpportunity(id) {
+
+            if (!id) {
+                return;
+            }
+
+            const token =
+                localStorage.getItem("token");
+
+            if (!token) {
+
+                alert(
+                    "Please login to apply for an opportunity."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+            if (
+                appliedOpportunityIds.has(id)
+            ) {
+
+                alert(
+                    "You have already applied to this opportunity."
+                );
+
+                return;
+
+            }
+
+            const button =
+                document.getElementById(
+                    `apply-${id}`
+                );
+
+            if (!button) {
+                return;
+            }
+
+            button.disabled =
+                true;
+
+            button.classList.add(
+                "loading"
+            );
+
+            button.textContent =
+                "Applying...";
+
+            try {
+
+                const response =
+                    await fetch(
+                        APPLICATION_API_URL,
+                        {
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                Authorization:
+                                    "Bearer " + token
+
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    opportunityId: id
+                                })
+
+                        }
+                    );
+
+                const data =
+                    await response.json()
+                        .catch(
+                            () => ({})
+                        );
+
+                if (
+                    response.status === 401
+                ) {
+
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+
+                    alert(
+                        "Session expired. Please login again."
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+                if (
+                    response.status === 403
+                ) {
+
+                    alert(
+                        data.message ||
+                        "Only students can apply for opportunities."
+                    );
+
+                    button.disabled =
+                        false;
+
+                    button.classList.remove(
+                        "loading"
+                    );
+
+                    button.textContent =
+                        "Apply Now";
+
+                    return;
+
+                }
+
+                if (
+                    response.status === 409
+                ) {
+
+                    appliedOpportunityIds.add(
+                        id
+                    );
+
+                    button.classList.remove(
+                        "loading"
+                    );
+
+                    button.classList.add(
+                        "applied"
+                    );
+
+                    button.textContent =
+                        "✓ Applied";
+
+                    button.disabled =
+                        true;
+
+                    alert(
+                        data.message ||
+                        "You have already applied to this opportunity."
+                    );
+
+                    return;
+
+                }
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to apply"
+                    );
+
+                }
+
+                appliedOpportunityIds.add(
+                    id
+                );
+
+                button.classList.remove(
+                    "loading"
+                );
+
+                button.classList.add(
+                    "applied"
+                );
+
+                button.textContent =
+                    "✓ Applied";
+
+                button.disabled =
+                    true;
+
+                alert(
+                    "Application submitted successfully!"
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "APPLY ERROR:",
+                    error
+                );
+
+                button.disabled =
+                    false;
+
+                button.classList.remove(
+                    "loading"
+                );
+
+                button.textContent =
+                    "Apply Now";
+
+                alert(
+                    error.message ||
+                    "Unable to submit application. Please try again."
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // URL SEARCH
+        // =====================================================
+
+        function setupSearchFromURL() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            const search =
+                params.get("search");
+
+            const type =
+                params.get("type");
+
+            if (search) {
+
+                document.getElementById(
+                    "searchInput"
+                ).value =
+                    search;
+
+            }
+
+            if (
+                type === "matches"
+            ) {
+
+                isMatchingMode =
+                    true;
+
+                document.getElementById(
+                    "pageTitle"
+                ).textContent =
+                    "Best Matches";
+
+            } else if (
+                type === "recommended"
+            ) {
+
+                isMatchingMode =
+                    true;
+
+                document.getElementById(
+                    "pageTitle"
+                ).textContent =
+                    "Recommended For You";
+
+            }
+
+        }
+
+
+        // =====================================================
+        // ENTER KEY SEARCH
+        // =====================================================
+
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        filterOpportunities();
+
+                    }
+
+                }
+            );
+
+
+        // =====================================================
+        // AUTO REFRESH
+        // =====================================================
+
+        setInterval(
+            async function () {
+
+                await loadApplications();
+
+                await loadOpportunities();
+
+            },
+            5000
+        );
+
+
+        // =====================================================
+        // REFRESH WHEN USER RETURNS
+        // =====================================================
+
+        window.addEventListener(
+            "focus",
+            async function () {
+
+                await loadApplications();
+
+                await loadOpportunities();
+
+            }
+        );
+
+
+        document.addEventListener(
+            "visibilitychange",
+            async function () {
+
+                if (!document.hidden) {
+
+                    await loadApplications();
+
+                    await loadOpportunities();
+
+                }
+
+            }
+        );
+
+
+        // =====================================================
+        // ESCAPE HTML
+        // =====================================================
+
+        function escapeHTML(value) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        // =====================================================
+        // LOGOUT
+        // =====================================================
+
+        function logout() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            localStorage.removeItem(
+                "user"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+

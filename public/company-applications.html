@@ -1,0 +1,3740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Applications | SkillBridge</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        /* ================================
+           SIDEBAR
+        ================================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #111827;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            border-right: 1px solid #1f2937;
+        }
+
+        .logo {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            border-bottom: 1px solid #273244;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .logo-subtitle {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+
+        .nav {
+            flex: 1;
+            padding: 22px 14px;
+            overflow-y: auto;
+        }
+
+        .nav-title {
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 12px;
+            margin-bottom: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 14px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .nav-item:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(
+                135deg,
+                rgba(99, 102, 241, 0.95),
+                rgba(124, 58, 237, 0.95)
+            );
+            color: white;
+            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.25);
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .logout-section {
+            padding: 15px;
+            border-top: 1px solid #273244;
+        }
+
+        .logout-btn {
+            width: 100%;
+            border: none;
+            background: #1f2937;
+            color: #d1d5db;
+            padding: 12px;
+            border-radius: 9px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #374151;
+            color: white;
+        }
+
+        /* ================================
+           MAIN
+        ================================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            gap: 20px;
+        }
+
+        .page-title {
+            font-size: 29px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 7px;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .company-pill {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.04);
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .company-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* ================================
+           TOOLBAR
+        ================================= */
+
+        .toolbar {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 17px 19px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .toolbar-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .sort-select {
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            padding: 9px 35px 9px 12px;
+            background: white;
+            color: #374151;
+            font-size: 13px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .sort-select:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .application-count {
+            font-size: 13px;
+            color: #6b7280;
+            white-space: nowrap;
+        }
+
+        .application-count strong {
+            color: #111827;
+        }
+
+        /* ================================
+           STATUS LEGEND
+        ================================= */
+
+        .status-legend {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 15px 18px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .legend-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #4b5563;
+            margin-right: 3px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .legend-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.interview {
+            background: #6366f1;
+        }
+
+        .legend-dot.review {
+            background: #f59e0b;
+        }
+
+        .legend-dot.shortlisted {
+            background: #8b5cf6;
+        }
+
+        .legend-dot.selected {
+            background: #10b981;
+        }
+
+        .legend-dot.rejected {
+            background: #ef4444;
+        }
+
+        /* ================================
+           STATS
+        ================================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            right: -20px;
+            top: -20px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.06);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .stat-subtitle {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 5px;
+        }
+
+        /* ================================
+           APPLICATION CONTAINER
+        ================================= */
+
+        #applicationsContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ================================
+           APPLICATION CARD
+        ================================= */
+
+        .application-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 17px;
+            padding: 23px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.035);
+            transition: 0.2s ease;
+        }
+
+        .application-card:hover {
+            border-color: #d8d9ff;
+            box-shadow: 0 8px 24px rgba(79, 70, 229, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #f0f1f4;
+        }
+
+        .student-info {
+            min-width: 0;
+        }
+
+        .student-name {
+            font-size: 19px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 5px;
+        }
+
+        .student-email {
+            font-size: 13px;
+            color: #6b7280;
+            word-break: break-word;
+        }
+
+        /* ================================
+           STATUS BADGES
+        ================================= */
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        .status.interview {
+            color: #4338ca;
+            background: #eef2ff;
+            border-color: #c7d2fe;
+        }
+
+        .status.review {
+            color: #92400e;
+            background: #fffbeb;
+            border-color: #fde68a;
+        }
+
+        .status.shortlisted {
+            color: #6d28d9;
+            background: #f5f3ff;
+            border-color: #ddd6fe;
+        }
+
+        .status.selected {
+            color: #047857;
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+
+        .status.rejected {
+            color: #b91c1c;
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+
+        .status.applied {
+            color: #4338ca;
+            background: #eef2ff;
+            border-color: #c7d2fe;
+        }
+
+        /* ================================
+           MATCH SECTION
+        ================================= */
+
+        .match-section {
+            padding: 19px 0;
+            border-bottom: 1px solid #f0f1f4;
+        }
+
+        .match-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .match-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .match-percentage {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .match-high {
+            color: #059669;
+        }
+
+        .match-medium {
+            color: #d97706;
+        }
+
+        .match-low {
+            color: #dc2626;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 9px;
+            background: #eef0f4;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-fill.high {
+            background: #10b981;
+        }
+
+        .progress-fill.medium {
+            background: #f59e0b;
+        }
+
+        .progress-fill.low {
+            background: #ef4444;
+        }
+
+        .match-description {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        /* ================================
+           INFORMATION GRID
+        ================================= */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 19px 0;
+            border-bottom: 1px solid #f0f1f4;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border: 1px solid #edf0f3;
+            border-radius: 10px;
+            padding: 12px;
+            min-width: 0;
+        }
+
+        .info-label {
+            font-size: 10px;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 13px;
+            color: #374151;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        /* ================================
+           SKILLS
+        ================================= */
+
+        .skills-section {
+            padding: 19px 0;
+            border-bottom: 1px solid #f0f1f4;
+        }
+
+        .skills-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 11px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: #f5f3ff;
+            color: #5b21b6;
+            border: 1px solid #ddd6fe;
+            border-radius: 8px;
+            padding: 7px 9px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .skill-level {
+            background: white;
+            color: #7c3aed;
+            border-radius: 5px;
+            padding: 2px 5px;
+            font-size: 9px;
+            font-weight: 700;
+            border: 1px solid #e9d5ff;
+        }
+
+        .no-skills {
+            color: #9ca3af;
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        /* ================================
+           SKILL ANALYSIS
+        ================================= */
+
+        .skill-analysis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            padding: 19px 0;
+            border-bottom: 1px solid #f0f1f4;
+        }
+
+        .analysis-box {
+            border-radius: 11px;
+            padding: 14px;
+            min-height: 100px;
+        }
+
+        .matched-box {
+            background: #ecfdf5;
+            border: 1px solid #d1fae5;
+        }
+
+        .missing-box {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+        }
+
+        .analysis-title {
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .matched-box .analysis-title {
+            color: #047857;
+        }
+
+        .missing-box .analysis-title {
+            color: #c2410c;
+        }
+
+        .analysis-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .analysis-skill {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 5px 8px;
+            border-radius: 6px;
+        }
+
+        .matched-box .analysis-skill {
+            background: white;
+            color: #047857;
+            border: 1px solid #bbf7d0;
+        }
+
+        .missing-box .analysis-skill {
+            background: white;
+            color: #c2410c;
+            border: 1px solid #fed7aa;
+        }
+
+        .empty-skill {
+            font-size: 11px;
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* ================================
+           APPLICATION FOOTER
+        ================================= */
+
+        .application-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding-top: 18px;
+        }
+
+        .applied-date {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .applied-date strong {
+            color: #374151;
+        }
+
+        .status-controls {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .status-select {
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 9px;
+            padding: 9px 32px 9px 11px;
+            color: #374151;
+            font-size: 12px;
+            cursor: pointer;
+            outline: none;
+            min-width: 175px;
+        }
+
+        .status-select:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .update-btn {
+            border: none;
+            background: #4f46e5;
+            color: white;
+            border-radius: 9px;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .update-btn:hover {
+            background: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .update-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ================================
+           LOADING
+        ================================= */
+
+        .loading {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 60px 20px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .spinner {
+            width: 35px;
+            height: 35px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #6366f1;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ================================
+           EMPTY
+        ================================= */
+
+        .empty {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 17px;
+            border-radius: 50%;
+            background: #eef2ff;
+            color: #6366f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #374151;
+            margin-bottom: 7px;
+        }
+
+        .empty-text {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        /* ================================
+           TOAST
+        ================================= */
+
+        .toast-container {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            min-width: 280px;
+            max-width: 380px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 11px;
+            padding: 13px 15px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.13);
+            font-size: 13px;
+            color: #374151;
+            animation: toastIn 0.25s ease;
+        }
+
+        .toast.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================================
+           MOBILE MENU
+        ================================= */
+
+        .mobile-header {
+            display: none;
+        }
+
+        .menu-btn {
+            border: none;
+            background: #111827;
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .sidebar-overlay {
+            display: none;
+        }
+
+        /* ================================
+           RESPONSIVE 1200
+        ================================= */
+
+        @media (max-width: 1200px) {
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ================================
+           RESPONSIVE 900
+        ================================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.45);
+                z-index: 999;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+            }
+
+            .mobile-title {
+                font-size: 18px;
+                font-weight: 800;
+                color: #111827;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skill-analysis {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* ================================
+           RESPONSIVE 650
+        ================================= */
+
+        @media (max-width: 650px) {
+
+            .main {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .page-subtitle {
+                line-height: 1.5;
+            }
+
+            .company-pill {
+                display: none;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .toolbar-left {
+                justify-content: space-between;
+            }
+
+            .sort-select {
+                flex: 1;
+            }
+
+            .application-count {
+                text-align: left;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 14px;
+            }
+
+            .stat-value {
+                font-size: 23px;
+            }
+
+            .application-card {
+                padding: 16px;
+                border-radius: 14px;
+            }
+
+            .application-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .application-header .status {
+                align-self: flex-start;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .application-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .status-controls {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .status-select,
+            .update-btn {
+                width: 100%;
+            }
+
+            .status-legend {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 9px;
+            }
+        }
+
+        /* ================================
+           RESPONSIVE 430
+        ================================= */
+
+        @media (max-width: 430px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .match-header {
+                align-items: flex-start;
+            }
+
+            .student-name {
+                font-size: 17px;
+            }
+
+            .toast-container {
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+            }
+
+            .toast {
+                min-width: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         SIDEBAR OVERLAY
+    ========================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()">
+    </div>
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">
+                S
+            </div>
+
+            <div>
+                <div class="logo-text">
+                    SkillBridge
+                </div>
+
+                <div class="logo-subtitle">
+                    Academia × Industry
+                </div>
+            </div>
+        </div>
+
+        <nav class="nav">
+
+            <div class="nav-title">
+                Company
+            </div>
+
+            <a
+                href="company-dashboard.html"
+                class="nav-item">
+
+                <span class="nav-icon">▦</span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+            <a
+                href="company-opportunities.html"
+                class="nav-item">
+
+                <span class="nav-icon">◈</span>
+
+                <span>
+                    My Opportunities
+                </span>
+
+            </a>
+
+            <a
+                href="company-applications.html"
+                class="nav-item active">
+
+                <span class="nav-icon">✓</span>
+
+                <span>
+                    Applications
+                </span>
+
+            </a>
+
+            <a
+                href="company-profile.html"
+                class="nav-item">
+
+                <span class="nav-icon">◉</span>
+
+                <span>
+                    Company Profile
+                </span>
+
+            </a>
+
+        </nav>
+
+        <div class="logout-section">
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+
+                <span>↪</span>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="main">
+
+        <!-- Mobile Header -->
+
+        <div class="mobile-header">
+
+            <button
+                class="menu-btn"
+                onclick="toggleSidebar()">
+
+                ☰
+
+            </button>
+
+            <div class="mobile-title">
+                Applications
+            </div>
+
+            <div style="width:42px;"></div>
+
+        </div>
+
+        <!-- =====================================
+             TOPBAR
+        ====================================== -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h1 class="page-title">
+                    Applications
+                </h1>
+
+                <p class="page-subtitle">
+                    Review candidates, analyze their skills and manage application status
+                </p>
+
+            </div>
+
+            <div class="company-pill">
+
+                <div
+                    class="company-avatar"
+                    id="companyAvatar">
+                    C
+                </div>
+
+                <span id="companyName">
+                    Company
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================
+             TOOLBAR
+        ====================================== -->
+
+        <div class="toolbar">
+
+            <div class="toolbar-left">
+
+                <span class="toolbar-title">
+                    Sort by
+                </span>
+
+                <select
+                    class="sort-select"
+                    id="sortSelect"
+                    onchange="handleSort()">
+
+                    <option value="match-desc">
+                        Highest Match First
+                    </option>
+
+                    <option value="match-asc">
+                        Lowest Match First
+                    </option>
+
+                    <option value="newest">
+                        Newest Applications
+                    </option>
+
+                    <option value="oldest">
+                        Oldest Applications
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div
+                class="application-count"
+                id="applicationCount">
+
+                <strong>0</strong>
+                applications
+
+            </div>
+
+        </div>
+
+        <!-- =====================================
+             STATUS LEGEND
+        ====================================== -->
+
+        <div class="status-legend">
+
+            <span class="legend-title">
+                Application Status:
+            </span>
+
+            <span class="legend-item">
+
+                <span class="legend-dot interview"></span>
+
+                Selected for Interview
+
+            </span>
+
+            <span class="legend-item">
+
+                <span class="legend-dot review"></span>
+
+                Under Review
+
+            </span>
+
+            <span class="legend-item">
+
+                <span class="legend-dot shortlisted"></span>
+
+                Shortlisted
+
+            </span>
+
+            <span class="legend-item">
+
+                <span class="legend-dot selected"></span>
+
+                Selected
+
+            </span>
+
+            <span class="legend-item">
+
+                <span class="legend-dot rejected"></span>
+
+                Rejected
+
+            </span>
+
+        </div>
+
+        <!-- =====================================
+             STATS
+        ====================================== -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Applications
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalApplications">
+                    0
+                </div>
+
+                <div class="stat-subtitle">
+                    All received applications
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Under Review
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="reviewApplications">
+                    0
+                </div>
+
+                <div class="stat-subtitle">
+                    Currently being reviewed
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Selected for Interview
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="interviewApplications">
+                    0
+                </div>
+
+                <div class="stat-subtitle">
+                    Candidates moved to interview
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Shortlisted
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="shortlistedApplications">
+                    0
+                </div>
+
+                <div class="stat-subtitle">
+                    Shortlisted candidates
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Selected
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="selectedApplications">
+                    0
+                </div>
+
+                <div class="stat-subtitle">
+                    Final selections
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =====================================
+             APPLICATIONS
+        ====================================== -->
+
+        <div id="applicationsContainer">
+
+            <div class="loading">
+
+                <div class="spinner"></div>
+
+                <div>
+                    Loading applications...
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- =========================================
+         TOAST CONTAINER
+    ========================================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer">
+    </div>
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        /* ========================================
+           GLOBAL VARIABLES
+        ======================================== */
+
+        const API_BASE = "http://localhost:5000/api";
+
+        let token = localStorage.getItem("token");
+
+        let user = null;
+
+        let allApplications = [];
+
+        let currentApplications = [];
+
+        /* ========================================
+           SAFE USER PARSING
+        ======================================== */
+
+        try {
+
+            user = JSON.parse(
+                localStorage.getItem("user") || "null"
+            );
+
+        } catch (error) {
+
+            console.error(
+                "User parsing error:",
+                error
+            );
+
+            user = null;
+        }
+
+        /* ========================================
+           AUTHENTICATION CHECK
+        ======================================== */
+
+        function checkAuthentication() {
+
+            if (!token || !user) {
+
+                alert("Please login first.");
+
+                window.location.href = "login.html";
+
+                return false;
+            }
+
+            if (user.role !== "company") {
+
+                alert(
+                    "Access denied. Company account required."
+                );
+
+                window.location.href = "dashboard.html";
+
+                return false;
+            }
+
+            return true;
+        }
+
+        /* ========================================
+           INITIAL AUTH CHECK
+        ======================================== */
+
+        if (!checkAuthentication()) {
+
+            throw new Error(
+                "Authentication failed."
+            );
+        }
+
+        /* ========================================
+           COMPANY HEADER
+        ======================================== */
+
+        function setupCompanyHeader() {
+
+            const companyName =
+                user?.name ||
+                user?.companyName ||
+                "Company";
+
+            const nameElement =
+                document.getElementById("companyName");
+
+            const avatarElement =
+                document.getElementById("companyAvatar");
+
+            if (nameElement) {
+
+                nameElement.textContent =
+                    companyName;
+            }
+
+            if (avatarElement) {
+
+                avatarElement.textContent =
+                    companyName
+                        .charAt(0)
+                        .toUpperCase();
+            }
+        }
+
+        /* ========================================
+           TOAST
+        ======================================== */
+
+        function showToast(
+            message,
+            type = "success"
+        ) {
+
+            const container =
+                document.getElementById(
+                    "toastContainer"
+                );
+
+            if (!container) return;
+
+            const toast =
+                document.createElement("div");
+
+            toast.className =
+                `toast ${type}`;
+
+            toast.textContent =
+                message;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+
+                toast.style.opacity = "0";
+
+                toast.style.transform =
+                    "translateY(10px)";
+
+                setTimeout(() => {
+
+                    toast.remove();
+
+                }, 250);
+
+            }, 3000);
+        }
+
+        /* ========================================
+           HTML ESCAPE
+        ======================================== */
+
+        function escapeHtml(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+            }
+
+            return String(value)
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+        }
+
+        /* ========================================
+           STATUS DISPLAY MAPPING
+        ======================================== */
+
+        function displayStatus(rawStatus) {
+    if (!rawStatus) {
+        return "Applied";
+    }
+
+    return rawStatus;
+}
+        /* ========================================
+           STATUS VALUE FOR BACKEND
+        ======================================== */
+
+        function normalizeStatusForBackend(
+            selectedStatus
+        ) {
+
+            if (
+                selectedStatus ===
+                "Selected for Interview"
+            ) {
+
+                return "Selected for Interview";
+            }
+
+            return selectedStatus;
+        }
+
+        /* ========================================
+           STATUS CLASS
+        ======================================== */
+
+        function getStatusClass(status) {
+
+            const normalized =
+                displayStatus(status);
+
+            switch (normalized) {
+
+                case "Selected for Interview":
+
+                    return "interview";
+
+                case "Under Review":
+
+                    return "review";
+
+                case "Shortlisted":
+
+                    return "shortlisted";
+
+                case "Selected":
+
+                    return "selected";
+
+                case "Rejected":
+
+                    return "rejected";
+
+                default:
+
+                    return "interview";
+            }
+        }
+
+        /* ========================================
+           STATUS OPTIONS
+        ======================================== */
+
+        function getStatusOptions(
+            currentStatus
+        ) {
+
+            const status =
+                displayStatus(currentStatus);
+
+            const statuses = [
+
+                "Selected for Interview",
+
+                "Under Review",
+
+                "Shortlisted",
+
+                "Selected",
+
+                "Rejected"
+
+            ];
+
+            return statuses
+                .map(item => {
+
+                    return `
+                        <option
+                            value="${escapeHtml(item)}"
+                            ${item === status ? "selected" : ""}
+                        >
+                            ${escapeHtml(item)}
+                        </option>
+                    `;
+
+                })
+                .join("");
+        }
+
+        /* ========================================
+           FETCH APPLICATIONS
+        ======================================== */
+
+        async function loadApplications() {
+
+            const container =
+                document.getElementById(
+                    "applicationsContainer"
+                );
+
+            container.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div>
+                        Loading applications...
+                    </div>
+                </div>
+            `;
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/applications/company`,
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token,
+
+                                "Content-Type":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+                if (response.status === 401) {
+
+                    handleSessionExpired();
+
+                    return;
+                }
+
+                const data =
+                    await response.json();
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load applications."
+                    );
+                }
+
+                if (Array.isArray(data)) {
+
+                    allApplications = data;
+
+                } else if (
+                    Array.isArray(data.applications)
+                ) {
+
+                    allApplications =
+                        data.applications;
+
+                } else {
+
+                    allApplications = [];
+                }
+
+                updateStats(
+                    allApplications
+                );
+
+                updateApplicationCount(
+                    allApplications.length
+                );
+
+                handleSort();
+
+            } catch (error) {
+
+                console.error(
+                    "Applications loading error:",
+                    error
+                );
+
+                container.innerHTML = `
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            !
+                        </div>
+
+                        <div class="empty-title">
+                            Unable to Load Applications
+                        </div>
+
+                        <div class="empty-text">
+                            ${escapeHtml(
+                                error.message ||
+                                "Something went wrong."
+                            )}
+                        </div>
+
+                    </div>
+                `;
+
+                showToast(
+                    error.message ||
+                    "Failed to load applications.",
+                    "error"
+                );
+            }
+        }
+
+        /* ========================================
+           UPDATE STATS
+        ======================================== */
+
+        function updateStats(
+            applications
+        ) {
+
+            const total =
+                applications.length;
+
+            const review =
+                applications.filter(
+                    application =>
+                        displayStatus(
+                            application.status
+                        ) === "Under Review"
+                ).length;
+
+            const interview =
+                applications.filter(
+                    application =>
+                        displayStatus(
+                            application.status
+                        ) ===
+                        "Selected for Interview"
+                ).length;
+
+            const shortlisted =
+                applications.filter(
+                    application =>
+                        displayStatus(
+                            application.status
+                        ) === "Shortlisted"
+                ).length;
+
+            const selected =
+                applications.filter(
+                    application =>
+                        displayStatus(
+                            application.status
+                        ) === "Selected"
+                ).length;
+
+            document.getElementById(
+                "totalApplications"
+            ).textContent = total;
+
+            document.getElementById(
+                "reviewApplications"
+            ).textContent = review;
+
+            document.getElementById(
+                "interviewApplications"
+            ).textContent = interview;
+
+            document.getElementById(
+                "shortlistedApplications"
+            ).textContent = shortlisted;
+
+            document.getElementById(
+                "selectedApplications"
+            ).textContent = selected;
+        }
+
+        /* ========================================
+           APPLICATION COUNT
+        ======================================== */
+
+        function updateApplicationCount(
+            count
+        ) {
+
+            const element =
+                document.getElementById(
+                    "applicationCount"
+                );
+
+            element.innerHTML = `
+                <strong>
+                    ${count}
+                </strong>
+                ${count === 1
+                    ? "application"
+                    : "applications"}
+            `;
+        }
+
+        /* ========================================
+           SORT APPLICATIONS
+        ======================================== */
+
+        function handleSort() {
+
+            const sortValue =
+                document.getElementById(
+                    "sortSelect"
+                ).value;
+
+            currentApplications =
+                [...allApplications];
+
+            if (
+                sortValue === "match-desc"
+            ) {
+
+                currentApplications.sort(
+                    (a, b) =>
+                        getMatchPercentage(b) -
+                        getMatchPercentage(a)
+                );
+
+            } else if (
+                sortValue === "match-asc"
+            ) {
+
+                currentApplications.sort(
+                    (a, b) =>
+                        getMatchPercentage(a) -
+                        getMatchPercentage(b)
+                );
+
+            } else if (
+                sortValue === "newest"
+            ) {
+
+                currentApplications.sort(
+                    (a, b) =>
+                        getApplicationTime(b) -
+                        getApplicationTime(a)
+                );
+
+            } else if (
+                sortValue === "oldest"
+            ) {
+
+                currentApplications.sort(
+                    (a, b) =>
+                        getApplicationTime(a) -
+                        getApplicationTime(b)
+                );
+            }
+
+            renderApplications(
+                currentApplications
+            );
+        }
+
+        /* ========================================
+           MATCH PERCENTAGE
+        ======================================== */
+
+        function getMatchPercentage(
+            application
+        ) {
+
+            const possibleValues = [
+
+                application.matchPercentage,
+
+                application.matchPercent,
+
+                application.matchScore,
+
+                application.match
+
+            ];
+
+            for (
+                const value of possibleValues
+            ) {
+
+                const number =
+                    Number(value);
+
+                if (
+                    Number.isFinite(number)
+                ) {
+
+                    return Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            number
+                        )
+                    );
+                }
+            }
+
+            return 0;
+        }
+
+        /* ========================================
+           APPLICATION DATE
+        ======================================== */
+
+        function getApplicationTime(
+            application
+        ) {
+
+            const date =
+                application.appliedAt ||
+                application.createdAt ||
+                application.updatedAt;
+
+            if (!date) {
+
+                return 0;
+            }
+
+            const time =
+                new Date(date).getTime();
+
+            return Number.isFinite(time)
+                ? time
+                : 0;
+        }
+
+        /* ========================================
+           FORMAT DATE
+        ======================================== */
+
+        function formatDate(
+            dateValue
+        ) {
+
+            if (!dateValue) {
+
+                return "Date not available";
+            }
+
+            const date =
+                new Date(dateValue);
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return "Date not available";
+            }
+
+            return date.toLocaleDateString(
+                "en-IN",
+                {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                }
+            );
+        }
+
+        /* ========================================
+           MATCH CLASS
+        ======================================== */
+
+        function getMatchClass(
+            percentage
+        ) {
+
+            if (percentage >= 75) {
+
+                return "high";
+            }
+
+            if (percentage >= 50) {
+
+                return "medium";
+            }
+
+            return "low";
+        }
+
+        /* ========================================
+           MATCH DESCRIPTION
+        ======================================== */
+
+        function getMatchDescription(
+            percentage
+        ) {
+
+            if (percentage >= 90) {
+
+                return "Excellent skill match. Strong candidate for this opportunity.";
+
+            }
+
+            if (percentage >= 75) {
+
+                return "Very good skill match. Candidate meets most requirements.";
+
+            }
+
+            if (percentage >= 50) {
+
+                return "Moderate skill match. Review the candidate's skill gaps.";
+
+            }
+
+            if (percentage > 0) {
+
+                return "Low skill match. Consider reviewing missing or below-level skills.";
+
+            }
+
+            return "Skill match information is not available.";
+        }
+
+        /* ========================================
+           NORMALIZE SKILLS
+        ======================================== */
+
+        function normalizeSkills(
+            skills
+        ) {
+
+            if (!skills) {
+
+                return [];
+            }
+
+            if (
+                Array.isArray(skills)
+            ) {
+
+                return skills;
+            }
+
+            if (
+                typeof skills === "object"
+            ) {
+
+                return Object.entries(
+                    skills
+                ).map(
+                    ([name, value]) => {
+
+                        if (
+                            typeof value ===
+                            "object"
+                        ) {
+
+                            return {
+                                name,
+                                ...value
+                            };
+                        }
+
+                        return {
+                            name,
+                            level: value
+                        };
+                    }
+                );
+            }
+
+            return [];
+        }
+
+        /* ========================================
+           SKILL NAME
+        ======================================== */
+
+        function getSkillName(
+            skill
+        ) {
+
+            if (
+                typeof skill === "string"
+            ) {
+
+                return skill;
+            }
+
+            if (!skill) {
+
+                return "";
+            }
+
+            return (
+                skill.name ||
+                skill.skill ||
+                skill.title ||
+                skill.skillName ||
+                ""
+            );
+        }
+
+        /* ========================================
+           SKILL LEVEL
+        ======================================== */
+
+        function getSkillLevel(
+            skill
+        ) {
+
+            if (
+                typeof skill === "string" ||
+                !skill
+            ) {
+
+                return "";
+            }
+
+            return (
+                skill.level ||
+                skill.proficiency ||
+                skill.skillLevel ||
+                skill.experienceLevel ||
+                ""
+            );
+        }
+
+        /* ========================================
+           RENDER SKILLS
+        ======================================== */
+
+        function renderSkills(
+            skills
+        ) {
+
+            const normalized =
+                normalizeSkills(skills);
+
+            if (
+                normalized.length === 0
+            ) {
+
+                return `
+                    <div class="no-skills">
+                        No skills added by the student.
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="skills-list">
+
+                    ${normalized
+                        .map(skill => {
+
+                            const name =
+                                getSkillName(skill);
+
+                            const level =
+                                getSkillLevel(skill);
+
+                            if (!name) {
+
+                                return "";
+                            }
+
+                            return `
+                                <span class="skill-chip">
+
+                                    ${escapeHtml(
+                                        name
+                                    )}
+
+                                    ${
+                                        level
+                                            ? `
+                                                <span class="skill-level">
+                                                    ${escapeHtml(
+                                                        level
+                                                    )}
+                                                </span>
+                                            `
+                                            : ""
+                                    }
+
+                                </span>
+                            `;
+
+                        })
+                        .join("")}
+
+                </div>
+            `;
+        }
+
+        /* ========================================
+           EXTRACT ANALYSIS SKILLS
+        ======================================== */
+
+        function getAnalysisSkills(
+            application,
+            type
+        ) {
+
+            if (
+                type === "matched"
+            ) {
+
+                return (
+                    application.matchedSkills ||
+                    application.matchingSkills ||
+                    application.matched ||
+                    []
+                );
+            }
+
+            return (
+                application.missingSkills ||
+                application.missingOrBelowSkills ||
+                application.belowLevelSkills ||
+                application.missing ||
+                []
+            );
+        }
+
+        /* ========================================
+           RENDER ANALYSIS SKILLS
+        ======================================== */
+
+        function renderAnalysisSkills(
+            skills
+        ) {
+
+            const normalized =
+                normalizeSkills(skills);
+
+            if (
+                normalized.length === 0
+            ) {
+
+                return `
+                    <span class="empty-skill">
+                        None
+                    </span>
+                `;
+            }
+
+            return normalized
+                .map(skill => {
+
+                    const name =
+                        getSkillName(skill);
+
+                    if (!name) {
+
+                        return "";
+                    }
+
+                    return `
+                        <span class="analysis-skill">
+                            ${escapeHtml(name)}
+                        </span>
+                    `;
+
+                })
+                .join("");
+        }
+
+        /* ========================================
+           STUDENT COLLEGE
+        ======================================== */
+
+        function getStudentCollege(
+            student
+        ) {
+
+            return (
+                student.college ||
+                student.institution ||
+                student.university ||
+                "Not specified"
+            );
+        }
+
+        /* ========================================
+           STUDENT BRANCH
+        ======================================== */
+
+        function getStudentBranch(
+            student
+        ) {
+
+            return (
+                student.branch ||
+                student.department ||
+                student.stream ||
+                "Not specified"
+            );
+        }
+
+        /* ========================================
+           STUDENT YEAR
+        ======================================== */
+
+        function getStudentYear(
+            student
+        ) {
+
+            return (
+                student.year ||
+                student.currentYear ||
+                student.studyYear ||
+                "Not specified"
+            );
+        }
+
+        /* ========================================
+           STUDENT PREFERRED ROLE
+        ======================================== */
+
+        function getPreferredRole(
+            student
+        ) {
+
+            return (
+                student.preferredRole ||
+                student.desiredRole ||
+                student.rolePreference ||
+                "Not specified"
+            );
+        }
+
+        /* ========================================
+           STUDENT WORK MODE
+        ======================================== */
+
+        function getWorkMode(
+            student
+        ) {
+
+            return (
+                student.workMode ||
+                student.preferredWorkMode ||
+                "Not specified"
+            );
+        }
+
+        /* ========================================
+           OPPORTUNITY TITLE
+        ======================================== */
+
+        function getOpportunityTitle(
+            opportunity
+        ) {
+
+            return (
+                opportunity.title ||
+                opportunity.name ||
+                "Opportunity"
+            );
+        }
+
+        /* ========================================
+           RENDER APPLICATIONS
+        ======================================== */
+
+        function renderApplications(
+            applications
+        ) {
+
+            const container =
+                document.getElementById(
+                    "applicationsContainer"
+                );
+
+            if (
+                !applications ||
+                applications.length === 0
+            ) {
+
+                container.innerHTML = `
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            ✓
+                        </div>
+
+                        <div class="empty-title">
+                            No Applications Yet
+                        </div>
+
+                        <div class="empty-text">
+                            Applications from students will appear here when they apply to your opportunities.
+                        </div>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+            container.innerHTML =
+                applications
+                    .map(
+                        application =>
+                            renderApplication(
+                                application
+                            )
+                    )
+                    .join("");
+        }
+
+        /* ========================================
+           RENDER SINGLE APPLICATION
+        ======================================== */
+
+        function renderApplication(
+            application
+        ) {
+
+            const student =
+                application.student || {};
+
+            const opportunity =
+                application.opportunity || {};
+
+            const rawStatus =
+                application.status ||
+                "Applied";
+
+            const status =
+                displayStatus(
+                    rawStatus
+                );
+
+            const statusClass =
+                getStatusClass(
+                    rawStatus
+                );
+
+            const percentage =
+                getMatchPercentage(
+                    application
+                );
+
+            const matchClass =
+                getMatchClass(
+                    percentage
+                );
+
+            const matchedSkills =
+                getAnalysisSkills(
+                    application,
+                    "matched"
+                );
+
+            const missingSkills =
+                getAnalysisSkills(
+                    application,
+                    "missing"
+                );
+
+            const studentName =
+                student.name ||
+                "Unknown Student";
+
+            const studentEmail =
+                student.email ||
+                "Email not available";
+
+            const opportunityTitle =
+                getOpportunityTitle(
+                    opportunity
+                );
+
+            const studentSkills =
+                student.skills ||
+                application.studentSkills ||
+                [];
+
+            const applicationId =
+                application._id ||
+                application.id ||
+                "";
+
+            return `
+
+                <article
+                    class="application-card"
+                    data-application-id="${escapeHtml(
+                        applicationId
+                    )}"
+                >
+
+                    <!-- =========================
+                         APPLICATION HEADER
+                    ========================== -->
+
+                    <div class="application-header">
+
+                        <div class="student-info">
+
+                            <div class="student-name">
+                                ${escapeHtml(
+                                    studentName
+                                )}
+                            </div>
+
+                            <div class="student-email">
+                                ${escapeHtml(
+                                    studentEmail
+                                )}
+                            </div>
+
+                        </div>
+
+                        <span
+                            class="status ${statusClass}"
+                            id="status-badge-${escapeHtml(
+                                applicationId
+                            )}"
+                        >
+                            ${escapeHtml(status)}
+                        </span>
+
+                    </div>
+
+                    <!-- =========================
+                         MATCH SECTION
+                    ========================== -->
+
+                    <div class="match-section">
+
+                        <div class="match-header">
+
+                            <span class="match-title">
+                                Skill Match
+                            </span>
+
+                            <span
+                                class="match-percentage match-${matchClass}"
+                            >
+                                ${percentage}%
+                            </span>
+
+                        </div>
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill ${matchClass}"
+                                style="width: ${percentage}%"
+                            ></div>
+
+                        </div>
+
+                        <div class="match-description">
+
+                            ${escapeHtml(
+                                getMatchDescription(
+                                    percentage
+                                )
+                            )}
+
+                        </div>
+
+                    </div>
+
+                    <!-- =========================
+                         STUDENT / OPPORTUNITY INFO
+                    ========================== -->
+
+                    <div class="info-grid">
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Opportunity
+                            </div>
+
+                            <div class="info-value">
+                                ${escapeHtml(
+                                    opportunityTitle
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                College
+                            </div>
+
+                            <div class="info-value">
+                                ${escapeHtml(
+                                    getStudentCollege(
+                                        student
+                                    )
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Branch
+                            </div>
+
+                            <div class="info-value">
+                                ${escapeHtml(
+                                    getStudentBranch(
+                                        student
+                                    )
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Year
+                            </div>
+
+                            <div class="info-value">
+                                ${escapeHtml(
+                                    getStudentYear(
+                                        student
+                                    )
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Preferred Role
+                            </div>
+
+                            <div class="info-value">
+                                ${escapeHtml(
+                                    getPreferredRole(
+                                        student
+                                    )
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Work Mode
+                            </div>
+
+                            <div class="info-value">
+                                ${escapeHtml(
+                                    getWorkMode(
+                                        student
+                                    )
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Opportunity Type
+                            </div>
+
+                            <div class="info-value">
+                                ${escapeHtml(
+                                    opportunity.type ||
+                                    "Not specified"
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <div class="info-label">
+                                Location
+                            </div>
+
+                            <div class="info-value">
+                                ${escapeHtml(
+                                    opportunity.location ||
+                                    "Not specified"
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- =========================
+                         STUDENT SKILLS
+                    ========================== -->
+
+                    <div class="skills-section">
+
+                        <div class="skills-title">
+                            Student Skills
+                        </div>
+
+                        ${renderSkills(
+                            studentSkills
+                        )}
+
+                    </div>
+
+                    <!-- =========================
+                         SKILL ANALYSIS
+                    ========================== -->
+
+                    <div class="skill-analysis">
+
+                        <div class="analysis-box matched-box">
+
+                            <div class="analysis-title">
+                                ✓ Matched Skills
+                            </div>
+
+                            <div class="analysis-skills">
+
+                                ${renderAnalysisSkills(
+                                    matchedSkills
+                                )}
+
+                            </div>
+
+                        </div>
+
+                        <div class="analysis-box missing-box">
+
+                            <div class="analysis-title">
+                                ! Missing / Below-Level Skills
+                            </div>
+
+                            <div class="analysis-skills">
+
+                                ${renderAnalysisSkills(
+                                    missingSkills
+                                )}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- =========================
+                         FOOTER
+                    ========================== -->
+
+                    <div class="application-footer">
+
+                        <div class="applied-date">
+
+                            Applied on:
+
+                            <strong>
+                                ${escapeHtml(
+                                    formatDate(
+                                        application.appliedAt ||
+                                        application.createdAt
+                                    )
+                                )}
+                            </strong>
+
+                        </div>
+
+                        <div class="status-controls">
+
+                            <select
+                                class="status-select"
+                                id="status-${escapeHtml(
+                                    applicationId
+                                )}"
+                            >
+
+                                ${getStatusOptions(
+                                    rawStatus
+                                )}
+
+                            </select>
+
+                            <button
+                                class="update-btn"
+                                onclick="updateStatus(
+                                    '${escapeHtml(
+                                        applicationId
+                                    )}'
+                                )"
+                            >
+                                Update Status
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+            `;
+        }
+
+        /* ========================================
+           UPDATE STATUS
+        ======================================== */
+
+        async function updateStatus(
+            applicationId
+        ) {
+
+            if (!applicationId) {
+
+                showToast(
+                    "Invalid application ID.",
+                    "error"
+                );
+
+                return;
+            }
+
+            const select =
+                document.getElementById(
+                    `status-${applicationId}`
+                );
+
+            if (!select) {
+
+                showToast(
+                    "Status selector not found.",
+                    "error"
+                );
+
+                return;
+            }
+
+            const button =
+                select.parentElement
+                    .querySelector(
+                        ".update-btn"
+                    );
+
+            const selectedStatus =
+                select.value;
+
+            const backendStatus =
+                normalizeStatusForBackend(
+                    selectedStatus
+                );
+
+            if (button) {
+
+                button.disabled = true;
+
+                button.textContent =
+                    "Updating...";
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/applications/${applicationId}/status`,
+                        {
+                            method: "PATCH",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token,
+
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                status:
+                                    backendStatus
+                            })
+                        }
+                    );
+
+                if (response.status === 401) {
+
+                    handleSessionExpired();
+
+                    return;
+                }
+
+                const data =
+                    await response.json();
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to update application status."
+                    );
+                }
+
+                /*
+                    Update local application data
+                    without refreshing the complete page.
+                */
+
+                const index =
+                    allApplications.findIndex(
+                        application =>
+                            String(
+                                application._id ||
+                                application.id
+                            ) ===
+                            String(applicationId)
+                    );
+
+                if (index !== -1) {
+
+                    allApplications[index].status =
+                        backendStatus;
+                }
+
+                updateStats(
+                    allApplications
+                );
+
+                const badge =
+                    document.getElementById(
+                        `status-badge-${applicationId}`
+                    );
+
+                if (badge) {
+
+                    const newClass =
+                        getStatusClass(
+                            backendStatus
+                        );
+
+                    badge.className =
+                        `status ${newClass}`;
+
+                    badge.textContent =
+                        displayStatus(
+                            backendStatus
+                        );
+                }
+
+                showToast(
+                    "Application status updated successfully.",
+                    "success"
+                );
+
+                /*
+                    Re-render sorting state so the
+                    current page remains consistent.
+                */
+
+                handleSort();
+
+            } catch (error) {
+
+                console.error(
+                    "Status update error:",
+                    error
+                );
+
+                showToast(
+                    error.message ||
+                    "Failed to update application status.",
+                    "error"
+                );
+
+            } finally {
+
+                if (button) {
+
+                    button.disabled = false;
+
+                    button.textContent =
+                        "Update Status";
+                }
+            }
+        }
+
+        /* ========================================
+           SESSION EXPIRED
+        ======================================== */
+
+        function handleSessionExpired() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            localStorage.removeItem(
+                "user"
+            );
+
+            alert(
+                "Your session has expired. Please login again."
+            );
+
+            window.location.href =
+                "login.html";
+        }
+
+        /* ========================================
+           LOGOUT
+        ======================================== */
+
+        function logout() {
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+            if (!confirmLogout) {
+
+                return;
+            }
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            localStorage.removeItem(
+                "user"
+            );
+
+            window.location.href =
+                "login.html";
+        }
+
+        /* ========================================
+           MOBILE SIDEBAR
+        ======================================== */
+
+        function toggleSidebar() {
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+            const overlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+            overlay.classList.toggle(
+                "show"
+            );
+        }
+
+        /* ========================================
+           CLOSE SIDEBAR
+        ======================================== */
+
+        function closeSidebar() {
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+            const overlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+            overlay.classList.remove(
+                "show"
+            );
+        }
+
+        /* ========================================
+           WINDOW RESIZE
+        ======================================== */
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                if (
+                    window.innerWidth > 900
+                ) {
+
+                    closeSidebar();
+                }
+            }
+        );
+
+        /* ========================================
+           INITIALIZE PAGE
+        ======================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+                setupCompanyHeader();
+
+                loadApplications();
+
+            }
+        );
+
+                /* ========================================
+           UPDATE STATUS
+        ======================================== */
+
+        async function updateStatus(applicationId) {
+
+            if (!applicationId) {
+                showToast(
+                    "Invalid application ID.",
+                    "error"
+                );
+                return;
+            }
+
+            const select = document.getElementById(
+                `status-${applicationId}`
+            );
+
+            if (!select) {
+                showToast(
+                    "Status selector not found.",
+                    "error"
+                );
+                return;
+            }
+
+            const button = select.parentElement.querySelector(
+                ".update-btn"
+            );
+
+            const selectedStatus = select.value;
+
+            /*
+             * Selected for Interview is now the
+             * replacement for the old Applied status.
+             *
+             * Shortlisted is still available.
+             *
+             * Selected is a separate direct-final status.
+             */
+            const backendStatus = selectedStatus;
+
+            if (button) {
+                button.disabled = true;
+                button.textContent = "Updating...";
+            }
+
+            try {
+
+                const response = await fetch(
+                    `${API_BASE}/applications/${applicationId}/status`,
+                    {
+                        method: "PATCH",
+
+                        headers: {
+                            "Authorization": "Bearer " + token,
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            status: backendStatus
+                        })
+                    }
+                );
+
+                if (response.status === 401) {
+                    handleSessionExpired();
+                    return;
+                }
+
+                let data = {};
+
+                try {
+                    data = await response.json();
+                } catch (jsonError) {
+                    data = {};
+                }
+console.log(
+    "STATUS BEFORE API:",
+    JSON.stringify(status)
+);
+                if (!response.ok) {
+                    throw new Error(
+                        data.message ||
+                        "Failed to update application status."
+                    );
+                }
+
+                /*
+                 * Update local application object
+                 * so the UI remains synchronized.
+                 */
+                const applicationIndex =
+                    allApplications.findIndex(
+                        application =>
+                            String(
+                                application._id ||
+                                application.id
+                            ) === String(applicationId)
+                    );
+
+                if (applicationIndex !== -1) {
+
+                    allApplications[
+                        applicationIndex
+                    ].status = backendStatus;
+                }
+
+                /*
+                 * Update statistics.
+                 */
+                updateStats(allApplications);
+
+                /*
+                 * Update status badge.
+                 */
+                const badge = document.getElementById(
+                    `status-badge-${applicationId}`
+                );
+
+                if (badge) {
+
+                    const statusClass =
+                        getStatusClass(backendStatus);
+
+                    badge.className =
+                        `status ${statusClass}`;
+
+                    badge.textContent =
+                        displayStatus(backendStatus);
+                }
+
+                showToast(
+                    `Application status changed to "${displayStatus(
+                        backendStatus
+                    )}".`,
+                    "success"
+                );
+
+                /*
+                 * Re-render according to current sorting.
+                 */
+                handleSort();
+
+            } catch (error) {
+
+                console.error(
+                    "Status update error:",
+                    error
+                );
+
+                showToast(
+                    error.message ||
+                    "Failed to update application status.",
+                    "error"
+                );
+
+            } finally {
+
+                if (button) {
+                    button.disabled = false;
+                    button.textContent = "Update Status";
+                }
+            }
+        }
+
+
+        /* ========================================
+           SESSION EXPIRED
+        ======================================== */
+
+        function handleSessionExpired() {
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            alert(
+                "Your session has expired. Please login again."
+            );
+
+            window.location.href = "login.html";
+        }
+
+
+        /* ========================================
+           LOGOUT
+        ======================================== */
+
+        function logout() {
+
+            const shouldLogout = confirm(
+                "Are you sure you want to logout?"
+            );
+
+            if (!shouldLogout) {
+                return;
+            }
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            window.location.href = "login.html";
+        }
+
+
+        /* ========================================
+           MOBILE SIDEBAR
+        ======================================== */
+
+        function toggleSidebar() {
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            const overlay =
+                document.getElementById("sidebarOverlay");
+
+            if (!sidebar || !overlay) {
+                return;
+            }
+
+            sidebar.classList.toggle("open");
+            overlay.classList.toggle("show");
+        }
+
+
+        /* ========================================
+           CLOSE SIDEBAR
+        ======================================== */
+
+        function closeSidebar() {
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            const overlay =
+                document.getElementById("sidebarOverlay");
+
+            if (!sidebar || !overlay) {
+                return;
+            }
+
+            sidebar.classList.remove("open");
+            overlay.classList.remove("show");
+        }
+
+
+        /* ========================================
+           CLOSE SIDEBAR WHEN NAV ITEM CLICKED
+        ======================================== */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                const navItem =
+                    event.target.closest(".nav-item");
+
+                if (
+                    navItem &&
+                    window.innerWidth <= 900
+                ) {
+
+                    closeSidebar();
+                }
+            }
+        );
+
+
+        /* ========================================
+           WINDOW RESIZE
+        ======================================== */
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                if (window.innerWidth > 900) {
+                    closeSidebar();
+                }
+            }
+        );
+
+
+        /* ========================================
+           ESC KEY
+        ======================================== */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+                    closeSidebar();
+                }
+            }
+        );
+
+
+        /* ========================================
+           PREVENT DOUBLE PAGE LOAD
+        ======================================== */
+
+        let pageInitialized = false;
+
+
+        /* ========================================
+           INITIALIZE PAGE
+        ======================================== */
+
+        async function initializePage() {
+
+            if (pageInitialized) {
+                return;
+            }
+
+            pageInitialized = true;
+
+            if (!checkAuthentication()) {
+                return;
+            }
+
+            setupCompanyHeader();
+
+            await loadApplications();
+        }
+
+
+        /* ========================================
+           DOM READY
+        ======================================== */
+
+        if (
+            document.readyState === "loading"
+        ) {
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                initializePage
+            );
+
+        } else {
+
+            initializePage();
+        }
+
+
+        /* ========================================
+           VISIBILITY REFRESH
+        ======================================== */
+
+        document.addEventListener(
+            "visibilitychange",
+            function () {
+
+                if (
+                    document.visibilityState === "visible"
+                ) {
+
+                    /*
+                     * Don't aggressively reload.
+                     * Just keep local UI state.
+                     */
+                    updateStats(allApplications);
+                }
+            }
+        );
+
+
+        /* ========================================
+           NETWORK ERROR HELPER
+        ======================================== */
+
+        window.addEventListener(
+            "online",
+            function () {
+
+                showToast(
+                    "Internet connection restored.",
+                    "success"
+                );
+            }
+        );
+
+
+        window.addEventListener(
+            "offline",
+            function () {
+
+                showToast(
+                    "You are currently offline.",
+                    "error"
+                );
+            }
+        );
+
+    
+    </script>
+
+</body>
+</html>

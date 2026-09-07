@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillBridge | Student Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+}
+
+body{
+    background:#f7f9fc;
+    color:#101828;
+    min-height:100vh;
+}
+
+button,input{
+    font-family:inherit;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:255px;
+    height:100vh;
+    background:#101828;
+    color:#fff;
+    padding:24px 16px;
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 10px;
+    margin-bottom:38px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:19px;
+    font-weight:800;
+    box-shadow:0 8px 22px rgba(37,99,235,.25);
+}
+
+.logo h2{
+    font-size:20px;
+    letter-spacing:-.4px;
+}
+
+.menu-title{
+    color:#667085;
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1.2px;
+    padding:0 12px;
+    margin-bottom:11px;
+}
+
+.menu{
+    list-style:none;
+}
+
+.menu li{
+    margin-bottom:5px;
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:12px 13px;
+    border-radius:10px;
+    color:#98a2b3;
+    font-size:13px;
+    font-weight:500;
+    transition:.2s;
+}
+
+.menu a:hover{
+    background:#1d2939;
+    color:#fff;
+    transform:translateX(2px);
+}
+
+.menu a.active{
+    background:linear-gradient(135deg,#2563eb,#4338ca);
+    color:#fff;
+    box-shadow:0 7px 20px rgba(37,99,235,.24);
+}
+
+.menu-icon{
+    width:21px;
+    text-align:center;
+    font-size:16px;
+}
+
+.sidebar-bottom{
+    margin-top:auto;
+}
+
+.logout{
+    width:100%;
+    border:1px solid #344054;
+    background:#1d2939;
+    color:#fda29b;
+    padding:11px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:13px;
+    transition:.2s;
+}
+
+.logout:hover{
+    background:#344054;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:255px;
+    min-height:100vh;
+}
+
+/* ================= TOPBAR ================= */
+
+.topbar{
+    height:76px;
+    background:#fff;
+    border-bottom:1px solid #eaecf0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 36px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.search{
+    width:390px;
+    position:relative;
+}
+
+.search input{
+    width:100%;
+    padding:12px 15px 12px 43px;
+    border:1px solid #d0d5dd;
+    border-radius:11px;
+    outline:none;
+    background:#f9fafb;
+    font-size:13px;
+    transition:.2s;
+}
+
+.search input:focus{
+    background:#fff;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.search span{
+    position:absolute;
+    left:14px;
+    top:10px;
+    font-size:18px;
+    color:#667085;
+}
+
+.top-profile{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.avatar{
+    width:41px;
+    height:41px;
+    border-radius:50%;
+    background:#dbeafe;
+    color:#1d4ed8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:800;
+    border:3px solid #eff6ff;
+}
+
+.profile-name{
+    font-size:13px;
+    font-weight:700;
+}
+
+.profile-role{
+    font-size:11px;
+    color:#667085;
+    text-transform:capitalize;
+    margin-top:2px;
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+    padding:32px 36px 50px;
+}
+
+.page-heading{
+    margin-bottom:23px;
+}
+
+.page-heading h1{
+    font-size:27px;
+    letter-spacing:-.7px;
+}
+
+.page-heading p{
+    color:#667085;
+    font-size:13px;
+    margin-top:6px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    min-height:190px;
+    border-radius:20px;
+    padding:31px 32px;
+    background:linear-gradient(120deg,#1d4ed8,#4338ca 70%,#5b21b6);
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+    box-shadow:0 14px 35px rgba(37,99,235,.19);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(255,255,255,.055);
+    right:80px;
+    top:-180px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:210px;
+    height:210px;
+    border-radius:50%;
+    background:rgba(255,255,255,.045);
+    right:-60px;
+    bottom:-125px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero-tag{
+    display:inline-flex;
+    padding:5px 9px;
+    border-radius:20px;
+    background:rgba(255,255,255,.13);
+    color:#dbeafe;
+    font-size:10px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.hero h2{
+    font-size:25px;
+    letter-spacing:-.5px;
+    margin-bottom:7px;
+}
+
+.hero p{
+    max-width:540px;
+    color:#dbeafe;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.hero-actions{
+    display:flex;
+    gap:9px;
+    margin-top:18px;
+}
+
+.hero-btn{
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    padding:9px 13px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.hero-btn:hover{
+    background:rgba(255,255,255,.19);
+}
+
+.hero-badge{
+    position:relative;
+    z-index:3;
+    min-width:150px;
+    padding:19px;
+    border-radius:15px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(10px);
+    text-align:center;
+}
+
+.hero-badge strong{
+    display:block;
+    font-size:31px;
+    margin-bottom:3px;
+}
+
+.hero-badge span{
+    font-size:10px;
+    color:#dbeafe;
+}
+
+.readiness{
+    margin-top:11px;
+}
+
+.readiness-line{
+    height:4px;
+    background:rgba(255,255,255,.2);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.readiness-bar{
+    height:100%;
+    width:0%;
+    background:#fff;
+    border-radius:20px;
+    transition:.5s;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:22px;
+}
+
+.stat-card{
+    background:#fff;
+    border:1px solid #eaecf0;
+    border-radius:15px;
+    padding:19px;
+    transition:.2s;
+}
+
+.stat-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 28px rgba(16,24,40,.07);
+}
+
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#475467;
+    font-size:12px;
+    font-weight:600;
+}
+
+.stat-icon{
+    width:37px;
+    height:37px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eff6ff;
+    color:#2563eb;
+    font-size:16px;
+}
+
+.stat-card h3{
+    margin-top:15px;
+    font-size:25px;
+    letter-spacing:-.6px;
+}
+
+.stat-card p{
+    margin-top:4px;
+    font-size:11px;
+    color:#98a2b3;
+}
+
+/* ================= GRID ================= */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #eaecf0;
+    border-radius:16px;
+    padding:22px;
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.card-header h3{
+    font-size:16px;
+    letter-spacing:-.2px;
+}
+
+.card-subtitle{
+    color:#98a2b3;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.view-all{
+    color:#2563eb;
+    font-size:11px;
+    font-weight:700;
+}
+
+.view-all:hover{
+    text-decoration:underline;
+}
+
+/* ================= SKILLS ================= */
+
+.skill{
+    margin-bottom:18px;
+}
+
+.skill:last-child{
+    margin-bottom:0;
+}
+
+.skill-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:12px;
+}
+
+.skill-info span:last-child{
+    color:#667085;
+    font-weight:600;
+}
+
+.progress{
+    height:7px;
+    background:#eaecf0;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:linear-gradient(90deg,#2563eb,#6366f1);
+    border-radius:20px;
+    transition:width .5s ease;
+}
+
+/* ================= OPPORTUNITIES ================= */
+
+.opportunity{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid #f2f4f7;
+}
+
+.opportunity:last-child{
+    border-bottom:none;
+}
+
+.opp-left{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    min-width:0;
+}
+
+.opp-icon{
+    width:43px;
+    height:43px;
+    flex-shrink:0;
+    border-radius:11px;
+    background:#f2f4f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+}
+
+.opp-info{
+    min-width:0;
+}
+
+.opp-info h4{
+    font-size:12px;
+    margin-bottom:4px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.opp-info p{
+    color:#667085;
+    font-size:10px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.match{
+    display:inline-block;
+    margin-top:5px;
+    padding:3px 7px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:700;
+}
+
+.match-high{
+    color:#15803d;
+    background:#dcfce7;
+}
+
+.match-medium{
+    color:#a16207;
+    background:#fef9c3;
+}
+
+.match-low{
+    color:#b91c1c;
+    background:#fee2e2;
+}
+
+.apply{
+    padding:7px 11px;
+    border:1px solid #2563eb;
+    color:#2563eb;
+    background:#fff;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:700;
+    flex-shrink:0;
+    transition:.2s;
+}
+
+.apply:hover{
+    background:#eff6ff;
+}
+
+/* ================= EMPTY / LOADING ================= */
+
+.empty,
+.loading,
+.recommendation-message{
+    color:#98a2b3;
+    font-size:12px;
+    line-height:1.7;
+    padding:14px 0;
+}
+
+.recommendation-message{
+    color:#667085;
+}
+
+/* ================= BOTTOM CAREER CARD ================= */
+
+.career-card{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:20px;
+}
+
+.career-box{
+    background:#fff;
+    border:1px solid #eaecf0;
+    border-radius:16px;
+    padding:22px;
+}
+
+.career-title{
+    font-size:15px;
+    font-weight:700;
+}
+
+.career-description{
+    color:#667085;
+    font-size:11px;
+    line-height:1.6;
+    margin-top:6px;
+}
+
+.career-list{
+    margin-top:17px;
+    display:grid;
+    gap:10px;
+}
+
+.career-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    border-radius:10px;
+    background:#f8fafc;
+}
+
+.career-item-icon{
+    width:31px;
+    height:31px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    background:#eff6ff;
+    color:#2563eb;
+    font-size:14px;
+}
+
+.career-item strong{
+    display:block;
+    font-size:11px;
+}
+
+.career-item span{
+    display:block;
+    font-size:9px;
+    color:#98a2b3;
+    margin-top:2px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-grid,
+    .career-card{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:750px){
+    .sidebar{
+        width:70px;
+        padding:20px 10px;
+    }
+
+    .logo h2,
+    .menu-title,
+    .menu a span,
+    .logout{
+        display:none;
+    }
+
+    .logo{
+        justify-content:center;
+        padding:0;
+    }
+
+    .menu a{
+        justify-content:center;
+    }
+
+    .main{
+        margin-left:70px;
+    }
+
+    .topbar{
+        padding:0 18px;
+    }
+
+    .search{
+        width:45%;
+    }
+
+    .profile-info{
+        display:none;
+    }
+
+    .content{
+        padding:25px 18px;
+    }
+
+    .hero{
+        padding:24px;
+    }
+}
+
+@media(max-width:500px){
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .page-heading h1{
+        font-size:23px;
+    }
+
+    .search{
+        display:none;
+    }
+
+    .hero{
+        display:block;
+    }
+
+    .hero-badge{
+        display:inline-block;
+        margin-top:20px;
+    }
+
+    .hero-actions{
+        flex-wrap:wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div>
+
+        <div class="logo">
+            <div class="logo-icon">S</div>
+            <h2>SkillBridge</h2>
+        </div>
+
+        <div class="menu-title">Main Menu</div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="dashboard.html" class="active">
+                    <span class="menu-icon">⌂</span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="my-skills.html">
+                    <span class="menu-icon">◈</span>
+                    <span>My Skills</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="learning.html">
+                    <span class="menu-icon">▣</span>
+                    <span>Learning</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="opportunities.html">
+                    <span class="menu-icon">◆</span>
+                    <span>Opportunities</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="applications.html">
+                    <span class="menu-icon">◷</span>
+                    <span>Applications</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="menu-title" style="margin-top:30px;">
+            Account
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="profile.html">
+                    <span class="menu-icon">⚙</span>
+                    <span>Profile</span>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="sidebar-bottom">
+
+        <button class="logout" onclick="logout()">
+            ⇥ &nbsp; Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <div class="search">
+
+        <span>⌕</span>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search opportunities, skills, courses..."
+        >
+
+    </div>
+
+    <div class="top-profile">
+
+        <div class="avatar" id="avatar">A</div>
+
+        <div class="profile-info">
+
+            <div class="profile-name" id="profileName">
+                User
+            </div>
+
+            <div class="profile-role" id="profileRole">
+                Student
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+<!-- ================= PAGE HEADING ================= -->
+
+<div class="page-heading">
+
+    <h1>Dashboard</h1>
+
+    <p>
+        Your career journey, skills and opportunities — all in one place.
+    </p>
+
+</div>
+
+
+<!-- ================= HERO ================= -->
+
+<div class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-tag">
+            CAREER READINESS
+        </span>
+
+        <h2 id="welcomeMessage">
+            Welcome back! 👋
+        </h2>
+
+        <p>
+            Keep improving your skills, discover relevant opportunities
+            and take the next step toward your career goals.
+        </p>
+
+        <div class="hero-actions">
+
+            <button
+                class="hero-btn"
+                onclick="window.location.href='my-skills.html'"
+            >
+                + Add Skills
+            </button>
+
+            <button
+                class="hero-btn"
+                onclick="window.location.href='learning.html'"
+            >
+                Continue Learning →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-badge">
+
+        <strong id="profileStrength">
+            0%
+        </strong>
+
+        <span>
+            Profile Strength
+        </span>
+
+        <div class="readiness">
+
+            <div class="readiness-line">
+
+                <div
+                    class="readiness-bar"
+                    id="readinessBar"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= STATS ================= -->
+
+<div class="stats">
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <span>My Skills</span>
+
+            <div class="stat-icon">
+                ◈
+            </div>
+
+        </div>
+
+        <h3 id="skillCount">
+            00
+        </h3>
+
+        <p>
+            Skills added
+        </p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <span>Learning</span>
+
+            <div class="stat-icon">
+                ▣
+            </div>
+
+        </div>
+
+        <h3 id="courseCount">
+            00
+        </h3>
+
+        <p>
+            Courses completed
+        </p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <span>Applications</span>
+
+            <div class="stat-icon">
+                ◆
+            </div>
+
+        </div>
+
+        <h3 id="applicationCount">
+            00
+        </h3>
+
+        <p>
+            Applications sent
+        </p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <span>Opportunities</span>
+
+            <div class="stat-icon">
+                ★
+            </div>
+
+        </div>
+
+        <h3 id="opportunityCount">
+            00
+        </h3>
+
+        <p>
+            Opportunities found
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SKILLS + MATCHES ================= -->
+
+<div class="dashboard-grid">
+
+
+    <!-- SKILLS -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Skill Progress
+                </h3>
+
+                <div class="card-subtitle">
+                    Build stronger skills for better opportunities
+                </div>
+
+            </div>
+
+            <a
+                href="my-skills.html"
+                class="view-all"
+            >
+                Manage
+            </a>
+
+        </div>
+
+
+        <div id="dashboardSkills">
+
+            <p class="loading">
+                Loading your skills...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- MATCHES -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Best Matches
+                </h3>
+
+                <div class="card-subtitle">
+                    Opportunities matching your skills
+                </div>
+
+            </div>
+
+            <a
+                href="opportunities.html?type=matches"
+                class="view-all"
+            >
+                View all
+            </a>
+
+        </div>
+
+
+        <div id="bestMatches">
+
+            <p class="loading">
+                Finding your best matches...
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= RECOMMENDATIONS ================= -->
+
+<div class="card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>
+                Recommended For You
+            </h3>
+
+            <div class="card-subtitle">
+                Personalized opportunities based on your skills
+            </div>
+
+        </div>
+
+        <a
+            href="opportunities.html?type=recommended"
+            class="view-all"
+        >
+            View all
+        </a>
+
+    </div>
+
+
+    <div id="recommendedOpportunities">
+
+        <p class="loading">
+            Preparing recommendations...
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CAREER SECTION ================= -->
+
+<div class="career-card">
+
+
+    <div class="career-box">
+
+        <div class="career-title">
+            Build Your Career Profile
+        </div>
+
+        <div class="career-description">
+            A stronger profile helps SkillBridge understand your skills
+            and connect you with relevant industry opportunities.
+        </div>
+
+
+        <div class="career-list">
+
+            <div class="career-item">
+
+                <div class="career-item-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        Add your skills
+                    </strong>
+
+                    <span>
+                        Showcase what you can do
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="career-item">
+
+                <div class="career-item-icon">
+                    📚
+                </div>
+
+                <div>
+
+                    <strong>
+                        Keep learning
+                    </strong>
+
+                    <span>
+                        Improve your career readiness
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="career-item">
+
+                <div class="career-item-icon">
+                    🚀
+                </div>
+
+                <div>
+
+                    <strong>
+                        Explore opportunities
+                    </strong>
+
+                    <span>
+                        Find internships, jobs and more
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="career-box">
+
+        <div class="career-title">
+            What's next?
+        </div>
+
+        <div class="career-description">
+            Follow these simple steps to make the most of SkillBridge.
+        </div>
+
+
+        <div class="career-list">
+
+            <div class="career-item">
+
+                <div class="career-item-icon">
+                    01
+                </div>
+
+                <div>
+
+                    <strong>
+                        Complete your profile
+                    </strong>
+
+                    <span>
+                        Add education and career details
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="career-item">
+
+                <div class="career-item-icon">
+                    02
+                </div>
+
+                <div>
+
+                    <strong>
+                        Strengthen your skills
+                    </strong>
+
+                    <span>
+                        Add and improve relevant skills
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="career-item">
+
+                <div class="career-item-icon">
+                    03
+                </div>
+
+                <div>
+
+                    <strong>
+                        Apply & grow
+                    </strong>
+
+                    <span>
+                        Apply to opportunities that fit you
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<script>
+
+/* ================= API ================= */
+
+const SKILLS_API =
+    "http://localhost:5000/api/skills";
+
+const OPPORTUNITIES_API =
+    "http://localhost:5000/api/opportunities";
+
+const MATCHES_API =
+    "http://localhost:5000/api/opportunities/matches";
+
+const APPLICATIONS_API =
+    "http://localhost:5000/api/applications";
+
+
+/* ================= START ================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadUserInfo();
+
+        loadDashboard();
+
+    }
+);
+
+
+/* ================= DASHBOARD ================= */
+
+async function loadDashboard(){
+
+    const token =
+        localStorage.getItem("token");
+
+    if(!token){
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+    try{
+
+        await Promise.all([
+
+            loadSkills(token),
+
+            loadOpportunities(token),
+
+            loadApplications(token),
+
+            loadMatches(token)
+
+        ]);
+
+    }catch(error){
+
+        console.error(
+            "DASHBOARD ERROR:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ================= SKILLS ================= */
+
+async function loadSkills(token){
+
+    try{
+
+        const response =
+            await fetch(
+                SKILLS_API,
+                {
+                    method:"GET",
+                    headers:{
+                        "Authorization":
+                            "Bearer " + token,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        if(response.status === 401){
+
+            handleUnauthorized();
+
+            return;
+
+        }
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Failed to fetch skills"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        let skills = [];
+
+
+        if(Array.isArray(data)){
+
+            skills = data;
+
+        }
+        else if(
+            Array.isArray(data.skills)
+        ){
+
+            skills = data.skills;
+
+        }
+
+
+        updateSkillCount(
+            skills.length
+        );
+
+        renderSkills(
+            skills
+        );
+
+        calculateProfileStrength(
+            skills
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "SKILLS ERROR:",
+            error
+        );
+
+
+        document.getElementById(
+            "dashboardSkills"
+        ).innerHTML = `
+
+            <p class="empty">
+
+                Unable to load your skills.
+
+                <br>
+
+                Please refresh the page.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+/* ================= OPPORTUNITIES ================= */
+
+async function loadOpportunities(token){
+
+    try{
+
+        const response =
+            await fetch(
+                OPPORTUNITIES_API
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Failed to fetch opportunities"
+            );
+
+        }
+
+
+        const opportunities =
+            await response.json();
+
+
+        const count =
+            Array.isArray(opportunities)
+                ? opportunities.length
+                : 0;
+
+
+        document.getElementById(
+            "opportunityCount"
+        ).textContent =
+            String(count).padStart(2,"0");
+
+
+    }catch(error){
+
+        console.error(
+            "OPPORTUNITIES ERROR:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ================= APPLICATIONS ================= */
+
+async function loadApplications(token){
+
+    try{
+
+        const response =
+            await fetch(
+                APPLICATIONS_API,
+                {
+                    method:"GET",
+                    headers:{
+                        "Authorization":
+                            "Bearer " + token,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        if(response.status === 401){
+
+            handleUnauthorized();
+
+            return;
+
+        }
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Failed to fetch applications"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        let applications = [];
+
+
+        if(Array.isArray(data)){
+
+            applications = data;
+
+        }
+        else if(
+            Array.isArray(data.applications)
+        ){
+
+            applications =
+                data.applications;
+
+        }
+
+
+        document.getElementById(
+            "applicationCount"
+        ).textContent =
+            String(
+                applications.length
+            ).padStart(2,"0");
+
+
+    }catch(error){
+
+        console.error(
+            "APPLICATIONS ERROR:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ================= MATCHES ================= */
+
+async function loadMatches(token){
+
+    const bestMatchesContainer =
+        document.getElementById(
+            "bestMatches"
+        );
+
+    const recommendedContainer =
+        document.getElementById(
+            "recommendedOpportunities"
+        );
+
+
+    try{
+
+        const response =
+            await fetch(
+                MATCHES_API,
+                {
+                    method:"GET",
+                    headers:{
+                        "Authorization":
+                            "Bearer " + token,
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        if(response.status === 401){
+
+            handleUnauthorized();
+
+            return;
+
+        }
+
+
+        if(response.status === 403){
+
+            throw new Error(
+                "Only students can access matches"
+            );
+
+        }
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Failed to fetch matches"
+            );
+
+        }
+
+
+        const opportunities =
+            await response.json();
+
+
+        if(
+            !Array.isArray(opportunities) ||
+            opportunities.length === 0
+        ){
+
+            bestMatchesContainer.innerHTML = `
+
+                <p class="recommendation-message">
+
+                    No opportunities are available right now.
+
+                    <br><br>
+
+                    Add more skills to your profile
+                    to get better recommendations.
+
+                </p>
+
+            `;
+
+
+            recommendedContainer.innerHTML = `
+
+                <p class="recommendation-message">
+
+                    No recommendations available yet.
+
+                    <br>
+
+                    Add skills from
+                    <strong>My Skills</strong>
+                    to start receiving personalized
+                    opportunities.
+
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+        const topThree =
+            opportunities.slice(0,3);
+
+
+        renderBestMatches(
+            topThree
+        );
+
+
+        renderRecommendedOpportunities(
+            topThree
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "MATCHES ERROR:",
+            error
+        );
+
+
+        bestMatchesContainer.innerHTML = `
+
+            <p class="recommendation-message">
+
+                Unable to load matches.
+
+                <br>
+
+                Please refresh the page.
+
+            </p>
+
+        `;
+
+
+        recommendedContainer.innerHTML = `
+
+            <p class="recommendation-message">
+
+                Unable to load recommendations.
+
+                <br>
+
+                Please refresh the page.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+/* ================= BEST MATCHES ================= */
+
+function renderBestMatches(
+    opportunities
+){
+
+    const container =
+        document.getElementById(
+            "bestMatches"
+        );
+
+
+    if(!opportunities.length){
+
+        container.innerHTML = `
+
+            <p class="empty">
+                No matches found.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        opportunities.map(
+            function(opportunity){
+
+                const title =
+                    opportunity.title ||
+                    "Opportunity";
+
+
+                const company =
+                    opportunity.company ||
+                    "Company";
+
+
+                const workMode =
+                    opportunity.workMode ||
+                    "Remote";
+
+
+                const matchPercentage =
+                    Number(
+                        opportunity.matchPercentage ||
+                        0
+                    );
+
+
+                const matchClass =
+                    getMatchClass(
+                        matchPercentage
+                    );
+
+
+                return `
+
+                    <div class="opportunity">
+
+                        <div class="opp-left">
+
+                            <div class="opp-icon">
+                                ${getOpportunityIcon(
+                                    opportunity.type
+                                )}
+                            </div>
+
+                            <div class="opp-info">
+
+                                <h4>
+                                    ${escapeHTML(title)}
+                                </h4>
+
+                                <p>
+                                    ${escapeHTML(company)}
+                                    •
+                                    ${escapeHTML(workMode)}
+                                </p>
+
+                                <span class="match ${matchClass}">
+                                    ${matchPercentage}% Match
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="apply"
+                            onclick="openOpportunity('${opportunity._id}')"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ================= RECOMMENDED ================= */
+
+function renderRecommendedOpportunities(
+    opportunities
+){
+
+    const container =
+        document.getElementById(
+            "recommendedOpportunities"
+        );
+
+
+    if(!opportunities.length){
+
+        container.innerHTML = `
+
+            <p class="empty">
+                No recommendations found.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        opportunities.map(
+            function(opportunity){
+
+                const title =
+                    opportunity.title ||
+                    "Opportunity";
+
+
+                const company =
+                    opportunity.company ||
+                    "Company";
+
+
+                const workMode =
+                    opportunity.workMode ||
+                    "Remote";
+
+
+                const skills =
+                    Array.isArray(
+                        opportunity.requiredSkills
+                    )
+                        ? opportunity.requiredSkills
+                        : [];
+
+
+                const skillText =
+                    skills
+                        .slice(0,3)
+                        .map(
+                            skill => {
+
+                                if(
+                                    typeof skill ===
+                                    "object"
+                                ){
+
+                                    return escapeHTML(
+                                        skill.name ||
+                                        ""
+                                    );
+
+                                }
+
+                                return escapeHTML(
+                                    skill
+                                );
+
+                            }
+                        )
+                        .join(" • ");
+
+
+                const matchPercentage =
+                    Number(
+                        opportunity.matchPercentage ||
+                        0
+                    );
+
+
+                const matchClass =
+                    getMatchClass(
+                        matchPercentage
+                    );
+
+
+                return `
+
+                    <div class="opportunity">
+
+                        <div class="opp-left">
+
+                            <div class="opp-icon">
+                                ${getOpportunityIcon(
+                                    opportunity.type
+                                )}
+                            </div>
+
+                            <div class="opp-info">
+
+                                <h4>
+                                    ${escapeHTML(title)}
+                                </h4>
+
+                                <p>
+                                    ${escapeHTML(
+                                        skillText ||
+                                        company
+                                    )}
+                                </p>
+
+                                <span class="match ${matchClass}">
+                                    ${matchPercentage}% Match
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="apply"
+                            onclick="openOpportunity('${opportunity._id}')"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ================= MATCH CLASS ================= */
+
+function getMatchClass(
+    percentage
+){
+
+    if(percentage >= 70){
+
+        return "match-high";
+
+    }
+
+
+    if(percentage >= 40){
+
+        return "match-medium";
+
+    }
+
+
+    return "match-low";
+
+}
+
+
+/* ================= OPPORTUNITY ICON ================= */
+
+function getOpportunityIcon(
+    type
+){
+
+    switch(type){
+
+        case "Internship":
+            return "💼";
+
+        case "Job":
+            return "🚀";
+
+        case "Hackathon":
+            return "🏆";
+
+        case "Course":
+            return "📚";
+
+        default:
+            return "💻";
+
+    }
+
+}
+
+
+/* ================= OPEN OPPORTUNITY ================= */
+
+function openOpportunity(
+    opportunityId
+){
+
+    if(!opportunityId){
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "opportunity-details.html?id=" +
+        encodeURIComponent(
+            opportunityId
+        );
+
+}
+
+
+/* ================= SKILL COUNT ================= */
+
+function updateSkillCount(
+    count
+){
+
+    const element =
+        document.getElementById(
+            "skillCount"
+        );
+
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    element.textContent =
+        String(count).padStart(
+            2,
+            "0"
+        );
+
+}
+
+
+/* ================= RENDER SKILLS ================= */
+
+function renderSkills(
+    skills
+){
+
+    const container =
+        document.getElementById(
+            "dashboardSkills"
+        );
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+    if(!skills.length){
+
+        container.innerHTML = `
+
+            <p class="empty">
+
+                No skills added yet.
+
+                <br>
+
+                Add skills from
+                <strong>My Skills</strong>
+                to start building your profile.
+
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    const visibleSkills =
+        skills.slice(0,5);
+
+
+    container.innerHTML =
+        visibleSkills.map(
+            function(skill){
+
+                const name =
+                    skill.name ||
+                    "Skill";
+
+
+                let percentage =
+                    skill.percentage;
+
+
+                if(
+                    percentage === undefined ||
+                    percentage === null
+                ){
+
+                    percentage = 25;
+
+                }
+
+
+                percentage =
+                    Number(percentage);
+
+
+                if(
+                    Number.isNaN(
+                        percentage
+                    )
+                ){
+
+                    percentage = 25;
+
+                }
+
+
+                percentage =
+                    Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            percentage
+                        )
+                    );
+
+
+                return `
+
+                    <div class="skill">
+
+                        <div class="skill-info">
+
+                            <span>
+                                ${escapeHTML(name)}
+                            </span>
+
+                            <span>
+                                ${percentage}%
+                            </span>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                style="width:${percentage}%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ================= PROFILE STRENGTH ================= */
+
+function calculateProfileStrength(
+    skills
+){
+
+    const strength =
+        Math.min(
+            skills.length * 10,
+            50
+        );
+
+
+    const element =
+        document.getElementById(
+            "profileStrength"
+        );
+
+
+    const bar =
+        document.getElementById(
+            "readinessBar"
+        );
+
+
+    if(element){
+
+        element.textContent =
+            strength + "%";
+
+    }
+
+
+    if(bar){
+
+        bar.style.width =
+            strength + "%";
+
+    }
+
+}
+
+
+/* ================= USER INFO ================= */
+
+function loadUserInfo(){
+
+    try{
+
+        const storedUser =
+            localStorage.getItem(
+                "user"
+            );
+
+
+        if(!storedUser){
+
+            return;
+
+        }
+
+
+        const user =
+            JSON.parse(
+                storedUser
+            );
+
+
+        const name =
+            user.name ||
+            user.fullName ||
+            user.username ||
+            "User";
+
+
+        const role =
+            user.role ||
+            "Student";
+
+
+        document.getElementById(
+            "profileName"
+        ).textContent =
+            name;
+
+
+        document.getElementById(
+            "profileRole"
+        ).textContent =
+            role;
+
+
+        document.getElementById(
+            "welcomeMessage"
+        ).textContent =
+            "Welcome back, " +
+            name +
+            "! 👋";
+
+
+        document.getElementById(
+            "avatar"
+        ).textContent =
+            name
+                .charAt(0)
+                .toUpperCase();
+
+
+    }catch(error){
+
+        console.error(
+            "USER INFO ERROR:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ================= SEARCH ================= */
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+
+if(searchInput){
+
+    searchInput.addEventListener(
+        "keydown",
+        function(event){
+
+            if(
+                event.key !==
+                "Enter"
+            ){
+
+                return;
+
+            }
+
+
+            const value =
+                this.value.trim();
+
+
+            if(!value){
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "opportunities.html?search=" +
+                encodeURIComponent(
+                    value
+                );
+
+        }
+    );
+
+}
+
+
+/* ================= ESCAPE HTML ================= */
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* ================= UNAUTHORIZED ================= */
+
+function handleUnauthorized(){
+
+    localStorage.removeItem(
+        "token"
+    );
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* ================= AUTO REFRESH ================= */
+
+window.addEventListener(
+    "focus",
+    function(){
+
+        loadDashboard();
+
+    }
+);
+
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(!document.hidden){
+
+            loadDashboard();
+
+        }
+
+    }
+);
+
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+
+    localStorage.removeItem(
+        "token"
+    );
+
+    localStorage.removeItem(
+        "user"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+</script>
+
+</body>
+</html>
+

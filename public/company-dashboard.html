@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Company Dashboard | SkillBridge</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #111827;
+            border-right: 1px solid #1f2937;
+            z-index: 1000;
+            transition: transform 0.25s ease;
+        }
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+            height: 80px;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #273244;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 19px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .logo-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
+        }
+
+        .logo-subtitle {
+            color: #6b7280;
+            font-size: 9px;
+            letter-spacing: 0.4px;
+        }
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .nav {
+            padding: 22px 14px;
+        }
+
+        .nav-title {
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 0 14px;
+            margin-bottom: 10px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            text-decoration: none;
+            color: #cbd5e1;
+            padding: 13px 14px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .nav a:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        .nav a.active {
+            background: linear-gradient(
+                135deg,
+                rgba(99, 102, 241, 0.95),
+                rgba(124, 58, 237, 0.95)
+            );
+            color: white;
+            box-shadow:
+                0 5px 14px rgba(79, 70, 229, 0.22);
+        }
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
+
+        .logout-section {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 14px;
+            border-top: 1px solid #273244;
+        }
+
+        .logout-btn {
+            width: 100%;
+            border: none;
+            background: #1f2937;
+            color: #cbd5e1;
+            padding: 12px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+            transition: 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #374151;
+            color: white;
+        }
+
+        /* =====================================================
+           MOBILE HEADER
+        ===================================================== */
+
+        .mobile-header {
+            display: none;
+            height: 60px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: center;
+            padding: 0 16px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .hamburger {
+            border: none;
+            background: transparent;
+            font-size: 23px;
+            cursor: pointer;
+            color: #374151;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .hamburger:hover {
+            background: #f3f4f6;
+        }
+
+        .mobile-logo {
+            margin-left: 10px;
+            font-size: 17px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        /* =====================================================
+           SIDEBAR OVERLAY
+        ===================================================== */
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            z-index: 950;
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            font-size: 29px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .heading p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           COMPANY PROFILE PILL
+        ===================================================== */
+
+        .company-profile-mini {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 8px 13px 8px 9px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .company-profile-mini:hover {
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .company-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .company-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .company-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .company-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .company-role {
+            font-size: 10px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow:
+                0 2px 8px rgba(15, 23, 42, 0.035);
+            transition: 0.2s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #d8d9ff;
+            box-shadow:
+                0 5px 16px rgba(79, 70, 229, 0.08);
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 12px;
+            margin-bottom: 9px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        /* =====================================================
+           MAIN SECTION
+        ===================================================== */
+
+        .section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow:
+                0 2px 8px rgba(15, 23, 42, 0.035);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .section-header h2 {
+            font-size: 19px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .section-header p {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        .post-btn {
+            border: none;
+            background: #4f46e5;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .post-btn:hover {
+            background: #4338ca;
+        }
+
+        /* =====================================================
+           OPPORTUNITY LIST
+        ===================================================== */
+
+        .opportunity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .opportunity-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            transition: 0.2s ease;
+        }
+
+        .opportunity-card:hover {
+            border-color: #d8d9ff;
+            box-shadow:
+                0 5px 16px rgba(79, 70, 229, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .opportunity-left {
+            min-width: 0;
+        }
+
+        .opportunity-title {
+            font-weight: 800;
+            font-size: 16px;
+            color: #111827;
+            margin-bottom: 7px;
+        }
+
+        .opportunity-meta {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .opportunity-company {
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        .view-btn {
+            border: 1px solid #c7d2fe;
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 9px 15px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            white-space: nowrap;
+            transition: 0.2s ease;
+        }
+
+        .view-btn:hover {
+            background: #e0e7ff;
+            border-color: #a5b4fc;
+        }
+
+        /* =====================================================
+           EMPTY / LOADING
+        ===================================================== */
+
+        .empty {
+            text-align: center;
+            padding: 45px 20px;
+            color: #6b7280;
+            border: 1px dashed #e5e7eb;
+            border-radius: 13px;
+            background: #fafbfc;
+        }
+
+        .empty h3 {
+            color: #374151;
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .empty p {
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        /* =====================================================
+           LOADING SPINNER
+        ===================================================== */
+
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #6366f1;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 13px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 11px;
+            padding: 13px 16px;
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.14);
+            font-size: 13px;
+            z-index: 2000;
+            display: none;
+        }
+
+        .toast.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .mobile-header {
+                display: flex;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 25px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .main {
+                padding: 18px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .company-profile-mini {
+                width: 100%;
+            }
+
+            .section {
+                padding: 16px;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .post-btn {
+                width: 100%;
+            }
+
+            .opportunity-card {
+                padding: 16px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .view-btn {
+                width: 100%;
+            }
+
+        }
+
+        @media (max-width: 430px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .heading h1 {
+                font-size: 24px;
+            }
+
+            .heading p {
+                font-size: 13px;
+                line-height: 1.5;
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-value {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MOBILE HEADER
+    ====================================================== -->
+
+    <header class="mobile-header">
+
+        <button
+            class="hamburger"
+            onclick="toggleSidebar()"
+            aria-label="Open navigation">
+            ☰
+        </button>
+
+        <div class="mobile-logo">
+            SkillBridge
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SIDEBAR OVERLAY
+    ====================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()">
+    </div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                S
+            </div>
+
+            <div class="logo-text">
+
+                <div class="logo-title">
+                    SkillBridge
+                </div>
+
+                <div class="logo-subtitle">
+                    Academia × Industry
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="nav">
+
+            <div class="nav-title">
+                Company Portal
+            </div>
+
+
+            <a
+                href="company-dashboard.html"
+                class="active">
+
+                <span class="nav-icon">
+                    ▦
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="company-opportunities.html">
+
+                <span class="nav-icon">
+                    ◈
+                </span>
+
+                <span>
+                    My Opportunities
+                </span>
+
+            </a>
+
+
+            <a href="company-applications.html">
+
+                <span class="nav-icon">
+                    ▤
+                </span>
+
+                <span>
+                    Applications
+                </span>
+
+            </a>
+
+
+            <a href="company-profile.html">
+
+                <span class="nav-icon">
+                    ◉
+                </span>
+
+                <span>
+                    Company Profile
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="logout-section">
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+
+                ⇥ &nbsp; Logout
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <div class="topbar">
+
+
+            <div class="heading">
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Manage your opportunities and discover talented candidates.
+                </p>
+
+            </div>
+
+
+            <!-- COMPANY PROFILE -->
+
+            <div
+                class="company-profile-mini"
+                onclick="openCompanyProfile()">
+
+
+                <div
+                    class="company-avatar"
+                    id="companyAvatar">
+
+                    C
+
+                </div>
+
+
+                <div class="company-info">
+
+                    <div
+                        class="company-name"
+                        id="companyName">
+
+                        Company
+
+                    </div>
+
+                    <div class="company-role">
+
+                        Company Account
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Opportunities
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalOpportunities">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Active Opportunities
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="activeOpportunities">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Applications
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalApplications">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Shortlisted
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="shortlistedApplications">
+
+                    0
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             RECENT OPPORTUNITIES
+        ================================================== -->
+
+        <div class="section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Recent Opportunities
+                    </h2>
+
+                    <p>
+                        Your latest posted opportunities
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="post-btn"
+                    onclick="postOpportunity()">
+
+                    + Post Opportunity
+
+                </button>
+
+
+            </div>
+
+
+            <div id="opportunityContainer">
+
+                <div class="empty">
+
+                    <div class="spinner"></div>
+
+                    <h3>
+                        Loading Opportunities...
+                    </h3>
+
+                    <p>
+                        Please wait while we fetch your opportunities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        id="toast"
+        class="toast">
+    </div>
+
+
+    <script>
+
+
+        // =====================================================
+        // API URLS
+        // =====================================================
+
+        const API_URL =
+            "http://localhost:5000/api/opportunities";
+
+
+        const APPLICATION_API =
+            "http://localhost:5000/api/applications";
+
+
+        const PROFILE_API =
+            "http://localhost:5000/api/profile";
+
+
+        // =====================================================
+        // PAGE LOAD
+        // =====================================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                checkCompanyAccess();
+
+            }
+        );
+
+
+        // =====================================================
+        // COMPANY ACCESS CHECK
+        // =====================================================
+
+        async function checkCompanyAccess() {
+
+            const token =
+                localStorage.getItem("token");
+
+
+            const userData =
+                localStorage.getItem("user");
+
+
+            // -------------------------------------------------
+            // LOGIN CHECK
+            // -------------------------------------------------
+
+            if (!token || !userData) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            try {
+
+                const user =
+                    JSON.parse(userData);
+
+
+                // -------------------------------------------------
+                // ROLE CHECK
+                // -------------------------------------------------
+
+                if (user.role !== "company") {
+
+                    alert(
+                        "Access denied. Company account required."
+                    );
+
+                    window.location.href =
+                        "dashboard.html";
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // SHOW LOCAL USER DATA
+                // -------------------------------------------------
+
+                updateCompanyHeader(user);
+
+
+                // -------------------------------------------------
+                // LOAD FRESH PROFILE
+                // -------------------------------------------------
+
+                await loadCompanyProfile();
+
+
+                // -------------------------------------------------
+                // LOAD DASHBOARD DATA
+                // -------------------------------------------------
+
+                loadCompanyOpportunities();
+
+                loadCompanyApplications();
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "USER DATA ERROR:",
+                    error
+                );
+
+
+                localStorage.removeItem("token");
+
+                localStorage.removeItem("user");
+
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+        }
+
+
+        // =====================================================
+        // UPDATE COMPANY HEADER
+        // =====================================================
+
+        function updateCompanyHeader(user) {
+
+            const companyNameElement =
+                document.getElementById(
+                    "companyName"
+                );
+
+
+            const avatarElement =
+                document.getElementById(
+                    "companyAvatar"
+                );
+
+
+            const name =
+                user.name ||
+                "Company";
+
+
+            companyNameElement.innerText =
+                name;
+
+
+            setCompanyAvatar(
+                avatarElement,
+                user.companyLogo,
+                name
+            );
+
+        }
+
+
+        // =====================================================
+        // LOAD FRESH COMPANY PROFILE
+        // =====================================================
+
+        async function loadCompanyProfile() {
+
+            const token =
+                localStorage.getItem("token");
+
+
+            const userData =
+                localStorage.getItem("user");
+
+
+            if (!token || !userData) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const localUser =
+                    JSON.parse(userData);
+
+
+                if (!localUser._id) {
+
+                    console.warn(
+                        "User ID missing from localStorage."
+                    );
+
+                    return;
+
+                }
+
+
+                const response =
+                    await fetch(
+                        PROFILE_API +
+                        "/" +
+                        encodeURIComponent(
+                            localUser._id
+                        ),
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "FRESH COMPANY PROFILE:",
+                    data
+                );
+
+
+                // -------------------------------------------------
+                // TOKEN EXPIRED
+                // -------------------------------------------------
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem(
+                        "token"
+                    );
+
+                    localStorage.removeItem(
+                        "user"
+                    );
+
+
+                    alert(
+                        "Session expired. Please login again."
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // ACCESS DENIED
+                // -------------------------------------------------
+
+                if (response.status === 403) {
+
+                    alert(
+                        data.message ||
+                        "Access denied."
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                    return;
+
+                }
+
+
+                if (!response.ok) {
+
+                    console.error(
+                        "PROFILE API ERROR:",
+                        data
+                    );
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // PROFILE ROUTE RETURNS USER
+                // -------------------------------------------------
+
+                const freshUser =
+                    data.user ||
+                    data;
+
+
+                if (!freshUser) {
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // MAKE SURE USER IS COMPANY
+                // -------------------------------------------------
+
+                if (
+                    freshUser.role &&
+                    freshUser.role !== "company"
+                ) {
+
+                    alert(
+                        "Access denied. Company account required."
+                    );
+
+
+                    window.location.href =
+                        "dashboard.html";
+
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // MERGE LOCAL + FRESH USER
+                // -------------------------------------------------
+
+                const mergedUser = {
+                    ...localUser,
+                    ...freshUser
+                };
+
+
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(
+                        mergedUser
+                    )
+                );
+
+
+                // -------------------------------------------------
+                // UPDATE HEADER
+                // -------------------------------------------------
+
+                updateCompanyHeader(
+                    mergedUser
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "LOAD COMPANY PROFILE ERROR:",
+                    error
+                );
+
+                /*
+                    Dashboard still works if profile
+                    request temporarily fails.
+                */
+
+            }
+
+        }
+
+
+        // =====================================================
+        // COMPANY AVATAR
+        // =====================================================
+
+        function setCompanyAvatar(
+            element,
+            logo,
+            companyName
+        ) {
+
+            if (!element) {
+
+                return;
+
+            }
+
+
+            // -------------------------------------------------
+            // LOGO EXISTS
+            // -------------------------------------------------
+
+            if (
+                logo &&
+                String(logo).trim() !== ""
+            ) {
+
+                const image =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                image.src =
+                    String(logo).trim();
+
+
+                image.alt =
+                    companyName ||
+                    "Company Logo";
+
+
+                image.onerror =
+                    function () {
+
+                        element.innerHTML =
+                            "";
+
+                        element.innerText =
+                            getCompanyInitial(
+                                companyName
+                            );
+
+                    };
+
+
+                element.innerHTML =
+                    "";
+
+
+                element.appendChild(
+                    image
+                );
+
+
+                return;
+
+            }
+
+
+            // -------------------------------------------------
+            // FALLBACK INITIAL
+            // -------------------------------------------------
+
+            element.innerHTML =
+                "";
+
+
+            element.innerText =
+                getCompanyInitial(
+                    companyName
+                );
+
+        }
+
+
+        // =====================================================
+        // COMPANY INITIAL
+        // =====================================================
+
+        function getCompanyInitial(
+            companyName
+        ) {
+
+            const name =
+                String(
+                    companyName ||
+                    "Company"
+                ).trim();
+
+
+            if (!name) {
+
+                return "C";
+
+            }
+
+
+            return name
+                .charAt(0)
+                .toUpperCase();
+
+        }
+
+
+        // =====================================================
+        // OPEN COMPANY PROFILE
+        // =====================================================
+
+        function openCompanyProfile() {
+
+            window.location.href =
+                "company-profile.html";
+
+        }
+
+
+        // =====================================================
+        // LOAD COMPANY OPPORTUNITIES
+        // =====================================================
+
+        async function loadCompanyOpportunities() {
+
+            const token =
+                localStorage.getItem("token");
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL + "/my",
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "MY COMPANY OPPORTUNITIES:",
+                    data
+                );
+
+
+                // -------------------------------------------------
+                // SESSION EXPIRED
+                // -------------------------------------------------
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem(
+                        "token"
+                    );
+
+                    localStorage.removeItem(
+                        "user"
+                    );
+
+
+                    alert(
+                        "Session expired. Please login again."
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // ACCESS DENIED
+                // -------------------------------------------------
+
+                if (response.status === 403) {
+
+                    alert(
+                        data.message ||
+                        "Only companies can access this page."
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                    return;
+
+                }
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Failed to load opportunities"
+                    );
+
+                }
+
+
+                renderOpportunities(
+                    data
+                );
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "COMPANY OPPORTUNITIES ERROR:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "opportunityContainer"
+                ).innerHTML = `
+
+                    <div class="empty">
+
+                        <h3>
+                            Something went wrong
+                        </h3>
+
+                        <p>
+                            ${
+                                escapeHTML(
+                                    error.message ||
+                                    "Unable to load opportunities."
+                                )
+                            }
+                        </p>
+
+                        <button
+                            class="post-btn"
+                            onclick="loadCompanyOpportunities()">
+
+                            Try Again
+
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // =====================================================
+        // RENDER OPPORTUNITIES
+        // =====================================================
+
+        function renderOpportunities(
+            opportunities
+        ) {
+
+            // -------------------------------------------------
+            // VALIDATE RESPONSE
+            // -------------------------------------------------
+
+            if (
+                !Array.isArray(
+                    opportunities
+                )
+            ) {
+
+                console.error(
+                    "INVALID OPPORTUNITIES RESPONSE:",
+                    opportunities
+                );
+
+
+                throw new Error(
+                    "Invalid opportunities response from server."
+                );
+
+            }
+
+
+            // -------------------------------------------------
+            // TOTAL
+            // -------------------------------------------------
+
+            document.getElementById(
+                "totalOpportunities"
+            ).innerText =
+                opportunities.length;
+
+
+            // -------------------------------------------------
+            // ACTIVE
+            // -------------------------------------------------
+
+            /*
+                Current backend does not provide a separate
+                active/inactive status field.
+
+                Therefore all company opportunities are
+                currently counted as active.
+            */
+
+            document.getElementById(
+                "activeOpportunities"
+            ).innerText =
+                opportunities.length;
+
+
+            const container =
+                document.getElementById(
+                    "opportunityContainer"
+                );
+
+
+            // -------------------------------------------------
+            // EMPTY
+            // -------------------------------------------------
+
+            if (
+                opportunities.length === 0
+            ) {
+
+                container.innerHTML = `
+
+                    <div class="empty">
+
+                        <h3>
+                            No Opportunities Yet
+                        </h3>
+
+                        <p>
+                            Start by posting your first opportunity.
+                        </p>
+
+                        <button
+                            class="post-btn"
+                            onclick="postOpportunity()">
+
+                            Post Opportunity
+
+                        </button>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            // -------------------------------------------------
+            // SORT NEWEST FIRST
+            // -------------------------------------------------
+
+            opportunities.sort(
+                function (a, b) {
+
+                    return new Date(
+                        b.createdAt || 0
+                    ) -
+                    new Date(
+                        a.createdAt || 0
+                    );
+
+                }
+            );
+
+
+            // -------------------------------------------------
+            // SHOW ONLY FIVE
+            // -------------------------------------------------
+
+            const recentOpportunities =
+                opportunities.slice(
+                    0,
+                    5
+                );
+
+
+            // -------------------------------------------------
+            // RENDER
+            // -------------------------------------------------
+
+            container.innerHTML = `
+
+                <div class="opportunity-list">
+
+                    ${
+                        recentOpportunities
+                            .map(
+                                opportunity => {
+
+                                    const opportunityId =
+                                        String(
+                                            opportunity._id ||
+                                            ""
+                                        );
+
+
+                                    return `
+
+                                        <div
+                                            class="opportunity-card">
+
+                                            <div
+                                                class="opportunity-left">
+
+                                                <div
+                                                    class="opportunity-title">
+
+                                                    ${
+                                                        escapeHTML(
+                                                            opportunity.title ||
+                                                            "Untitled Opportunity"
+                                                        )
+                                                    }
+
+                                                </div>
+
+
+                                                <div
+                                                    class="opportunity-meta">
+
+                                                    <span
+                                                        class="opportunity-company">
+
+                                                        ${
+                                                            escapeHTML(
+                                                                opportunity.type ||
+                                                                "Opportunity"
+                                                            )
+                                                        }
+
+                                                    </span>
+
+                                                    &nbsp; · &nbsp;
+
+                                                    ${
+                                                        escapeHTML(
+                                                            opportunity.location ||
+                                                            "India"
+                                                        )
+                                                    }
+
+                                                    &nbsp; · &nbsp;
+
+                                                    ${
+                                                        escapeHTML(
+                                                            opportunity.workMode ||
+                                                            "Remote"
+                                                        )
+                                                    }
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <button
+                                                class="view-btn"
+                                                onclick="viewOpportunity(
+                                                    '${escapeHTML(opportunityId)}'
+                                                )">
+
+                                                View
+
+                                            </button>
+
+                                        </div>
+
+                                    `;
+
+                                }
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+            `;
+
+        }
+
+
+        // =====================================================
+        // LOAD COMPANY APPLICATIONS
+        // =====================================================
+
+        async function loadCompanyApplications() {
+
+            const token =
+                localStorage.getItem("token");
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        APPLICATION_API +
+                        "/company",
+                        {
+                            method: "GET",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " + token
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "COMPANY APPLICATIONS:",
+                    data
+                );
+
+
+                if (!response.ok) {
+
+                    console.error(
+                        "APPLICATION API ERROR:",
+                        data
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    !Array.isArray(
+                        data
+                    )
+                ) {
+
+                    console.error(
+                        "INVALID APPLICATION RESPONSE:",
+                        data
+                    );
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // TOTAL APPLICATIONS
+                // -------------------------------------------------
+
+                document.getElementById(
+                    "totalApplications"
+                ).innerText =
+                    data.length;
+
+
+                // -------------------------------------------------
+                // SHORTLISTED
+                // -------------------------------------------------
+
+                const shortlisted =
+                    data.filter(
+                        application => {
+
+                            const status =
+                                application.status;
+
+
+                            return (
+                                status ===
+                                "Shortlisted"
+                            );
+
+                        }
+                    ).length;
+
+
+                document.getElementById(
+                    "shortlistedApplications"
+                ).innerText =
+                    shortlisted;
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "COMPANY APPLICATIONS ERROR:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // POST OPPORTUNITY
+        // =====================================================
+
+        function postOpportunity() {
+
+            window.location.href =
+                "post-opportunity.html";
+
+        }
+
+
+        // =====================================================
+        // VIEW COMPANY OPPORTUNITY
+        // =====================================================
+
+        function viewOpportunity(
+            opportunityId
+        ) {
+
+            /*
+                Existing dashboard behaviour is preserved.
+                The company opportunities page handles the
+                complete opportunity listing.
+            */
+
+            window.location.href =
+                "company-opportunities.html";
+
+        }
+
+
+        // =====================================================
+        // LOGOUT
+        // =====================================================
+
+        function logout() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+
+            localStorage.removeItem(
+                "user"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        // =====================================================
+        // MOBILE SIDEBAR
+        // =====================================================
+
+        function toggleSidebar() {
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+
+            const overlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+
+            sidebar.classList.toggle(
+                "open"
+            );
+
+
+            overlay.classList.toggle(
+                "show"
+            );
+
+        }
+
+
+        // =====================================================
+        // CLOSE SIDEBAR
+        // =====================================================
+
+        function closeSidebar() {
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+
+            const overlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+
+            overlay.classList.remove(
+                "show"
+            );
+
+        }
+
+
+        // =====================================================
+        // CLOSE MOBILE SIDEBAR AFTER NAVIGATION
+        // =====================================================
+
+        document.querySelectorAll(
+            ".nav a"
+        ).forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            window.innerWidth <=
+                            900
+                        ) {
+
+                            closeSidebar();
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        // =====================================================
+        // ESCAPE HTML
+        // =====================================================
+
+        function escapeHTML(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        // =====================================================
+        // WINDOW RESIZE
+        // =====================================================
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                if (
+                    window.innerWidth >
+                    900
+                ) {
+
+                    closeSidebar();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
