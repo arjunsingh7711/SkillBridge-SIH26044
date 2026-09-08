@@ -113,11 +113,6 @@ Manage Applications
 
 ![Skills](screenshot/studentskill.png)
 
----
-
-### 💼 Opportunities
-
-![Opportunities](screenshot/studentopportunities.png)
 
 ---
 
